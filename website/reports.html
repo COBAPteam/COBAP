@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-174539863-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-174539863-1');
+</script>
+<title>Covid Border Accountability Project</title>
+<meta charset="UTF-8">
+<link rel="icon" href="favicon.png">
+<meta class="top" name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script> 
+$(function(){
+  $("#topbar").load("navbar.html"); 
+  $("#modal").load("modal.html"); 
+});
+</script>
+<body>
+<div id="modal" class="modal"></div>
+<div class="topbar" id="topbar"></div>
+<nav class="w3-sidebar w3-purple w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">Close Menu</a>
+  <div class="w3-container-side">
+    <h3 class="w3-padding-64"><img src='logoim.png' style='width:185px'></h3>
+  </div>
+  <div class="w3-bar-block">
+  <a href="http://covidborderaccountability.org/" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">HOME</a> 
+     </div>
+</nav>
+<header class="w3-container-side w3-top w3-hide-large w3-purple w3-xlarge w3-padding">
+  <a href="javascript:void(0)" class="w3-button w3-purple w3-margin-right" onclick="w3_open()">☰</a>
+  <span><img src='logoim.png' style='width:185px'></span>
+</header>
+<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+<div class="w3-main" style="margin-left:340px;margin-right:40px">
+  <a class="top" name="soon"></a>
+  <div class="w3-container" id="services" style="height:unset; padding-bottom:250px">
+      <h2>Oct. 2020: <a href="usareport.html">United States</a></h2>
+      <h2>Nov. 2020: <a href="greaterchinareport.html">Greater China</a></h2>
+  </div>
+
+</body>
+<script>
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("myOverlay").style.display = "block";
+}
+
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("myOverlay").style.display = "none";
+}
+</script>
+
+</html>

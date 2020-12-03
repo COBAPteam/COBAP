@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Policy Map</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,  minimum-scale=1.0">
+    <meta property='og:image' content='https://www.covidborderaccountability.org/sharenew.png' />
+    <meta name="description" content="The COVID Border Accountability Project map tool displays information on border policies around the world in response to the COVID-19 pandemic. Clicking on a country will provide more info on policies, including sources.">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-174539863-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-174539863-1');
+    </script>
+    <link rel="apple-touch-icon" href="/appletouch.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.0.3/nouislider.min.js" charset="utf-8"></script>
+    <script src="https://libs.cartocdn.com/carto-vl/v1.4.4/carto-vl.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/1.10.0/mapbox-gl.min.js"></script>
+    <script src="https://libs.cartocdn.com/airship-components/v1.0.3/airship.js"></script>
+    <script async src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+    <script src="casedata1129.js"></script>
+    <script src="info.js"></script>
+    <link rel="stylesheet" type="text/css" href="mapall.css">
+    <link rel="icon" href="favicon.png">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(function(){
+          $("#topbar").load("navbar.html");
+          $("#modal").load("modal.html");
+        });
+    </script>
+    <style>
+        .dropdown-content {
+            background-color: #222 !important
+        }
+
+            .dropdown-content a:hover {
+                color: #222 !important
+            }
+    </style>
+</head>
+<body>
+  <div class="slider"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" id="animatecontrol" onclick="animateslider()" style="float: left;margin-left: -50px;margin-top: -8px;cursor: pointer;"><path style="fill:white" d="M8 5v14l11-7z"/></svg></div>
+  <div id="modal" class="modal"></div>
+  <div class="topbar" id="topbar"></div>
+  <div id="map"></div>
+  <div id="info" class="info"></div>
+  <aside class="toolbox" id="toolbox">
+    <div class="box">
+      <section>
+        <div id="controls">
+          <div class="mini" style="right:0; padding-left: 220px;font-size: 20px;"><a style="color:white;text-decoration:none" href="javascript:minimizelegend()">-</a></div>
+          <ul id="content"></ul>
+        </div>
+      </section>
+      <as-category-widget class="as-p--16"
+          visible-categories="3"
+          disable-interactivity/>
+      <footer class="js-footer"></footer>
+    </div>
+  </aside>
+  <div id="minilegend"><a style="color:white;text-decoration:none" href="javascript:showlegend()">Show Legend ^</a></div>
+  <div id="loader">
+    <div id="loadertext">
+    <img src="logoim.png" height=125>
+    <h1> Welcome to the COVID Border Accountability Project</h1>
+      <p>This map tool displays information on border policies around the world in response to the COVID-19 pandemic. Clicking on a country will provide more info on policies, including sources.</p>
+    <p><div id="spinner" class="CDB-LoaderIcon CDB-LoaderIcon--big">
+      <svg class="CDB-LoaderIcon-spinner" viewBox="0 0 50 50">
+        <circle class="CDB-LoaderIcon-path" cx="25" cy="25" r="20" fill="none"></circle>
+      </svg>
+    </div></p>
+  </div>
+  </div> 
+</body>
+<script src="mapout.js"></script>
+</html>

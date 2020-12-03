@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-174539863-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-174539863-1');
+</script>
+<title>Covid Border Accountability Project</title>
+<meta charset="UTF-8">
+<link rel="icon" href="favicon.png">
+<meta class="top" name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script> 
+$(function(){
+  $("#topbar").load("navbar.html"); 
+  $("#modal").load("modal.html"); 
+});
+</script>
+    <style>
+ @media only screen and (max-width: 600px) {
+            .w3-main {
+                font-size: 14px;
+            }
+            h1 {
+                font-size: 26px;
+            }
+            h2 {
+                font-size: 22px;
+            }
+            h3 {
+                font-size: 20px;
+            }
+            h4 {
+                font-size: 18px;
+            }
+            h5 {
+                font-size: 16px;
+            }
+            .w3-container {
+            height:unset;
+            }
+
+        }
+
+    </style>
+</head>
+<body>
+<div id="modal" class="modal"></div>
+<div class="topbar" id="topbar"></div>
+<nav class="w3-sidebar w3-purple w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">Close Menu</a>
+  <div class="w3-container-side">
+    <h3 class="w3-padding-64"><img src='logoim.png' style='width:185px'></h3>
+  </div>
+  <div class="w3-bar-block">
+    <a href="index.html" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">HOME</a> 
+    <a href="#aboutus" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">ABOUT US</a> 
+    <a href="#projecthistory" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">PROJECT HISTORY</a> 
+    <a href="#ack" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">ACKNOWLEDGEMENTS</a> 
+    <a href="#goals" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">PROJECT GOALS</a> 
+    <a href="#sources" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">SOURCES</a>
+    <a href="#view" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">OUR VIEW</a>
+  </div>
+</nav>
+<header class="w3-container-side w3-top w3-hide-large w3-purple w3-xlarge w3-padding">
+  <a href="javascript:void(0)" class="w3-button w3-purple w3-margin-right" onclick="w3_open()">☰</a>
+  <span><img src='logoim.png' style='width:185px'></span>
+</header>
+<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+<div class="w3-main" style="margin-left:340px;margin-right:40px">
+
+     <a class="top" name="aboutus"></a>
+  <div class="w3-container" id="services" >
+    <h1 class="w3-xxxlarge w3-text-purple"><b>ABOUT US</b></h1>
+    <hr style="width:50px;border:5px solid #402c62; background-color: #402c62;" class="w3-round">
+    <p>Welcome to the website of the COVID Border Accountability Project (COBAP). COBAP documents country-level travel and immigration bans introduced in response to COVID-19. By wielding a hand-coded, original dataset for all countries and associated island territories, we set out to explore how COVID-19 restrictions impact aspiring migrants. We depict our policy data in a user-friendly Maptool updated on Wednesdays at 12pm EDT (4pm UTC).  </p>
+    <p>Our team is a collective made up of faculty researchers, postdoctoral researchers, engineers, graduate students, undergraduate students, and non-academic volunteers—from all over the world, reading policy announcements in 14 languages—sponsored only by virtual “<a href="https://www.buymeacoffee.com/IaTftgN" target="_blank" rel="noopener noreferrer">coffees</a>.” We started small—impacted by COVID-19 in various ways—but we think our response to this global crisis is big. The Project Lead is <a href="https://politicalscience.nd.edu/people/students/mary-a-shiraef/" target="_blank" rel="noopener noreferrer">Mary A. Shiraef</a>, a graduate student in Political Science at the University of Notre Dame. 
+</p>
+    <p>The interactive snapshot of history captured by this project is provided to assist other scholars who are adapting projects stalled by COVID-19. Additionally, we hope it provides important context on COVID-19 travel bans for both medical and social scientists, as well as migrants, journalists, and public health officials in years to come.</p>
+  </div> 
+    <a class="top" name="projecthistory"></a>
+  <div class="w3-container" id="projecthistory" >
+    <h1 class="w3-xxxlarge w3-text-purple"><b>PROJECT HISTORY</b></h1>
+    <hr style="width:50px;border:5px solid #402c62; background-color: #402c62;" class="w3-round">
+    <p>The initial idea for our project was born in the Immigration Policy Lab (<a href="https://immigrationlab.org/" target="_blank" rel="noopener noreferrer">IPL</a>) at Stanford University. The Project Lead of COBAP, Mary A. Shiraef, was a visiting graduate student in Stanford’s Department of Political Science when the virus first appeared in the United States. With IPL program managers Jennifer Fei and Jessica Sadye Wolff, Shiraef set out to <a href="https://immigrationlab.org/2020/06/26/will-covid-19-harden-worlds-borders/">map the initial immigration-related response</a> of each country and highlight, with data visualization from the <a href="https://www.acaps.org/" target="_blank" rel="noopener noreferrer">ACAPS</a> Government Measures Dataset, travel history- and citizenship status-based bans by country.</p> 
+    <p>From there, Shiraef reached out to colleagues, friends, former students and family members, who volunteered to help her source and hand-code policies across the globe, using a carefully designed Qualtrics survey capturing >1000 country-level policies along six core dimensions: complete closures with/without citizen exceptions, complete closures with/without specific country(ies) exceptions, complete closures with/without workers exceptions, partial closures which impact physical borders, partial bans which impact specific groups based on their nationality, and partial bans which impact visa seekers. In August 2020, Shiraef’s team officially became the COVID Border Accountability Project (COBAP), a collective made up of 11 Founding <a href="team.html">Team Members</a> and 21 Research Assistants (RAs) working to document and depict border policies over time as a public good resource.</p>
+  </div> 
+    <a class="top" name="ack"></a>
+    <div class="w3-container" id="ack">
+        <h1 class="w3-xxxlarge w3-text-purple" style="overflow-wrap: break-word;"><b>ACKNOWLEDGEMENTS</b></h1>
+        <hr style="width:50px;border:5px solid #402c62; background-color: #402c62;" class="w3-round">
+        <p>We are extraordinarily grateful to the volunteer Research Assistants (RAs) who hand-coded the original data: Aman Bedi, Elizabeth Beling, Aadya Bhaskaran, Cora Hirst, Cayleigh Jackson, Camilla Kline, Nikolas Lazar, Rachel Musetti, Hannah Risman, Hannah Rossi, Yeshwini Selvaraj, Ellen Shiraef, Michael Shiraef, Noah Taylor, Bryn Walker, Ian Wang, and Mark Weiss.</p>
+        <p>We are also grateful for faculty input from political scientists Jeremy Weinstein, David Laitin, and Colin Lewis-Beck, from Luis Schenoni at Universität Konstanz and for regular input from the scientists of the Stanford Bachelor viewing group.</p>
+        <p>We are thankful to Cat Williams for her superb editing skills and to Gemma Dipoppa for peer-reviewing our first report.</p>
+        <p>We are grateful to have Laxman Iyer as our first <a href="https://www.buymeacoffee.com/p/108093" target="_blank" rel="noopener noreferrer">Founding Donor</a>.</p>
+        <p>We are also grateful for those who have contributed a coffee: Cat, Ian, Tahmina, Tasha, Gemma, Susanna, Sarah, Renu, Ellen, Charlie, Carolyn, Mary, and Paul. </p>
+        <p>We could not show you the data without the incredible programming skills of Matthew J. Amme.</p>
+    </div> 
+    <a class="top" name="goals"></a>
+  <div class="w3-container" id="services" >
+    <h1 class="w3-xxxlarge w3-text-purple"><b>PROJECT GOALS: PHASE ONE AND TWO</b></h1>
+    <hr style="width:50px;border:5px solid #402c62; background-color: #402c62;" class="w3-round">
+    <p>In the first phase of the COBAP project (March - August 2020), we collected the data and programmed a map to visualize the policy changes. See our data collection process here with our <a href="https://docs.google.com/document/d/1ZNf4IMg5D4iF7lzAE5LD_BBXPcngSSUPIM_eaQhwJOs/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Qualtrics survey questions</a>. Our project goals in phase two are (1) to update our existing database each week; (2) produce an academic publication explaining the emergence of visa-related bans, and (3) launch portfolios to document specific resources for those most impacted by these new bans. Like our parent projects, <a href="https://www.coronanet-project.org/download.html" target="_blank" rel="noopener noreferrer">Coronanet</a> and Oxford University’s <a href="https://www.bsg.ox.ac.uk/research/research-projects/coronavirus-government-response-tracker" target="_blank" rel="noopener noreferrer">Government Response Tracker</a>, we are releasing our data prior to publication as a public-good resource. Different from these teams, we focus exclusively on immigration-related government responses, highlighting those that impact vulnerable groups. We are pre-registering our research agenda with EGAP (Evidence in Governance and Politics), and we invite other scholars or RAs interested in working with us to <a href="https://docs.google.com/forms/d/1ID8TwYqmfEQvjuR-CaFphhzL_9uAA6uTem7jnYPxsTA/edit" target="_blank" rel="noopener noreferrer">fill out this form</a>.</p>
+  </div> 
+    <a class="top" name="sources"></a>
+    <div class="w3-container" id="services" >
+    <h1 class="w3-xxxlarge w3-text-purple"><b>SOURCES</b></h1>
+    <hr style="width:50px;border:5px solid #402c62; background-color: #402c62;" class="w3-round">
+    <p>Our data is a systematized collection of policy texts sourced with links we have captured on the <a href="https://archive.org/web/" target="_blank" rel="noopener noreferrer">Wayback machine</a>. As proxies for travel and border restrictions, we also include restrictions recorded by the international airline industry and the international insurance industry. In limited cases when policy texts are not available, we utilize Tweets from verified government sources, major news outlets of host countries or major news outlets from external countries.</p>
+    <p>Are we missing a policy? <a href="https://docs.google.com/forms/d/1OGd-56pqT0iRPGv6iJdTnIWWI5vkbF2faAnTz5sDNxI/edit" target="_blank" rel="noopener noreferrer">Let us know</a></p>
+  </div> 
+    <a class="top" name="view"></a>
+    <div class="w3-container" id="services" >
+    <h1 class="w3-xxxlarge w3-text-purple"><b>OUR VIEW</b></h1>
+    <hr style="width:50px;border:5px solid #402c62; background-color: #402c62;" class="w3-round">
+    <p>We call ourselves the COVID Border Accountability Project (COBAP) because it is our hope that, one day, as you slide through time with our Maptool, all of these travel and immigration bans will be lifted. More realistically, we do not know what will become of these policies and expect that some countries may introduce or have already introduced new policies with the intention of excluding certain groups of people. We oppose discrimination-based policies, and we support the aspirations of migrants and their host communities.</p>
+
+    <p>At COBAP’s core, we want to use our hand-coded database to visualize new borders constructed by COVID-19, with an explicit long-term goal to use the data to hold ourselves and our governments accountable for the consequences of these new policies.</p>
+
+    <p>By the nature of our topic, COBAP is a work-in-progress. Until all new barriers to access related to COVID-19 are recorded and depicted in our central <a href="index.html">Maptool</a>, we are committed to listening, learning, making changes, and playing an active role—with our updated policy data—in documenting these barriers to freedom of movement.</p>
+  </div>
+</div>
+<script>
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("myOverlay").style.display = "block";
+}
+
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("myOverlay").style.display = "none";
+}
+</script>
+</body>
+</html>
