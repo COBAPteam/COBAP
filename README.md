@@ -1,6 +1,6 @@
 # COVID Border Accountability Project (COBAP)
 
-Last update: 12-6-2020 1193 Policies, 239 Territories
+Last update: 12-7-2020 1201 Policies, 243 Territories
 
 This is the data repository for the [COBAP project](https://www.covidborderaccountability.org/). 
 
@@ -43,11 +43,9 @@ A small handful of nations have not implemented any restrictions falling into th
 
 
 ## Notes
-COBAP restricts the database to include policies which were implemented by the government or administrative structure of the country or territory. We limit the scope of our data collection in this way in order to track the country introducing the policy and the nations/persons who are targeted by it. This approach avoids the duplication of data as well as the misrecording of policies at the national level. 
+With the help of RAs, COBAP restricts the database to include policies which were implemented by the government or administrative structure of the country or territory. We limit the scope of our data collection in this way in order to specify the country introducing the policy and the nations/persons who are targeted by it. This avoids the duplication of data and misrecording of policies at the national level. 
 
-We do not include cases in which a country may have effectively experienced a border closure due to another country's policy decisions. For instance, Afghanistan closing a border to both outgoing and incoming traffic with neighboring nations may, in effect, lead to a border closure or stem human movement in the neighboring nations; our database, in this case, would only record a policy for Afghanistan. policies made at the clear direction of, or in agreement with, those neighboring nations. As such, for the full scope of reduction on all human movement in a given location, we recommend combining our database with others.
-
-This policy interpretation can, in practice, become quite complicated because some nations have limited transportation links through other nations. For instance, many of the island nations of the Pacific Island Forum rely on Australia for its air transportation links to the respective islands. In practice, this means we do not record Australia’s “complete closure” as a complete closure for these island nations although their access may have been impacted. We aim to reflect these types of relationships in our database with our sub-category “Specific Country(ies) Exception” of the nation implementing the restriction. For example, if Australia’s “Complete Closure” lists New Zealand, the Pacific Island Forum countries, Timor-Leste, New Caledonia, and French Polynesia as exceptions to their closure, we record a complete closure (with listed exceptions) for Australia, but no policy for its island nations. We record the policies in this way because it aligns with the intended policy impact, i.e., the Australian policy introduced these specific exceptions in order not to sever these air transportation links; and the island territories did not introduce a new restriction on movement. In sum, the standard for inclusion into our database relies on the policy introduced by the national-level government of a given country (and not those of other countries).
+We do not include cases in which a country may effectively have experienced a border closure (or drastic human movement reduction) due to another country's policy decisions, or due to internal national-level or subnational level lockdowns. Furthermore, we do not capture the full extent of policies which are multidirectional, i.e. when one nation closes a border to both outgoing and ingoing traffic. This policy interpretation process can, in practice, become complicated because some nations have limited transportation links through other nations. For instance, many of the island nations of the Pacific Island Forum rely on air transport links through Australia. These types of relationships are not explicitly captured as policies for the affected nations, but rather in the “Specific Country(ies) Exception” of the nations making the restriction (I.e. Australia’s Complete Closure lists New Zealand, the Pacific Island Forum countries, Timor-Leste, New Caledonia, and French Polynesia as exceptions to their travel ban in order not to sever these air transportation links). 
 
 
 
