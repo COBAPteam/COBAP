@@ -100,6 +100,6 @@ source(0-4)| Web link(s) to source of policy, separated per column
 Please contact cobap@covidborderaccountability.org
 
 For any issues with the recorded policies, feel free to submit a github issue or give us a heads up [here](https://docs.google.com/forms/d/1OGd-56pqT0iRPGv6iJdTnIWWI5vkbF2faAnTz5sDNxI).
-
+ 
 # LICENSE 
 GPL-3.0
