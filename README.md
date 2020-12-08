@@ -36,9 +36,9 @@ Further questions about the policy implemented are use to categorize partial clo
 
 **Travel history ban(s)**: A partial closure which bans travelers who, regardless of nationality, have recently travelled  through or from a specified country or group of countries, e.g. for "All travelers who have been to or travelled through China, Hong Kong, Iran, Italy, and Japan are advised to not enter the country, and may be denied entry"
 
-**Refugee ban(s)**: A partial closure which impacts those entering through a specified land, sea or air border; OR all land borders closed OR all air borders closed OR all sea borders closed (but not all three)
+**Refugee ban(s)**: A partial closure which impacts refugees or asylum seekers.
 
-**Border Closure(s)**: A partial closure which impacts refugees or asylum seekers.
+**Border Closure(s)**: A partial closure which impacts those entering through a specified land, sea or air border; OR all land borders closed OR all air borders closed OR all sea borders closed (but not all three)
 
 ## No Policy Implemented
 A small handful of nations have not implemented any restrictions falling into the categories above during the COVID-19 pandemic. These are included, recording the end date as the date the RA confirmed that no policies have been implemented, as well as a source of a government website on COVID-19 restrictions. 
