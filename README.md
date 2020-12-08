@@ -1,6 +1,6 @@
 # COVID Border Accountability Project (COBAP)
 
-Last update: 12-7-2020 1201 Policies, 243 Territories
+Last update: 12-7-2020 1201 Policies, 242 Territories
 
 This is the data repository for the [COBAP project](https://www.covidborderaccountability.org/). 
 
@@ -36,7 +36,9 @@ Further questions about the policy implemented are use to categorize partial clo
 
 **Travel history ban(s)**: A partial closure which bans travelers who, regardless of nationality, have recently travelled  through or from a specified country or group of countries, e.g. for "All travelers who have been to or travelled through China, Hong Kong, Iran, Italy, and Japan are advised to not enter the country, and may be denied entry"
 
-**Border Closure(s)**: A partial closure which impacts those entering through a specified land, sea or air border; OR all land borders closed OR all air borders closed OR all sea borders closed (but not all three)
+**Refugee ban(s)**: A partial closure which impacts those entering through a specified land, sea or air border; OR all land borders closed OR all air borders closed OR all sea borders closed (but not all three)
+
+**Border Closure(s)**: A partial closure which impacts refugees or asylum seekers.
 
 ## No Policy Implemented
 A small handful of nations have not implemented any restrictions falling into the categories above during the COVID-19 pandemic. These are included, recording the end date as the date the RA confirmed that no policies have been implemented, as well as a source of a government website on COVID-19 restrictions. 
@@ -63,30 +65,36 @@ Variable | Description
 ------------ | -------------
 id | unique ID used for each policy
 country_name| country name that implemented the restriction
-iso3|unique three-letter country code as published by the International Organization for Standardization. Non-standard codes: SOL - Somaliland, EUR - European Union Schengen Zone
-iso2|unique two-letter country code as published by the International Organization for Standardization. Non-standard codes: XS - Somaliland, EU - European Union Schengen Zone
+iso3|unique three-letter country code as published by the International Organization for Standardization. Non-standard codes: XKX - Kosovo, SOL - Somaliland, EUR - European Union Schengen Zone
+iso2|unique two-letter country code as published by the International Organization for Standardization. Non-standard codes: XK - Kosovo, XS - Somaliland, EU - European Union Schengen Zone
 policy_type| one of COMPLETE, PARTIAL, or NOPOLICYIMPLEMENTED
-policy_subtype|The policy sub-type, one of: ESSENTIAL_ONLY,CITIZEN_EXCEP,SPECIFIC_COUNTRY,WORK_EXCEP,VISA,CITIZENSHIP,HISTORY,BORDER,NONE. Note: Only the most restrictive partial closure is included, so a policy with CITIZENSHIP exception may have travel history or specific border closure information in the related fields.
+policy_subtype|The policy sub-type, one of: ESSENTIAL_ONLY,CITIZEN_EXCEP,SPECIFIC_COUNTRY,WORK_EXCEP,VISA,CITIZENSHIP,HISTORY,REFUGEE_BAN,BORDER,NONE. Note: Only the most restrictive partial closure is included, so a policy with CITIZENSHIP exception may have travel history or specific border closure information in the related fields.
 start_date| the date the policy was implemented (DD_MM_YY)
 end_date| the date the policy was lifted (DD_MM_YY)
-citizen_excep| whether the complete closure makes an exception for citizens
-country_excep| which country(ies) are exempted from the complete closure
-work_excep| whether the complete closure exempts workers
-air| whether the partial closure closed all or some air routes
+air| whether there was a air border closure or not (1 or 0)
+air_type| whether the partial closure closed all or some air routes
 targets_air| which air routes were targeted
-land| whether the partial closure closed all or some land routes
+land| whether there was a land border closure or not (1 or 0)
+land_type| whether the partial closure closed all or some land routes
 targets_land| which land routes were targeted
-sea| whether the partial closure closed all or some sea routes
+sea| whether there was a sea border closure or not (1 or 0)
+sea_type| whether the partial closure closed all or some sea routes
 targets_sea| which sea routes were targeted
-targets_status| whether the partial closure targets certain groups of travelers (by travel history or citizenship)
-cit_list| which groups were targeted based on their citizenship status
+citizen | whether the partial closure targets certain groups of travelers by citizenship (1 or 0)
+citizen_list| which groups were targeted based on their citizenship status
+history | whether the partial closure targets certain groups of travelers by travel history (1 or 0)
 history_list| which groups were targeted based on their recent travel status
-targets_ref| restriction which uses the language of “refugee” or “asylum seeker”
-ref_list| which refugees are targeted, all or some
-migrant_list| which refugees are targeted
-visa| which visa seekers are targeted, all or some
+refugee| partial closure restriction which uses the language of “refugee” or “asylum seeker” (1 or 0)
+refugee_list| which refugees are targeted
+visa| whether visa seekers are targeted (1 or 0)
+visa_type| which visa seekers are targeted, all or some
 visa_list| which visa seekers are targeted
-source(s)| Web link(s) to source of policy, separated per column
+citizen_excep| whether the complete closure makes an exception for citizens (1 or 0)
+citizen_excep_list| which persons are exempted from the complete closure
+country_excep| which country(ies) are exempted from the complete closure (1 or 0)
+country_excep_list| which country(ies) are exempted from the complete closure
+work_excep| whether the complete closure exempts workers (1 or 0)
+source(0-4)| Web link(s) to source of policy, separated per column
 
 # Contact
 Please contact cobap@covidborderaccountability.org
