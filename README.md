@@ -84,7 +84,7 @@ citizen | whether the partial closure targets certain groups of travelers by cit
 citizen_list| which groups were targeted based on their citizenship status
 history | whether the partial closure targets certain groups of travelers by travel history (1 or 0)
 history_list| which groups were targeted based on their recent travel status
-refugee| partial closure restriction which uses the language of “refugee” or “asylum seeker” (1 or 0)
+refugee| whether the partial closure uses the language of “refugee” or “asylum seeker” (1 or 0)
 refugee_list| which refugees are targeted
 visa| whether visa seekers are targeted (1 or 0)
 visa_type| which visa seekers are targeted, all or some
