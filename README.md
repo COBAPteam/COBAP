@@ -45,9 +45,18 @@ A small handful of nations have not implemented any restrictions falling into th
 
 
 ## Notes
-With the help of RAs, COBAP restricts the database to include policies which were implemented by the government or administrative structure of the country or territory. We limit the scope of our data collection in this way in order to specify the country introducing the policy and the nations/persons who are targeted by it. This avoids the duplication of data and misrecording of policies at the national level. 
+With the help of RAs, COBAP restricts the database to include policies which were implemented by the government or administrative structure of the country or territory recorded. We limit the scope of our data collection in this way in order to specify the country introducing the policy and the nations/persons who are targeted by it. This avoids the duplication of data and misrecording of policies at the national level. 
 
-We do not include cases in which a country may effectively have experienced a border closure (or drastic human movement reduction) due to another country's policy decisions, or due to internal national-level or subnational level lockdowns. Furthermore, we do not capture the full extent of policies which are multidirectional, i.e. when one nation closes a border to both outgoing and ingoing traffic. This policy interpretation process can, in practice, become complicated because some nations have limited transportation links through other nations. For instance, many of the island nations of the Pacific Island Forum rely on air transport links through Australia. These types of relationships are not explicitly captured as policies for the affected nations, but rather in the “Specific Country(ies) Exception” of the nations making the restriction (I.e. Australia’s Complete Closure lists New Zealand, the Pacific Island Forum countries, Timor-Leste, New Caledonia, and French Polynesia as exceptions to their travel ban in order not to sever these air transportation links). 
+We do not include cases in which a country may effectively have experienced a border closure (or drastic human movement reduction) due to another country's policy decisions, or due to internal national-level or subnational level lockdowns. Furthermore, we do not capture the full extent of policies which are multidirectional, i.e. when one nation closes a border to both outgoing and ingoing traffic. 
+
+We do not capture quarantine requirements for persons entering a country, even if they are targeted at specific citizens or travel history. We also do not capture rules regarding passenger transit, which may be more lax than the restriction recorded in our database (i.e. Australia allowing specific nations' citizens to transit through Australia via commercial air travel, even though entering Australia is only allowed for citizens, permanent residents and family).
+
+This policy interpretation process can, in practice, become complicated, and in general the goal is to not represent all such cases in this database. Some examples include:
+
+* Overseas departments and regions of France do not record French national level policies, except in cases where those policies explicitly mention restrictions in those regions.
+* Guernsey's state owned airline, Aurigny, suspending all flights, and therefore removing all commercial air access to Guernsey (except emergency service to Southampton) is not recorded as an air border closure, as Guernsey's government never explicitly banned arrivals. 
+* Vatican City workers who live in Rome allowed to travel into Vatican City for work during the complete closure will not be recorded as a Workers Exception as it is unrelated to specific classes of work permits.
+* Niuean, Cook Islander, and	Tokelauan citizens travel on New Zealand passports, and therefore policy text may not indicate that New Zealand has a Specific Country Exception for these nations.
 
 
 
