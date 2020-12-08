@@ -53,7 +53,7 @@ We do not capture quarantine requirements for persons entering a country, even i
 
 This policy interpretation process can, in practice, become complicated, and in general the goal is to not represent all such cases in this database. Some examples include:
 
-* Overseas departments and regions of France do not record French national level policies, except in cases where those policies explicitly mention restrictions in those regions.
+* Overseas departments and regions of France do not include French national level policies, except in cases where those policies explicitly mention restrictions in those regions, or restrictions introduced by the departmental or regional government. 
 * Guernsey's state owned airline, Aurigny, suspending all flights, and therefore removing all commercial air access to Guernsey (except emergency service to Southampton) is not recorded as an air border closure, as Guernsey's government never explicitly banned arrivals. 
 * Vatican City workers who live in Rome allowed to travel into Vatican City for work during the complete closure will not be recorded as a Workers Exception as it is unrelated to specific classes of work permits.
 * Niuean, Cook Islander, and	Tokelauan citizens travel on New Zealand passports, and therefore policy text may not indicate that New Zealand has a Specific Country Exception for these nations.
