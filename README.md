@@ -41,7 +41,7 @@ Further questions about the policy implemented are use to categorize partial clo
 **Border Closure(s)**: A partial closure which impacts those entering through a specified land, sea or air border; OR all land borders closed OR all air borders closed OR all sea borders closed (but not all three)
 
 ## No Policy Implemented
-A small handful of nations have not implemented any restrictions falling into the categories above during the COVID-19 pandemic. A policy is recorded for these nations, with the end_date being the date a thorough search was included, as well as a government website on COVID-19 restrictions for the source.
+A small handful of nations have not implemented any restrictions falling into the categories above during the COVID-19 pandemic. A policy is recorded for these nations, with the end_date being the most recent date a thorough search was performed, as well as a government website on COVID-19 restrictions for the source.
 
 ## Notes
 With the help of RAs, COBAP restricts the database to include policies which were implemented by the government or administrative structure of the country or territory recorded. We limit the scope of our data collection in this way in order to specify the country introducing the policy and the nations/persons who are targeted by it. This avoids the duplication of data and misrecording of policies at the national level. 
