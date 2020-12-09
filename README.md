@@ -7,10 +7,10 @@ This is the data repository for the [COBAP project](https://www.covidborderaccou
 The COVID Border Accountability Project (COBAP) provides a dataset of  >1000 policies systematized to reflect a complete timeline of new country-level restrictions on movement across international borders during the 2020 year. Using a 20-question survey, trained research assistants (RAs) sourced and documented for each new border policy: start and end dates, whether the closure constitutes a "complete closure" or "partial closure", which exceptions are made, which countries are banned, and which borders are closed, among other variables. In addition, the source of each policy was included in the database. The data provided is updated on a weekly basis, by Monday 12PM EST (17:00 UTC).
 
 # INFO
-COBAP tracks national level policies regarding immigration and travel. The policies are recorded by a team of RAs using Qualtrics.
-The initial list of policies is based on the travel-related policies in [ACAPS COVID-19 GOVERNMENT MEASURES DATASET](https://www.acaps.org/covid-19-government-measures-dataset), with additional policies found by our team.
+COBAP tracks national-level policies regarding immigration and travel inotroduced in response to the COVID-19 pandemic. The policies are recorded by a team of RAs using a curated Qualtrics survey per policy.
+The initial list of policies is based on a travel-related policies in [ACAPS COVID-19 GOVERNMENT MEASURES DATASET](https://www.acaps.org/covid-19-government-measures-dataset), with the bulk of our database found by our team. 
 
-The policies are recorded, noting start and end dates for the policy, sources, restriction notes, and whether the policy falls into our framework of Complete or Partial Closure (or no policy implemented):
+The policies are recorded, noting start and end dates for the policy, sources, country exceptions/targets, and whether the policy falls into our framework of Complete or Partial Closure (or no policy implemented):
 
 ## Complete Closure
 A new policy in which all newcomers are banned from all ports of entry—AIR, LAND, and SEA—with limited exceptions, including citizens, nationals from a specified country or set of up to 10 countries, and/or essential reasons, e.g. health emergencies, extreme humanitarian/diplomatic reasons, dignitaries, cargo flights, commercial transport, essential deliveries, permanent residents, existing visa holders, and family members of citizens
@@ -49,14 +49,15 @@ With the help of RAs, COBAP restricts the database to include policies which wer
 
 We do not include cases in which a country may effectively have experienced a border closure (or drastic human movement reduction) due to another country's policy decisions, or due to internal national-level or subnational level lockdowns. Furthermore, we do not capture the full extent of policies which are multidirectional, i.e. when one nation closes a border to both outgoing and ingoing traffic. 
 
-We do not capture quarantine requirements for persons entering a country, even if they are targeted at specific citizens or travel history. We also do not capture rules regarding passenger transit, which may be more lax than the restriction recorded in our database (i.e. Australia allowing specific nations' citizens to transit through Australia via commercial air travel, even though entering Australia is only allowed for citizens, permanent residents and family).
+We do not capture quarantine requirements for persons entering a country. We also do not capture rules regarding passenger transit. For instance, when Australia's government bars entry to all foreigners but allows specific nations' citizens to transit through Australia via commercial air travel, but we still record this as an "complete closure" since these populations are not able to enter and stay.
 
-This policy interpretation process can, in practice, become complicated, and in general the goal is to not represent all such cases in this database. Some examples include:
+This policy interpretation process can, in practice, become complicated. Our goal was to approach national-level governing territories systematically and produce correct data. Examples of the complicated cases we faced, and the decisions we made, include:
 
-* Overseas departments and regions of France do not include French national level policies, except in cases where those policies explicitly mention restrictions in those regions, or restrictions introduced by the departmental or regional government. 
-* Guernsey's state owned airline, Aurigny, suspending all flights, and therefore removing all commercial air access to Guernsey (except emergency service to Southampton) is not recorded as an air border closure, as Guernsey's government never explicitly banned arrivals. 
-* Vatican City workers who live in Rome allowed to travel into Vatican City for work during the complete closure will not be recorded as a Workers Exception as it is unrelated to specific classes of work permits.
-* Niuean, Cook Islander, and	Tokelauan citizens travel on New Zealand passports, and therefore policy text may not indicate that New Zealand has a Specific Country Exception for these nations.
+* French national-level policies apply to French overseas departments and regions (which are territorially not connected to mainland France). We do not include these national-level policies, for these overseas French entities but record any different policies they introduced separate from mainland France. (We faced a similar problem with the U.S. in relation to Guam and Puerto Rico; and took the same approach.)
+* Guernsey's state-owned airline, Aurigny, suspended all flights, which effectively removed all commercial air access to Guernsey (except emergency service to Southampton). We did not record this as air border closure because Guernsey's government never explicitly banned arrivals.
+* Vatican City was closed to all foreigners, but workers who live in Rome are allowed to travel into the Vatican City for work purposes. We record this as a complete_closure, with a workers_exception.
+* Niuean, Cook Islander, and Tokelauan citizens travel on New Zealand passports as New Zealand citizens. This means when we record a "complete closure" for New Zealand, we might not capture a specific country exception for these nations. We only record the country names listed in the text.
+* For additional complicated cases and the decisions we made, see our RA FAQ list.
 
 
 
@@ -106,7 +107,7 @@ work_excep| binary |whether the complete closure exempts workers (1) or not (0)
 source(0-4)| UTF-8 String | Web link to source of policy, one per column
 
 # Contact
-Please contact cobap@covidborderaccountability.org
+Please contact cobap@covidborderaccountability.org.
 
 For any issues with the recorded policies, feel free to submit a github issue or give us a heads up [here](https://docs.google.com/forms/d/1OGd-56pqT0iRPGv6iJdTnIWWI5vkbF2faAnTz5sDNxI).
  
