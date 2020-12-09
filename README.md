@@ -41,26 +41,22 @@ Further questions about the policy implemented are use to categorize partial clo
 **Border Closure(s)**: A partial closure which impacts those entering through a specified land, sea or air border; OR all land borders closed OR all air borders closed OR all sea borders closed (but not all three)
 
 ## No Policy Implemented
-A small handful of nations have not implemented any restrictions falling into the categories above during the COVID-19 pandemic. These are included, recording the end date as the date the RA confirmed that no policies have been implemented, as well as a source of a government website on COVID-19 restrictions. 
-
+A small handful of nations have not implemented any restrictions falling into the categories above during the COVID-19 pandemic. A policy is recorded for these nations, with the end_date being the date a thorough search was included, as well as a government website on COVID-19 restrictions for the source.
 
 ## Notes
 With the help of RAs, COBAP restricts the database to include policies which were implemented by the government or administrative structure of the country or territory recorded. We limit the scope of our data collection in this way in order to specify the country introducing the policy and the nations/persons who are targeted by it. This avoids the duplication of data and misrecording of policies at the national level. 
 
 We do not include cases in which a country may effectively have experienced a border closure (or drastic human movement reduction) due to another country's policy decisions, or due to internal national-level or subnational level lockdowns. Furthermore, we do not capture the full extent of policies which are multidirectional, i.e. when one nation closes a border to both outgoing and ingoing traffic. 
 
-We do not capture quarantine requirements for persons entering a country. We also do not capture rules regarding passenger transit. For instance, when Australia's government bars entry to all foreigners but allows specific nations' citizens to transit through Australia via commercial air travel, but we still record this as an "complete closure" since these populations are not able to enter and stay.
+We do not capture quarantine requirements for persons entering a country. We also do not capture rules regarding passenger transit. For instance, when Australia's government bars entry to all foreigners but allows specific nations' citizens to transit through Australia via commercial air travel, but we record this as an "complete closure (citizen exception) since they are not able to stay.
 
-This policy interpretation process can, in practice, become complicated. Our goal was to approach national-level governing territories systematically and produce correct data. Examples of the complicated cases we faced, and the decisions we made, include:
+This policy interpretation process can, in practice, become complicated. Our goal was to approach federal-level governing territories systematically and produce correct data. Examples of the complicated cases we faced, and the decisions we made, include:
 
-* French national-level policies apply to French overseas departments and regions (which are territorially not connected to mainland France). We do not include these national-level policies, for these overseas French entities but record any different policies they introduced separate from mainland France. (We faced a similar problem with the U.S. in relation to Guam and Puerto Rico; and took the same approach.)
+* France: French national-level policies apply to French overseas departments and regions (which are territorially not connected to mainland France). We do not include these national-level policies, for these overseas French entities .
 * Guernsey's state-owned airline, Aurigny, suspended all flights, which effectively removed all commercial air access to Guernsey (except emergency service to Southampton). We did not record this as air border closure because Guernsey's government never explicitly banned arrivals.
-* Vatican City was closed to all foreigners, but workers who live in Rome are allowed to travel into the Vatican City for work purposes. We record this as a complete_closure, with a workers_exception.
+* Vatican City was closed to all foreigners, but workers who live in Rome are allowed to travel into the Vatican City for work purposes. We record this as a "complete closure," with a "workers exception".
 * Niuean, Cook Islander, and Tokelauan citizens travel on New Zealand passports as New Zealand citizens. This means when we record a "complete closure" for New Zealand, we might not capture a specific country exception for these nations. We only record the country names listed in the text.
 * For additional complicated cases and the decisions we made, see our RA FAQ list.
-
-
-
 
 # FILELIST
 File | Description
