@@ -1,0 +1,231 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-174539863-1"></script>
+    <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-174539863-1');
+    </script>
+    <title>Covid Border Accountability Project</title>
+    <meta charset="UTF-8">
+    <link rel="icon" href="favicon.png">
+    <meta class="top" name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+
+$(function(){
+  $("#topbar").load("navbar.html");
+  $("#modal").load("modal.html");
+});
+    </script>
+<script>
+ function copysharelink() {
+  var copyText = document.getElementById("sharelink");
+  document.getElementById("sharelink").readOnly = false;
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+  document.getElementById("sharelink").readOnly = true;
+  document.execCommand("copy");
+  document.getElementById("sharetooltext").innerHTML = 'Copied!'
+}
+
+
+</script>
+
+</head>
+<body>
+    <div id="modal" class="modal"></div>
+    <div class="topbar" id="topbar"></div>
+    <style>
+        body {
+            color: #202124;
+            background-color: #fff;
+            text-align: justify;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: Baskerville,'Libre Baskerville',sans-serif;
+            font-weight: 400;
+            margin: 10px 0
+        }
+
+        .w3-main {
+            font-size: 20px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 900px;
+            max-width: 100vw;
+            font-family: Baskerville,'Libre Baskerville',sans-serif;
+        }
+        .maincontent {
+            line-height: 2;
+        }
+        .tooltip {
+            position: relative;
+            display: inline;
+            border-bottom: 1px dotted black;
+        }
+         .sharetooltip {
+            position: relative;
+            display: inline;
+        }
+        .sharetooltip .tooltiptext {
+                visibility: hidden;
+                background-color: black;
+                top: -5px;
+                left: 105%;
+                width: 150px;
+                color: #fff;
+                text-align: left;
+                padding: 5px 5px;
+                border-radius: 6px;
+                position: absolute;
+                font-size: 14px;
+                z-index: 1;
+            }
+
+            .sharetooltip:hover .tooltiptext {
+                visibility: visible;
+            }
+
+
+            .tooltip .tooltiptext {
+                visibility: hidden;
+                background-color: black;
+                bottom: 100%;
+                left: 50%;
+                margin-left: -30vh; 
+                width: 60vh;
+                color: #fff;
+                text-align: center;
+                padding: 15px;
+                border-radius: 6px;
+                position: absolute;
+                font-size: 16px;
+                z-index: 1;
+            }
+
+            .tooltip:hover .tooltiptext {
+                visibility: visible;
+            }
+
+                        tr{
+                vertical-align: top;         }
+        @media only screen and (max-width: 600px) {
+            .w3-main {
+                font-size: 14px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+            h2 {
+                font-size: 22px;
+            }
+
+            h3 {
+                font-size: 20px;
+            }
+
+            h4 {
+                font-size: 18px;
+            }
+
+            h5 {
+                font-size: 16px;
+            }
+
+        }
+    </style>
+    <div class="w3-main">
+        <a class="top" name="usa"></a>
+        <div class="w3-container" id="services" style="height:unset; padding-bottom:250px;padding-top:10vh">
+
+            <h2 style="font-weight: bold;text-align: initial;">An Overview of Migration-Related Policies introduced by the United States during the Coronavirus Pandemic</h2>
+            <br />
+            <div class="subtitle" style="display: inline-grid;   width:100%;     grid-template-columns: 1fr 1fr 1fr;        ">
+                <h5 style="font-weight:bold; color:#888">Author:</h5>
+                <h5 style="font-weight:bold; color:#888">Affiliation:</h5>
+                <h5 style="font-weight:bold; color:#888">Last Updated:</h5>
+                <h4>Bryn Walker</h4>
+                <h4>Emory University</h4>
+                <h4>October 2, 2020</h4>
+            </div>
+            <hr style="width:350px;border:3px solid #402c62; background-color: #402c62;" class="w3-round">
+            <div class="share" style="color:#888">
+                Share: <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fcovidborderaccountability.org/greaterchinareport.html&via=cobapteam" target="_blank" rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="twtr-icon  twtr-color-fill--blue-dark  has-hover"> <path opacity="0" d="M0 0h24v24H0z"></path><path fill="#202124" d="M23.643 4.937c-.835.37-1.732.62-2.675.733.962-.576 1.7-1.49 2.048-2.578-.9.534-1.897.922-2.958 1.13-.85-.904-2.06-1.47-3.4-1.47-2.572 0-4.658 2.086-4.658 4.66 0 .364.042.718.12 1.06-3.873-.195-7.304-2.05-9.602-4.868-.4.69-.63 1.49-.63 2.342 0 1.616.823 3.043 2.072 3.878-.764-.025-1.482-.234-2.11-.583v.06c0 2.257 1.605 4.14 3.737 4.568-.392.106-.803.162-1.227.162-.3 0-.593-.028-.877-.082.593 1.85 2.313 3.198 4.352 3.234-1.595 1.25-3.604 1.995-5.786 1.995-.376 0-.747-.022-1.112-.065 2.062 1.323 4.51 2.093 7.14 2.093 8.57 0 13.255-7.098 13.255-13.254 0-.2-.005-.402-.014-.602.91-.658 1.7-1.477 2.323-2.41z"></path></svg></a><input style="overflow: hidden;height: 1px;width:1px;border:0;padding:0;"type="text" value="https://covidborderaccountability.org/usareport.html" id="sharelink" readonly>
+                <span class="sharetooltip"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" onclick="copysharelink()" style="cursor: pointer;" viewBox="0 0 24 24"><path fill="#202124" d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg><span class="tooltiptext" id='sharetooltext'>Copy to Clipboard</span></span>
+                <a href="reports/US+Research+Report+COBAP.pdf"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"/></svg></a>
+            </div>
+            <br />
+            <div class="maincontent">
+                <p>During the earliest stages of the coronavirus pandemic (Feb 2020), the United States (U.S.) instituted several <span class="tooltip">partial closures<span class="tooltiptext">A new policy which restricts access of specific groups of people, whether by certain nationalities, travel histories; those entering through a specified land, sea or air border; OR all land borders closed OR all air borders closed OR all sea borders closed (but not all three)</span></span> that significantly restricted entry of foreign nationals through <span class="tooltip">travel history bans<span class="tooltiptext">A partial closure which bans travelers who, regardless of nationality, have recently travelled  through or from a specified country or group of countries, e.g. for "All travelers who have been to or travelled through China, Hong Kong, Iran, Italy, and Japan are advised to not enter the country, and may be denied entry" </span></span> (5). Thereafter, the U.S. has further restricted immigration with targeted and non-targeted <span class="tooltip">visa bans<span class="tooltiptext">A partial closure which bars access to regular application for new visas, whether impacting all visa seekers or those from specified countries</span></span> (3) <span class="tooltip">border closures<span class="tooltiptext">A partial closure which impacts those entering through a specified land, sea or air border; OR all land borders closed OR all air borders closed OR all sea borders closed (but not all three)</span></span> (7) and a <span class="tooltip">refugee ban<span class="tooltiptext">A partial closure which uses the language of "asylum seekers" and/or "refugee"</span></span> (1). </p>
+
+            <p> On 2-Feb, President Trump implemented a ban on foreign nationals who had been in <a href="https://web.archive.org/web/20200609193251/https://www.whitehouse.gov/presidential-actions/proclamation-suspension-entry-immigrants-nonimmigrants-persons-pose-risk-transmitting-2019-novel-coronavirus/" target="_blank" rel="noopener noreferrer">China</a> in the past 14 days, with exceptions made for the administrative regions of Hong Kong and Macau. A month later, on 2-Mar, U.S. President Trump instituted a similar ban on foreign nationals with a recent travel history from <a href="https://web.archive.org/web/20200610075601/https://www.whitehouse.gov/presidential-actions/proclamation-suspension-entry-immigrants-nonimmigrants-certain-additional-persons-pose-risk-transmitting-coronavirus/">Iran</a>.</p> 
+
+            <p>On 13-Mar, the U.S. implemented another travel history ban for the <a href="https://web.archive.org/web/20200609190905/https://www.whitehouse.gov/presidential-actions/proclamation-suspension-entry-immigrants-nonimmigrants-certain-additional-persons-pose-risk-transmitting-2019-novel-coronavirus/" target="_blank" rel="noopener noreferrer">Schengen Area</a>, impacting those who had recently been in: Austria, Belgium, Czech Republic, Denmark, Estonia, Finland, France, Germany, Greece, Hungary, Iceland, Italy, Latvia, Liechtenstein, Lithuania, Luxembourg, Malta, Netherlands, Norway, Poland, Portugal, Slovakia, Slovenia, Spain, Sweden, and Switzerland. Three days later, on 16-Mar, the United Kingdom and Ireland were added to the list, citing the "<a href="https://web.archive.org/web/20200828225621/https://www.whitehouse.gov/presidential-actions/proclamation-suspension-entry-immigrants-nonimmigrants-certain-additional-persons-pose-risk-transmitting-coronavirus-2/" target="_blank" rel="noopener noreferrer">general ability to travel freely between the United Kingdom and the Republic of Ireland</a>." On 28-May, those with recent travel history to <a href="https://web.archive.org/web/20200629215816/https://www.whitehouse.gov/presidential-actions/proclamation-suspension-entry-immigrants-nonimmigrants-certain-additional-persons-pose-risk-transmitting-novel-coronavirus/" target="_blank" rel="noopener noreferrer">Brazil</a> were also restricted. None of these travel history bans were given predetermined end dates. Rather, they stated that they would remain in effect “<a href="https://web.archive.org/web/20200610075601/https://www.whitehouse.gov/presidential-actions/proclamation-suspension-entry-immigrants-nonimmigrants-certain-additional-persons-pose-risk-transmitting-coronavirus/" target="_blank" rel="noopener noreferrer">until terminated by the President</a>.”</p>
+
+
+            <p>On 18-Mar, the U.S. effectively issued a visa ban when all U.S. Citizenship and Immigration Services (USCIS) offices were closed for non-emergency services, including international and domestic field offices, asylum offices, and application support centers (ASCs). USCIS announced they would <a href="https://www.uscis.gov/about-us/uscis-response-to-covid-19?fbclid=IwAR22h3fj5meCGQbDhPdiVoq2ktLPGBsfhgoVgRuXcTpmrYm4Tm4LrGtWjyg" target="_blank" rel="noopener noreferrer">re-open</a> field offices and asylum offices 4-Jun. However, the office closures led to monthslong delays in receiving basic services, including the <a href="https://www.natlawreview.com/article/waiting-green-cards" target="_blank" rel="noopener noreferrer">printing out</a> of 50,000 already approved green cards and 75,000 already approved work authorization documents, the re-scheduling of pre-COVID appointments and biometric fingerprinting services for asylum cases. Meanwhile, on 11-Sept, USCIS posted notice of their <a href="https://www.federalregister.gov/documents/2020/09/11/2020-19145/collection-and-use-of-biometrics-by-us-citizenship-and-immigration-services#h-58" target="_blank" rel="noopener noreferrer">proposal</a> to expand the biometric screening requirement, and its 85$ fee, to all who accompany migrants to USCIS, including children and U.S. citizens. The notice further proposes to expand the definition of "biometric" from fingerprint collection to include iris scanning, face print, palm print and DNA collection&mdash;any of which can be required "immediately" when necessary, at the discretion of the Department of Homeland Security (DHS). The DHS expects the additional biometrics collection fees, from U.S. citizens representing migrants, to help raise annually "between $22.4 million to $224.1 million." Because the DHS is a federal department, at the discretion of the U.S. President Trump, it remains unclear to migrants when, and how, these sweeping changes will take place. Moreover, in line with a pre-COVID <a href="https://www.uscis.gov/news/news-releases/uscis-will-adjust-international-footprint-to-seven-locations" target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer">announcement</a> (Aug 2019), all international, district-level USCIS offices, and 16 of the 24 international USCIS field offices, were <a href="https://www.uscis.gov/about-us/find-a-uscis-office/international-immigration-offices" target="_blank" rel="noopener noreferrer">closed permanently</a>. </p>
+
+             <p>Additionally, citing COVID-19, the U.S. issued two visa bans that more explicitly limit immigration from outside populations. The first was a 60-day suspension of entry of all "immigrants who present a risk to the United States labor market" (<a href="https://web.archive.org/web/20200609183618/https://www.govinfo.gov/content/pkg/FR-2020-04-27/pdf/2020-09068.pdf" target="_blank" rel="noopener noreferrer">Proclamation 10014</a>), set initially from 23-Apr to 22-Jun. On 22-Jun, however, the Trump administration determined 60 days was an "insufficient time period" for the U.S. labor market to rebalance and decided to extend the measure through 31-Dec, implementing it more specifically, by <a href="https://www.whitehouse.gov/presidential-actions/proclamation-suspending-entry-aliens-present-risk-u-s-labor-market-following-coronavirus-outbreak/" target="_blank" rel="noopener noreferrer">targeting  new H-1B, H-2B, J, and L nonimmigrant visas</a>.</p>
+
+             <p>The second visa ban was an <a href="https://web.archive.org/web/20200716102637/https://www.ice.gov/doclib/sevis/pdf/bcm2007-01.pdf" target="_blank" rel="noopener noreferrer">ambiguous</a>, unprecedented 6-Jul policy that rescinded visas for international students who enrolled exclusively in online classes. Following a public outcry and numerous <a href="https://www.insidehighered.com/quicktakes/2020/07/13/more-lawsuits-challenge-ice-international-student-rule" target="_blank" rel="noopener noreferrer">university-led lawsuits</a> (14-Jul), the measure was rescinded.</p> 
+
+            <p>Initially for 21-Mar to 22-Jun, the U.S. instituted new border closures with <a href="https://web.archive.org/save/https://www.dhs.gov/news/2020/08/14/fact-sheet-dhs-measures-border-limit-further-spread-coronavirus" target="_blank" rel="noopener noreferrer">Canada and Mexico</a> for non-essential travel. This 30-day border closure has since been extended six times, and at the time of writing, is extended through 21-Oct.</p>
+
+            <p>
+                A 25-Sept  <a href="https://s3.amazonaws.com/public-inspection.federalregister.gov/2020-20845.pdf" target="_blank" rel="noopener noreferrer">proposal</a> again targets international students and, if implemented, will amount to an additional, targeted visa ban, impacting those who wish to study for more than two years in the U.S. and are from the following countries: Afghanistan, Benin, Bhutan, Burkina Faso, Burundi, Cameroon, Central African Republic, Chad, Congo (DRC), Congo (ROC), Côte d'Ivoire, Djibouti, Equatorial Guinea, Eritrea, Ethiopia, Gabon, The Gambia, Ghana, Guinea, Guinea-Bissau, Guyana, Haiti, Iran, Iraq, Kenya, Kosovo, Kyrgyzstan, Liberia, Libya, Malawi, Mali, Mauritania, Moldova, Mongolia, Nepal, Niger, Nigeria, North Korea, Papua New Guinea, Philippines, Rwanda, Samoa, Senegal, Sierra Leone, Somalia, South Sudan, Sudan, Syria, Tajikistan, Tanzania, Togo, Tonga, Turkmenistan, Tuvalu, Uganda, Uzbekistan, Vietnam, Yemen, and Zambia. International media were quick to note that the majority of the countries targeted are from the African continent.
+
+            </p>
+
+            <p>Most recently, on 28-Sept, just before the government’s fiscal year ended, Trump <a href="https://www.state.gov/transmission-of-the-presidents-report-to-congress-on-the-proposed-refugee-admissions-for-fiscal-year-2021/" target="_blank" rel="noopener noreferrer">proposed</a> to drastically reduce the asylum seekers admitted annually, citing COVID-19. According to COBAP’s database, this is the second refugee ban of its kind, following Hungary’s <a href="https://www.reuters.com/article/us-eu-migration-hungary-ruling/hungary-tightens-asylum-rules-as-it-ends-migrant-detention-zones-idUSKBN22X12X" target="_blank" rel="noopener noreferrer">announcement</a> that its asylum seekers should submit their applications to other countries.</p>
+
+             <p>Further analysis is needed on both the  U.S. policy texts and the experiences of those impacted to understand the extent and impacts of these restrictions. </p>
+
+            <p>
+                 <h4 style="font-weight:bold;">Timeline</h4>
+                    <table style="width:100%; text-align:vertical;">
+
+                    <tr><td><b>2-Feb&ndash;N/A</b>:</td><td> Barred entry of foreign nationals who have been in China</td></tr>
+                    <tr><td><b>2-Mar&ndash;N/A</b>:</td><td> Barred entry of foreign nationals who have been in Iran</td></tr>
+                    <tr><td><b>13-Mar&ndash;N/A</b>:</td><td> Barred entry of foreign nationals who have been in the Schengen Area</td></tr>
+                    <tr><td><b>16-Mar&ndash;N/A</b>:</td><td> Barred entry of foreign nationals who have been in the UK or Ireland</td></tr>
+                    <tr><td><b>21-Mar&ndash;22-Jun</b>:</td><td> Closed land borders with Canada and Mexico for non-essential travel</td></tr>
+                    <tr><td><b>23-Apr&ndash;22-Jun</b>:</td><td> Barred entry to immigrants who "pose a risk to the labor market" (Proclamation 10014)</td></tr>
+                    <tr><td><b>26-May&ndash;N/A</b>:</td><td> Barred entry of foreign nationals who had been in Brazil</td></tr>
+                    <tr><td><b>22-Jun&ndash;31-Dec</b>:</td><td> Extension of Proclamation 10014, with added targeting of new H-1B, H-2B, J, and L nonimmigrant visas</td></tr>
+                    <tr><td><b>6-Jul&ndash;14-Jul</b>:</td><td> Barred visa access for international students enrolled exclusively in online classes</td></tr></table>
+                    
+            </p>
+                
+                <hr style="border-top: 1px solid #202124;">
+                <p><i>Bryn Walker is a research assistant (RA) and coauthor of the COVID Border
+Accountability Project (COBAP). COBAP documents country-level policy changes in
+travel and immigration, introduced in response to the COVID-19 pandemic,
+worldwide.</i></p>
+                <hr style="border-top: 1px solid #202124;">
+<a href="index.html">Back to the map</a>
+</div>
+        </div>
+
+</body>
+<script>
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("myOverlay").style.display = "block";
+}
+
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("myOverlay").style.display = "none";
+}
+</script>
+
+</html>

@@ -1,0 +1,276 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-174539863-1"></script>
+    <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-174539863-1');
+    </script>
+    <title>Covid Border Accountability Project</title>
+    <meta charset="UTF-8">
+    <link rel="icon" href="favicon.png">
+    <meta class="top" name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+
+$(function(){
+  $("#topbar").load("navbar.html");
+  $("#modal").load("modal.html");
+});
+    </script>
+<script>
+ function copysharelink() {
+  var copyText = document.getElementById("sharelink");
+  document.getElementById("sharelink").readOnly = false;
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+  document.getElementById("sharelink").readOnly = true;
+  document.execCommand("copy");
+  document.getElementById("sharetooltext").innerHTML = 'Copied!'
+}
+
+
+</script>
+</head>
+<body>
+    <div id="modal" class="modal"></div>
+    <div class="topbar" id="topbar"></div>
+    <style>
+        body {
+            color: #202124;
+            background-color: #fff;
+            text-align: justify;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: Baskerville,'Libre Baskerville',sans-serif;
+            font-weight: 400;
+            margin: 10px 0
+        }
+        .w3-main {
+            font-size: 18px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 900px;
+            max-width: 100vw;
+            font-family: Baskerville,'Libre Baskerville',sans-serif;
+        }
+        .maincontent {
+            line-height: 2;
+        }
+        @media only screen and (max-width: 600px) {
+            .w3-main {
+                font-size: 14px;
+            }
+            h1 {
+                font-size: 26px;
+            }
+            h2 {
+                font-size: 22px;
+            }
+            h3 {
+                font-size: 20px;
+            }
+            h4 {
+                font-size: 18px;
+            }
+            h5 {
+                font-size: 16px;
+            }
+        }
+        .tooltip {
+            position: relative;
+            display: inline;
+            border-bottom: 1px dotted black;
+
+        }
+              .sharetooltip {
+            position: relative;
+            display: inline;
+        }
+        .sharetooltip .tooltiptext {
+                visibility: hidden;
+                background-color: black;
+                top: -5px;
+                left: 105%;
+                width: 150px;
+                color: #fff;
+                text-align: left;
+                padding: 5px 5px;
+                border-radius: 6px;
+                position: absolute;
+                font-size: 14px;
+                z-index: 1;
+            }
+
+            .sharetooltip:hover .tooltiptext {
+                visibility: visible;
+            }
+
+
+            .tooltip .tooltiptext {
+                visibility: hidden;
+                background-color: black;
+                bottom: 100%;
+                left: 50%;
+                margin-left: -30vh; 
+                width: 60vh;
+                color: #fff;
+                text-align: center;
+                padding: 15px;
+                border-radius: 6px;
+                position: absolute;
+                font-size: 16px;
+                z-index: 1;
+            }
+
+            .tooltip:hover .tooltiptext {
+                visibility: visible;
+            }
+    </style>
+    <div class="w3-main">
+        <a class="top" name="usa"></a>
+        <div class="w3-container" id="services" style="height:unset; padding-bottom:250px;padding-top:10vh">
+
+            <h2 style="font-weight: bold;text-align: initial;">A Brief Overview of Greater China’s Immigration and Border-Related Policies in Response to the Coronavirus Pandemic</h2>
+            <br />
+            <div class="subtitle" style="display: inline-grid;   width:100%;     grid-template-columns: 1fr 1fr 1fr;        ">
+                <h5 style="font-weight:bold; color:#888">Author:</h5>
+                <h5 style="font-weight:bold; color:#888">Affiliation:</h5>
+                <h5 style="font-weight:bold; color:#888">Last Updated:</h5>
+                <h4>Cayleigh Jackson</h4>
+                <h4>Emory University</h4>
+                <h4>December 8, 2020</h4>
+                <h4>Maggie Shum</h4>
+                <h4>University of Notre Dame</h4>
+                <h4></h4>
+            </div>
+
+            <hr style="width:350px;border:3px solid #402c62; background-color: #402c62;" class="w3-round">
+        <div class="share" style="color:#888">
+                Share: <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fcovidborderaccountability.org/greaterchinareport.html&via=cobapteam" target="_blank" rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="twtr-icon  twtr-color-fill--blue-dark  has-hover"> <path opacity="0" d="M0 0h24v24H0z"></path><path fill="#202124" d="M23.643 4.937c-.835.37-1.732.62-2.675.733.962-.576 1.7-1.49 2.048-2.578-.9.534-1.897.922-2.958 1.13-.85-.904-2.06-1.47-3.4-1.47-2.572 0-4.658 2.086-4.658 4.66 0 .364.042.718.12 1.06-3.873-.195-7.304-2.05-9.602-4.868-.4.69-.63 1.49-.63 2.342 0 1.616.823 3.043 2.072 3.878-.764-.025-1.482-.234-2.11-.583v.06c0 2.257 1.605 4.14 3.737 4.568-.392.106-.803.162-1.227.162-.3 0-.593-.028-.877-.082.593 1.85 2.313 3.198 4.352 3.234-1.595 1.25-3.604 1.995-5.786 1.995-.376 0-.747-.022-1.112-.065 2.062 1.323 4.51 2.093 7.14 2.093 8.57 0 13.255-7.098 13.255-13.254 0-.2-.005-.402-.014-.602.91-.658 1.7-1.477 2.323-2.41z"></path></svg></a><input style="overflow: hidden;height: 1px;width:1px;border:0;padding:0;"type="text" value="https://covidborderaccountability.org/greaterchinareport.html" id="sharelink" readonly>
+                <span class="sharetooltip"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" onclick="copysharelink()" style="cursor: pointer;" viewBox="0 0 24 24"><path fill="#202124" d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg><span class="tooltiptext" id='sharetooltext'>Copy to Clipboard</span></span>
+                <a href="reports/Greater+China+Research+Report+COBAP.pdf"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"/></svg></a>
+            </div>
+            <br />
+            <div class="maincontent">
+
+                <div class="maincontent">
+                    <p><b>Border Context</b>: International travel policy in the People’s Republic of China is primarily decided upon by the Chinese <a href="https://www.fmprc.gov.cn/mfa_eng/" target="_blank" rel="noopener noreferrer">Ministry of Foreign Affairs</a>, whose policy control does not extend to the rest of Greater China. The most up-to-date COVID-19 information for the PRC can be found at the website of the <a href="http://en.nhc.gov.cn/" target="_blank" rel="noopener noreferrer">National Health Commission</a>. The Hong Kong Special Administrative Region government maintains its own <a href="https://www.coronavirus.gov.hk/eng/index.html" target="_blank" rel="noopener noreferrer">COVID-19 website</a>, and the Macau SAR Government maintains a <a href="https://www.ssm.gov.mo/apps1/PreventCOVID-19/en.aspx#clg17458" target="_blank" rel="noopener noreferrer">special webpage against epidemics</a> with up-to-date information. Similarly, the Ministry of Foreign Affairs of Taiwan maintains a <a href="https://www.mofa.gov.tw/en/theme.aspx?n=635352E3900FFF8E&s=8A33013523400F35&sms=BCDE19B435833080" target="_blank" rel="noopener noreferrer">special webpage</a> where the most recent COVID-19 updates for the region can be found.</p>
+                    <h4 style="font-weight:bold;">Mainland China</h4>
+
+                    <p>Since the outbreak of the pandemic (Jan 2020), China has primarily issued a <span class="tooltip">partial closure<span class="tooltiptext">A new policy which restricts access of specific groups of people, whether by certain nationalities, travel histories; those entering through a specified land, sea or air border; OR all land borders closed OR all air borders closed OR all sea borders closed (but not all three)</span></span> (1) on entry by foreign nationals, albeit a strict and comprehensive one. In early November 2020, China also implemented a series of country-specific <span class="tooltip">citizenship bans<span class="tooltiptext">A partial closure which bans foreign nationals from one country or group of countries, e.g. "entry to the country is denied to foreign nationals from Austria, Belgium, and France"</span></span> (11), with a <a href="http://www.fmcoprc.gov.hk/chn/wjbfyrbt/t1829637.htm" target="_blank" rel="noopener noreferrer">press briefing</a> stating that Chinese embassies in the relevant countries would continue to announce these bans if necessary. </p>
+                    <p>On 2-Feb, the Entry and Exit Administration of the People's Republic of China <a href="https://www.thestandnews.com/society/%E6%AD%A6%E6%BC%A2%E8%82%BA%E7%82%8E-%E5%85%A7%E5%9C%B0%E6%9A%AB%E5%81%9C%E5%AF%A9%E6%89%B9%E6%B8%AF%E6%BE%B3%E6%97%85%E9%81%8A%E7%B0%BD%E6%B3%A8-%E5%8C%85%E6%8B%AC%E8%87%AA%E7%94%B1%E8%A1%8C-%E4%B8%80%E5%91%A8%E4%B8%80%E8%A1%8C/" target="_blank" rel="noopener noreferrer">halted processes</a> on all visas for entering Hong Kong and Macau. On Feb 17, the Shenzhen government <a href="https://www.thestandnews.com/china/%E6%AD%A6%E6%BC%A2%E8%82%BA%E7%82%8E-%E6%B7%B1%E5%9C%B3%E6%81%A2%E5%BE%A9%E9%83%A8%E5%88%86%E8%B5%B4%E6%B8%AF%E7%B0%BD%E6%B3%A8-%E5%8C%85%E6%8B%AC%E6%8E%A2%E8%A6%AA%E5%B0%B1%E6%A5%AD%E5%9F%B9%E8%A8%93%E7%AD%89/" target="_blank" rel="noopener noreferrer">relaxed</a> the restrictions to allow Shenzhen citizens to travel to Hong Kong.</p>
+                    <p>Beginning on 28-Mar, China prohibited <a href="https://web.archive.org/web/20200327173542/https:/www.fmprc.gov.cn/mfa_eng/wjbxw/t1761867.shtml" target="_blank" rel="noopener noreferrer">most foreigners</a> from entering the country by temporarily suspending entry of all foreign nationals holding visas or residence permits still valid to the time of the announcement on 26-Mar. Entry by foreign nationals with APEC Business Travel Cards were also suspended, as well as several temporary visa or visa-free travel policies, such as port visas, the 24/72/144-hour visa-free transit policy, the Hainan 30-day visa-free policy, a 15-day visa-free policy specified for foreign cruise-group tours, and several visa-free policies aimed at foreign tour groups from Hong Kong, Macau, and specific ASEAN countries. Foreign nationals with visas issued after the announcement on 26-Mar were unaffected by the suspension. This policy was not given a specific end date but was announced to be “a temporary measure” that “w[ould] be calibrated in light of the evolving situation and announced accordingly.”</p>
+                    <p>On 28-Sept, China <a href="https://web.archive.org/web/20201001204634/https:/www.fmprc.gov.cn/mfa_eng/wjbxw/t1817370.shtml" target="_blank" rel="noopener noreferrer">slightly eased this restriction</a>, announcing that foreign nationals holding valid Chinese residence permits for “work, personal matters, and reunion” are allowed to enter China without needing to apply for new visas. However, all other measures in the 26-Mar remain in place.</p>
+                    <p>On 4-Nov, the Chinese embassy in <a href="http://www.chinese-embassy.org.uk/chn/gdxw/t1829526.htm" target="_blank" rel="noopener noreferrer">the U.K.</a> announced a ban on all traveling into China from non-Chinese nationals within the U.K., regardless if individuals “[hold] currently valid Chinese visas and residence permits for work, private affairs, or groups”. This began a series of citizenship bans—shortly after on 5-Nov, Chinese embassies in <a href="http://be.chineseembassy.org/chn/lsfw/aqtx/t1829527.htm" target="_blank" rel="noopener noreferrer">Belgium</a>, <a href="http://bd.chineseembassy.org/chn/lsyw/lstx/t1829556.htm" target="_blank" rel="noopener noreferrer">Bangladesh</a>, <a href="http://ru.china-embassy.org/chn/fwzn/lsfws/zytz/t1829736.htm" target="_blank" rel="noopener noreferrer">Russia</a>, <a href="http://ph.chineseembassy.org/chn/sgdt/t1829558.htm" target="_blank" rel="noopener noreferrer">the Philippines</a>, <a href="http://ua.china-embassy.org/chn/zgsg/t1829631.htm" target="_blank" rel="noopener noreferrer">Ukraine</a>, <a href="http://www.amb-chine.fr/chn/sgxw/t1829691.htm" target="_blank" rel="noopener noreferrer">France</a>, <a href="http://it.china-embassy.org/chn/lstz/t1829700.htm" target="_blank" rel="noopener noreferrer">Italy</a>, <a href="http://ng.chineseembassy.org/chn/hzqzqw/t1829791.htm" target="_blank" rel="noopener noreferrer">Nigeria</a>, <a href="http://et.china-embassy.org/chn/lsxx/t1829801.htm" target="_blank" rel="noopener noreferrer">Ethiopia</a>, and <a href="http://in.china-embassy.org/chn/sgxw/t1829641.htm" target="_blank" rel="noopener noreferrer">India</a> made identical announcements. These measures were again announced to be temporary and to be modified by a separate policy at a later date. </p>
+                    <p>China has, to date, not implemented any policies to fully close specific land, air, or sea borders<a href="#foot1">[1]</a>. However, China has maintained <a href="http://en.nhc.gov.cn/2020-04/09/c_78956.htm" target="_blank" rel="noopener noreferrer">very tight control</a> on many of its borders, with some borders, such as the border with Vietnam, decreasing from 20.79 million inbound and outbound travels in 2019 to <a href="http://en.nhc.gov.cn/2020-05/19/c_80298.htm" target="_blank" rel="noopener noreferrer">only 80 on average per day in May 2020</a>. International flights were also heavily restricted, with international airlines only allowed to maintain <a href="http://en.nhc.gov.cn/2020-03/27/c_78394.htm" target="_blank" rel="noopener noreferrer">one route into China</a> that sends one flight per week. It is also notable that soon after the outbreak of the pandemic (Jan 2020), <a href="https://www.newsweek.com/china-neighbors-close-borders-coronavirus-sars-1484978" target="_blank" rel="noopener noreferrer">nearly all of China’s neighbors</a> quickly closed their borders with China.</p>
+                    <p>In order to alleviate the pandemic’s impact on the economy, Chinese officials are permitting essential business travel from <a href="https://www.businesstraveller.com/business-travel/2020/06/14/the-singapore-china-fast-lane-for-essential-travel-key-facts/" target="_blank" rel="noopener noreferrer">Singapore</a> and <a href="https://www.straitstimes.com/asia/east-asia/over-1000-business-travellers-have-benefitted-from-fast-track-entry-deal-between" target="_blank" rel="noopener noreferrer">South Korea</a> under fast-track arrangements. These measures exempt selected business personnel from strict quarantine measures so they can conduct business amid the pandemic.</p>
+                    <p>
+                        <h4 style="font-weight:bold;">Hong Kong:</h4>
+                        Since the outbreak of the pandemic, the government of the Hong Kong Special Administrative Region has implemented implemented partial closures based on <span class="tooltip">travel history<span class="tooltiptext">A partial closure which bans travelers who, regardless of nationality, have recently travelled  through or from a specified country or group of countries, e.g. for "All travelers who have been to or travelled through China, Hong Kong, Iran, Italy, and Japan are advised to not enter the country, and may be denied entry" </span></span> (2) and air travel by non-residents (1). Hong Kong has also implemented a variety of strict quarantine policies.
+                    </p>
+                    <p> On 20-Jan, the Food and Health Bureau announced that all passengers traveling by air from the city of Wuhan into Hong Kong were required to submit a “<a href="https://www.thestandnews.com/society/%E6%AD%A6%E6%BC%A2%E8%82%BA%E7%82%8E-%E6%98%8E%E8%B5%B7%E6%AD%A6%E6%BC%A2%E6%8A%B5%E6%B8%AF%E8%88%AA%E7%8F%AD%E6%97%85%E5%AE%A2%E9%A0%88%E5%A1%AB%E5%81%A5%E5%BA%B7%E7%94%B3%E5%A0%B1-%E4%B8%8D%E5%8C%85%E6%8B%AC%E8%A5%BF%E4%B9%9D%E9%AB%98%E9%90%B5%E7%AB%99%E7%AD%89%E9%99%B8%E8%B7%AF%E5%8F%A3%E5%B2%B8/" target="_blank" rel="noopener noreferrer">Health & Quarantine Information Declaration</a>.” This policy did not cover those from Wuhan entering Hong Kong via high-speed train.</p>
+                    <p>On 27-Jan, the Hong Kong SAR government <a href="https://web.archive.org/web/20200305210651/https:/www.coronavirus.gov.hk/eng/inbound-travel.html" target="_blank" rel="noopener noreferrer">began to refuse entry</a> into Hong Kong for all Hubei residents and all non-Hong Kong residents who had visited the Hubei Province in the past 14 days. This policy <a href="https://web.archive.org/web/20200817142413/https:/www.coronavirus.gov.hk/eng/inbound-travel.html" target="_blank" rel="noopener noreferrer">remained in place</a> until mid-August.</p>
+                    <p>On 8-Feb, the Hong Kong government implemented <a href="https://www.scmp.com/news/hong-kong/politics/article/3049238/coronavirus-mandatory-quarantine-anyone-arriving-hong-kong" target="_blank" rel="noopener noreferrer">compulsory quarantine</a> for 14 days of persons from mainland China, or visited China in the past 14 days arriving at Hong Kong via ports of entry.</p>
+                    <p>On 25-Feb, Hong Kong restricted non-Hong Kong residents <a href="https://web.archive.org/web/20200305210651/https:/www.coronavirus.gov.hk/eng/inbound-travel.html" target="_blank" rel="noopener noreferrer">who had visited Korea</a> in the past 14 days from entering Hong Kong; this measure was lifted in mid-March. </p>
+                    <p>On 17-March, the Hong Kong SAR government announced <a href="https://www.reuters.com/article/us-health-coronavirus-hongkong-eu/hong-kong-says-travelers-from-european-schengen-countries-to-undergo-quarantine-idUSKBN2102CD" target="_blank" rel="noopener noreferrer">compulsory quarantine</a> for all persons who had visited Italy, France, Germany, Japan and Spain in the past 14 days when entering Hong Kong. The policy was <a href="https://hongkongfp.com/2020/03/16/coronavirus-hong-kong-expands-quarantine-policy-arrivals-uk-us-ireland-egypt-imported-cases-detected/" target="_blank" rel="noopener noreferrer">extended</a> to Ireland, the UK, the US and Egypt on 19-March.</p>
+                    <p>Since 25-Mar, Hong Kong has denied entry for all non-Hong Kong residents coming from overseas countries and regions <a href="https://web.archive.org/web/20200817142413/https:/www.coronavirus.gov.hk/eng/inbound-travel.html" target="_blank" rel="noopener noreferrer">by plane</a>. Additionally, this policy denies entry to all non-Hong Kong residents coming from Mainland China, Macau and Taiwan if they have been to any overseas countries and regions in the past 14 days, and all travelers must self-quarantine for two weeks. This measure was <a href="https://web.archive.org/web/20200324043054/https:/www.info.gov.hk/gia/general/202003/24/P2020032400050.htm" target="_blank" rel="noopener noreferrer">initially intended</a> to be in place for 14 days after it was implemented, but was later <a href="http://web.archive.org/web/20200421173518/https://www.info.gov.hk/gia/general/202004/06/P2020040600671.htm" target="_blank" rel="noopener noreferrer">extended</a> until further notice.</p>
+                    <p>On 2-Nov, Singapore announced its first <a href="https://www.straitstimes.com/singapore/transport/spore-hk-set-to-launch-air-bubble-which-may-allow-leisure-travel-without-need" target="_blank" rel="noopener noreferrer">two-way air travel bubble</a> with Hong Kong. The policy intention was to allow individuals to travel between the two locations without the need to be quarantined, subject to conditions, including testing negative for Covid-19. However, on 21-Nov this arrangement was <a href="https://www.npr.org/sections/coronavirus-live-updates/2020/11/21/937503634/air-travel-bubble-with-singapore-delayed-amid-covid-19-spike-in-hong-kong" target="_blank" rel="noopener noreferrer">postponed</a> for two weeks by the Singaporean government after an uptick in positive COVID-19 cases in Hong Kong.</p>
+
+                    <h4 style="font-weight:bold;">Macau:</h4>
+                    <p>Macau has implemented a <span class="tooltip">complete closure<span class="tooltiptext">A new policy in which all newcomers are banned from all ports of entry - AIR, LAND, and SEA - with limited exceptions, including citizens, nationals from a specified country or set of up to 10 countries, and/or essential reasons, e.g. health emergencies, extreme humanitarian/diplomatic reasons, dignitaries, cargo flights, commercial transport, essential deliveries, permanent residents, existing visa holders, and family members of citizens</span></span> (1).</p>
+                    <p>On 27-Jan, the Macau SAR government began to refuse entry into Macau for <a href="https://www.channelnewsasia.com/news/asia/wuhan-virus-macau-deny-entry-hubei-visitors-china-hong-kong-12358010" target="_blank" rel="noopener noreferrer">all Hubei residents</a> and all non-Macau residents who had visited the Hubei Province in the past 14 days.</p>
+                    <p>On 18-Mar, the Macau SAR government announced it would <a href="https://web.archive.org/web/20200320093358/https:/www.gov.mo/en/news/123667/" target="_blank" rel="noopener noreferrer">ban all non-residents</a> from entering Macau, with exceptions for residents of Mainland China, Hong Kong, and Taiwan, as well as work permit holders. This restriction has not been lifted, and no timeline has been given for doing so.</p>
+
+
+                    <h4 style="font-weight:bold;">Taiwan:</h4>
+                    <p>
+                        Taiwan has implemented four partial closures based on travel history (1), citizenship (2), and airline transit (1). It also later implemented a complete closure (1), which is currently in the process of being slowly appeased.
+                    </p>
+
+                    <p>Beginning on 7-Feb, Taiwan barred entry for all foreign nationals who had <a href="https://web.archive.org/web/20200611063457/https:/www.mofa.gov.tw/en/News_Content.aspx?n=539A9A50A5F8AF9E&sms=37B41539382B84BA&s=B15583048219C198" target="_blank" rel="noopener noreferrer">visited or resided in the PRC</a> in the past 14 days, including those eligible for visa-free treatment, landing visas, e-visas, or currently carrying valid visas. This restriction originally only applied to those who had visited Mainland China, but was <a href="https://web.archive.org/web/20200611061450/https:/www.mofa.gov.tw/en/News_Content.aspx?n=539A9A50A5F8AF9E&sms=37B41539382B84BA&s=EFB88BECEB5CCC92" target="_blank" rel="noopener noreferrer">quickly amended</a> to include Hong Kong and Macau, as well. </p>
+
+                    <p>On 11-Feb, Taiwan suspended entry for <a href="https://www.mac.gov.tw/en/News_Content.aspx?n=2BA0753CBE348412&sms=E828F60C4AFBAF90&s=0F2D2B8E7DA6EC5B" target="_blank" rel="noopener noreferrer">all Hong Kong and Macau residents</a>, with a handful of exceptions. Taiwan also <a href="https://web.archive.org/web/20200417082908/https:/www.cdc.gov.tw/En/Bulletin/Detail/_4X1IrBQkPHiaVGm2T2A5g?typeid=158" target="_blank" rel="noopener noreferrer">suspended the transit</a> of all airline passengers through Taiwan from 24-Mar until 7-Apr. Since 19-Mar, <a href="https://web.archive.org/web/20200611063210/https:/www.mofa.gov.tw/en/News_Content.aspx?n=539A9A50A5F8AF9E&sms=37B41539382B84BA&s=1816E365AF525FDD" target="_blank" rel="noopener noreferrer">all foreign nationals</a> have been barred from entering Taiwan, with the ability for foreign nationals to apply for an exempted status if they can meet criteria and submit required documentation. Since 24-June, 2020, Taiwan has begun to <a href="https://web.archive.org/web/20200821084222/https:/www.boca.gov.tw/cp-220-5081-c06dc-2.html" target="_blank" rel="noopener noreferrer">gradually ease this restriction</a>. </p>
+                    <p>From 29-Oct, the Taiwan government announced it would allow <a href="https://www.worldaware.com/intelligence-alert-taiwan-continues-restrictions-quarantine-rules-adjusted-travelers-south-korea" target="_blank" rel="noopener noreferrer">essential</a>, short-term business travel for specific activities for residents from countries on the <a href="https://www.cdc.gov.tw/En/Bulletin/Detail/qnrgGreimwG0BfcYTj6GSg?typeid=158" target="_blank" rel="noopener noreferrer">Central Epidemic Command Center</a> (CECC)'s low- and medium-risk location list.</p>
+                    <p>
+                        On 25-Nov, Taiwan announced its “<a href="https://web.archive.org/web/20201130054124/https:/www.boca.gov.tw/cp-220-5081-c06dc-2.html" target="_blank" rel="noopener noreferrer">Fall-Winter COVID-19 Prevention Program</a>”, set to begin on 1-Dec. The program requires that all travelers provide a COVID-19 nucleic acid report prior to boarding a flight to Taiwan, with exceptions for emergency situations, departing from a country where self-paid tests are unavailable, or participating in special agency programs approved by the CECC. On 2-Dec, the Taiwan CDC clarified details about this requirement and gave a <a href="https://web.archive.org/web/20201208065302/https:/www.cdc.gov.tw/En/Bulletin/Detail/u4KJUhLC0JauVRd47LXOHQ?typeid=158" target="_blank" rel="noopener noreferrer">short list of further exceptions</a>, such as an exception for children under six years old.
+                    </p>
+                    <p>Beginning on 4-Dec, Taiwan suspended entry of all <a href="https://web.archive.org/web/20201202095441/https:/www.cdc.gov.tw/En/Bulletin/Detail/aYWNno-cBcbAKEObXhMEEQ?typeid=158" target="_blank" rel="noopener noreferrer">Indonesian migrant workers</a> coming to Taiwan to work due to case numbers in Indonesia. This policy is to last until 17-Dec at a minimum and is to be reassessed at that date. </p>
+                    <h4 style="font-weight:bold;">Timeline</h4>
+
+                    <p>20-Jan - 27-Jan &mdash; Hong Kong SAR Food and Health Bureau requires all passengers travelling by air from Wuhan to submit a “Health & Quarantine Information Declaration” form</p>
+                    <p>27-Jan - 17-Aug &mdash; Hong Kong SAR government refuses entry for all Hubei residents and all non-Hong Kong residents who visited the Hubei Province in the past 14 days</p>
+
+                    <p>27-Jan - 18-Mar &mdash; Macau SAR government refuses entry into Macau for all Hubei residents and all non-Macau residents who had visited the Hubei Province in the past 14 days</p>
+
+                    <p>2-Feb - 17-Feb &mdash; People’s Republic of China halts visa processes for Chinese citizens to enter Hong Kong or Macau </p>
+
+                    <p>7-Feb - 19-Mar &mdash; Taiwan bars entry for all foreign nationals who visited or resided in Mainland China, Hong Kong, or Macau in the past 14 days </p>
+
+                    <p>8-Feb - N/A &mdash; Hong Kong SAR government announces compulsory quarantine for those arriving from China or who had visited China</p>
+
+                    <p>11-Feb - N/A &mdash; Taiwan suspends entry for all residents of Hong Kong and Macau</p>
+
+                    <p>25-Feb - 17-Mar &mdash; Hong Kong bans entry from all non-Hong Kong residents who visited Korea in the past 14 days</p>
+
+                    <p>17-Mar - 25-Mar &mdash; Hong Kong SAR government announces compulsory quarantine for those who had visited Italy, France, Germany, Japan and Spain in the past 14 days</p>
+
+                    <p>18-Mar - N/A &mdash; Macau SAR government bans entry for all non-residents, not including residents of Mainland China, Hong Kong, and Taiwan</p>
+
+                    <p>19-Mar - 25-Mar &mdash; Hong Kong SAR government announces compulsory quarantine for those who had visited Ireland, the UK, the US and Egypt in the past 14 day</p>
+
+                    <p>19-Mar - N/A &mdash; Taiwan bans all foreign nationals from entering Taiwan, with exceptions</p>
+
+                    <p>24-Mar - 7-Apr &mdash; Taiwan bans all airline passenger transits through the country</p>
+
+                    <p>25-Mar - N/A &mdash; Hong Kong prohibits all non-residents from arriving in Hong Kong by plane. Residents of Mainland China, Hong Kong, and Macau are denied entry if they have been anywhere overseas in the past 14 days and must mandatory quarantine</p>
+
+                    <p>28-Mar - N/A &mdash; China suspends entry of foreign nationals holding still-valid visas or residence permits, and suspends a number of visa-free travel policies</p>
+
+                    <p>24-June - N/A &mdash; Taiwan begins to ease the restrictions of its previous entry ban for foreign nationals</p>
+                    <p>28-Sept - N/A &mdash; China reallows foreign nationals with valid residence permits to enter without applying for new visas</p>
+                    <p>29-Oct - N/A &mdash; Taiwan allows essential travel from countries on the CECC’s low- and medium- risk location list</p>
+                    <p>2-Nov - N/A &mdash; Singaporean government announces two-way travel bubble with Hong Kong, delayed start until 21-Nov</p>
+                    <p>4-Nov - N/A &mdash; Chinese embassy in the U.K. announces full travel bans for travelers coming to China from the U.K</p>
+                    <p>5-Nov - N/A &mdash; Chinese embassies in Belgium, Russia, Ukraine, France, Italy, Nigeria, Ethiopia, India, Bangladesh, and the Philippines announce full travel bans for travelers coming to China from these countries</p>
+                    <p>1-Dec - N/A &mdash; Taiwan announces “Fall-Winter COVID-19 Prevention Program”</p>
+                    <p>4-Dec - 17-Dec &mdash; Taiwan suspends entry for all Indonesian migrant workers</p>
+                    <p><hr style="border:1px solid #402c62; background-color: #402c62;"></p>
+                    <p><a class="top" name="foot1"></a>[1] China increased restrictions of one specific checkpoint on the border with Russia named Suifenhe in April, which was called by some media outlets as China “closing the border with Russia.” However, China did not initiate a full closure; and in effect, Russia had closed its land border with China since February.</p>
+
+                    <hr style="border-top: 1px solid #202124;">
+                    <p>
+                        <i>
+                            Cayleigh Jackson is a research assistant (RA) and portfolio manager for the COVID Border Accountability Project (<a href="https://covidborderaccountability.org/" target="_blank" rel="noopener noreferrer">COBAP</a>). COBAP documents country-level policy changes in travel and immigration, introduced in response to the COVID-19 pandemic, worldwide. Jackson manages the China portfolio and monitors the data for Mainland China, Taiwan, Hong Kong, Malaysia, and Singapore.
+</i>
+                    </p>
+                    <p>
+                        <i>
+                            <a href="https://www.maggieshum.com/" target="_blank" rel="noopener noreferrer">Maggie Shum</a> is a research associate at the Keough School of Global Affairs at the University of Notre Dame, and is a native of Hong Kong. Her research focuses on party organization, participatory institutions and contentious politics in Latin America and Hong Kong.
+
+</i>
+                    </p>
+                    <hr style="border-top: 1px solid #202124;">
+                    <a href="index.html">Back to the map</a>
+                </div>
+                </div>
+
+</body>
+<script>
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("myOverlay").style.display = "block";
+}
+
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("myOverlay").style.display = "none";
+}
+</script>
+
+</html>

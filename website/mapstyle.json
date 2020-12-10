@@ -1,0 +1,838 @@
+{
+  "version": 8,
+  "name": "Dark Matter",
+  "metadata": {},
+  "sources": {
+    "carto": {
+      "type": "vector",
+      "url": "https://tiles.basemaps.cartocdn.com/vector/carto.streets/v1/tiles.json"
+    }
+  },
+  "sprite": "https://tiles.basemaps.cartocdn.com/gl/dark-matter-gl-style/sprite",
+  "glyphs": "https://tiles.basemaps.cartocdn.com/fonts/{fontstack}/{range}.pbf",
+  "layers": [
+    {
+      "id": "background",
+      "type": "background",
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "background-color": "#888",
+        "background-opacity": 1
+      }
+    },
+    {
+      "id": "landcover",
+      "type": "fill",
+      "source": "carto",
+      "source-layer": "landcover",
+      "filter": [
+        "any",
+        [
+          "==",
+          "class",
+          "wood"
+        ],
+        [
+          "==",
+          "class",
+          "grass"
+        ],
+        [
+          "==",
+          "subclass",
+          "recreation_ground"
+        ]
+      ],
+      "paint": {
+        "fill-color": {
+          "stops": [
+            [
+              8,
+              "#0e0e0e"
+            ],
+            [
+              9,
+              "#0e0e0e"
+            ],
+            [
+              11,
+              "#0e0e0e"
+            ],
+            [
+              13,
+              "#0e0e0e"
+            ],
+            [
+              15,
+              "#0e0e0e"
+            ]
+          ]
+        },
+        "fill-opacity": 1
+      }
+    },
+    {
+      "id": "waterway",
+      "type": "line",
+      "source": "carto",
+      "source-layer": "waterway",
+      "paint": {
+        "line-color": "#151515",
+        "line-width": {
+          "stops": [
+            [
+              8,
+              0.5
+            ],
+            [
+              9,
+              1
+            ],
+            [
+              15,
+              2
+            ],
+            [
+              16,
+              3
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "water",
+      "type": "fill",
+      "source": "carto",
+      "source-layer": "water",
+      "minzoom": 0,
+      "maxzoom": 24,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "Polygon"
+        ]
+      ],
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "fill-color": "#222222",
+        "fill-antialias": true,
+        "fill-translate-anchor": "map",
+        "fill-opacity": 1
+      }
+    },
+    {
+      "id": "water_shadow",
+      "type": "fill",
+      "source": "carto",
+      "source-layer": "water",
+      "minzoom": 0,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "Polygon"
+        ]
+      ],
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "fill-color": "transparent",
+        "fill-antialias": true,
+        "fill-translate-anchor": "map",
+        "fill-opacity": 1,
+        "fill-translate": {
+          "stops": [
+            [
+              0,
+              [
+                0,
+                2
+              ]
+            ],
+            [
+              6,
+              [
+                0,
+                1
+              ]
+            ],
+            [
+              14,
+              [
+                0,
+                1
+              ]
+            ],
+            [
+              17,
+              [
+                0,
+                2
+              ]
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "waterway_label",
+      "type": "symbol",
+      "source": "carto",
+      "source-layer": "waterway",
+      "filter": [
+        "all",
+        [
+          "has",
+          "name"
+        ],
+        [
+          "==",
+          "class",
+          "river"
+        ]
+      ],
+      "layout": {
+        "text-field": "{name_en}",
+        "text-font": [
+          "Montserrat Regular Italic",
+          "Open Sans Italic",
+          "Noto Sans Regular",
+          "HanWangHeiLight Regular",
+          "NanumBarunGothic Regular"
+        ],
+        "symbol-placement": "line",
+        "symbol-spacing": 300,
+        "symbol-avoid-edges": false,
+        "text-size": {
+          "stops": [
+            [
+              9,
+              8
+            ],
+            [
+              10,
+              9
+            ]
+          ]
+        },
+        "text-padding": 2,
+        "text-pitch-alignment": "auto",
+        "text-rotation-alignment": "auto",
+        "text-offset": {
+          "stops": [
+            [
+              6,
+              [
+                0,
+                -0.2
+              ]
+            ],
+            [
+              11,
+              [
+                0,
+                -0.4
+              ]
+            ],
+            [
+              12,
+              [
+                0,
+                -0.6
+              ]
+            ]
+          ]
+        },
+        "text-letter-spacing": 0,
+        "text-keep-upright": true
+      },
+      "paint": {
+        "text-color": "#444",
+        "text-halo-color": "#181818",
+        "text-halo-width": 1
+      }
+    },
+    {
+      "id": "boundary_country_outline",
+      "type": "line",
+      "source": "carto",
+      "source-layer": "boundary",
+      "minzoom": 6,
+      "maxzoom": 24,
+      "filter": [
+        "all",
+        [
+          "==",
+          "admin_level",
+          2
+        ],
+        [
+          "==",
+          "maritime",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#0e0e0e",
+        "line-opacity": 0.5,
+        "line-width": 8,
+        "line-offset": 0
+      }
+    },
+    {
+      "id": "boundary_country_inner",
+      "type": "line",
+      "source": "carto",
+      "source-layer": "boundary",
+      "minzoom": 0,
+      "filter": [
+        "all",
+        [
+          "==",
+          "admin_level",
+          2
+        ],
+        [
+          "==",
+          "maritime",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": {
+          "stops": [
+            [
+              4,
+              "#222"
+            ],
+            [
+              5,
+              "#292929"
+            ],
+            [
+              6,
+              "#292929"
+            ]
+          ]
+        },
+        "line-opacity": 1,
+        "line-width": {
+          "stops": [
+            [
+              3,
+              1
+            ],
+            [
+              6,
+              1.5
+            ]
+          ]
+        },
+        "line-offset": 0
+      }
+    },
+    {
+      "id": "watername_ocean",
+      "type": "symbol",
+      "source": "carto",
+      "source-layer": "water_name",
+      "minzoom": 0,
+      "maxzoom": 5,
+      "filter": [
+        "all",
+        [
+          "has",
+          "name"
+        ],
+        [
+          "==",
+          "$type",
+          "Point"
+        ],
+        [
+          "==",
+          "class",
+          "ocean"
+        ]
+      ],
+      "layout": {
+        "text-field": "{name}",
+        "symbol-placement": "point",
+        "text-size": {
+          "stops": [
+            [
+              0,
+              13
+            ],
+            [
+              2,
+              14
+            ],
+            [
+              4,
+              18
+            ]
+          ]
+        },
+        "text-font": [
+          "Courier",
+          "Noto Sans Regular",
+          "HanWangHeiLight Regular",
+          "NanumBarunGothic Regular"
+        ],
+        "text-line-height": 1.2,
+        "text-padding": 2,
+        "text-allow-overlap": false,
+        "text-ignore-placement": false,
+        "text-pitch-alignment": "auto",
+        "text-rotation-alignment": "auto",
+        "text-max-width": 6,
+        "text-letter-spacing": 0.1
+      },
+      "paint": {
+        "text-color": "#ccc",
+        "text-halo-color": "rgba(0,0,0,0.7)",
+        "text-halo-width": 1,
+        "text-halo-blur": 0
+      }
+    },
+    {
+      "id": "watername_sea",
+      "type": "symbol",
+      "source": "carto",
+      "source-layer": "water_name",
+      "minzoom": 5,
+      "filter": [
+        "all",
+        [
+          "has",
+          "name"
+        ],
+        [
+          "==",
+          "$type",
+          "Point"
+        ],
+        [
+          "==",
+          "class",
+          "sea"
+        ]
+      ],
+      "layout": {
+        "text-field": "{name}",
+        "symbol-placement": "point",
+        "text-size": 12,
+        "text-font": [
+          "Montserrat Medium Italic",
+          "Open Sans Italic",
+          "Noto Sans Regular",
+          "HanWangHeiLight Regular",
+          "NanumBarunGothic Regular"
+        ],
+        "text-line-height": 1.2,
+        "text-padding": 2,
+        "text-allow-overlap": false,
+        "text-ignore-placement": false,
+        "text-pitch-alignment": "auto",
+        "text-rotation-alignment": "auto",
+        "text-max-width": 6,
+        "text-letter-spacing": 0.1
+      },
+      "paint": {
+        "text-color": "#ccc",
+        "text-halo-color": "rgba(0,0,0,0.7)",
+        "text-halo-width": 1,
+        "text-halo-blur": 0
+      }
+    },
+    {
+      "id": "watername_lake",
+      "type": "symbol",
+      "source": "carto",
+      "source-layer": "water_name",
+      "minzoom": 4,
+      "filter": [
+        "all",
+        [
+          "has",
+          "name"
+        ],
+        [
+          "==",
+          "$type",
+          "Point"
+        ],
+        [
+          "==",
+          "class",
+          "lake"
+        ]
+      ],
+      "layout": {
+        "text-field": {
+          "stops": [
+            [
+              8,
+              "{name_en}"
+            ],
+            [
+              13,
+              "{name}"
+            ]
+          ]
+        },
+        "symbol-placement": "point",
+        "text-size": {
+          "stops": [
+            [
+              13,
+              9
+            ],
+            [
+              14,
+              10
+            ],
+            [
+              15,
+              11
+            ],
+            [
+              16,
+              12
+            ],
+            [
+              17,
+              13
+            ]
+          ]
+        },
+        "text-font": [
+          "Montserrat Regular Italic",
+          "Open Sans Italic",
+          "Noto Sans Regular",
+          "HanWangHeiLight Regular",
+          "NanumBarunGothic Regular"
+        ],
+        "text-line-height": 1.2,
+        "text-padding": 2,
+        "text-allow-overlap": false,
+        "text-ignore-placement": false,
+        "text-pitch-alignment": "auto",
+        "text-rotation-alignment": "auto"
+      },
+      "paint": {
+        "text-color": "#444",
+        "text-halo-color": "#181818",
+        "text-halo-width": 1,
+        "text-halo-blur": 1
+      }
+    },
+    {
+      "id": "watername_lake_line",
+      "type": "symbol",
+      "source": "carto",
+      "source-layer": "water_name",
+      "filter": [
+        "all",
+        [
+          "has",
+          "name"
+        ],
+        [
+          "==",
+          "$type",
+          "LineString"
+        ]
+      ],
+      "layout": {
+        "text-field": {
+          "stops": [
+            [
+              8,
+              "{name_en}"
+            ],
+            [
+              13,
+              "{name}"
+            ]
+          ]
+        },
+        "symbol-placement": "line",
+        "text-size": {
+          "stops": [
+            [
+              13,
+              9
+            ],
+            [
+              14,
+              10
+            ],
+            [
+              15,
+              11
+            ],
+            [
+              16,
+              12
+            ],
+            [
+              17,
+              13
+            ]
+          ]
+        },
+        "text-font": [
+          "Montserrat Regular Italic",
+          "Open Sans Italic",
+          "Noto Sans Regular",
+          "HanWangHeiLight Regular",
+          "NanumBarunGothic Regular"
+        ],
+        "symbol-spacing": 350,
+        "text-pitch-alignment": "auto",
+        "text-rotation-alignment": "auto",
+        "text-line-height": 1.2
+      },
+      "paint": {
+        "text-color": "#444",
+        "text-halo-color": "#181818",
+        "text-halo-width": 1,
+        "text-halo-blur": 1
+      }
+    },
+    {
+      "id": "place_country_2",
+      "type": "symbol",
+      "source": "carto",
+      "source-layer": "place",
+      "minzoom": 3,
+      "maxzoom": 10,
+      "filter": [
+        "all",
+        [
+          "==",
+          "class",
+          "country"
+        ],
+        [
+          ">=",
+          "rank",
+          3
+        ],
+        [
+          "has",
+          "iso_a2"
+        ]
+      ],
+      "layout": {
+        "text-field": "{name_en}",
+        "text-font": [
+          "Montserrat Medium",
+          "Open Sans Bold",
+          "Noto Sans Regular",
+          "HanWangHeiLight Regular",
+          "NanumBarunGothic Regular"
+        ],
+        "text-size": {
+          "stops": [
+            [
+              3,
+              10
+            ],
+            [
+              5,
+              11
+            ],
+            [
+              6,
+              12
+            ],
+            [
+              7,
+              13
+            ],
+            [
+              8,
+              14
+            ]
+          ]
+        },
+        "text-transform": "uppercase"
+      },
+      "paint": {
+        "text-color": {
+          "stops": [
+            [
+              3,
+              "#fff"
+            ],
+            [
+              5,
+              "#fff"
+            ],
+            [
+              6,
+              "#fff"
+            ]
+          ]
+        },
+        "text-halo-color": "#111",
+        "text-halo-width": 1
+      }
+    },
+    {
+      "id": "place_country_1",
+      "type": "symbol",
+      "source": "carto",
+      "source-layer": "place",
+      "minzoom": 2,
+      "maxzoom": 7,
+      "filter": [
+        "all",
+        [
+          "==",
+          "class",
+          "country"
+        ],
+        [
+          "<=",
+          "rank",
+          2
+        ]
+      ],
+      "layout": {
+        "text-field": "{name_en}",
+        "text-font": [
+          "Montserrat Medium",
+          "Open Sans Bold",
+          "Noto Sans Regular",
+          "HanWangHeiLight Regular",
+          "NanumBarunGothic Regular"
+        ],
+        "text-size": {
+          "stops": [
+            [
+              3,
+              11
+            ],
+            [
+              4,
+              12
+            ],
+            [
+              5,
+              13
+            ],
+            [
+              6,
+              14
+            ]
+          ]
+        },
+        "text-transform": "uppercase",
+        "text-max-width": {
+          "stops": [
+            [
+              2,
+              6
+            ],
+            [
+              3,
+              6
+            ],
+            [
+              4,
+              9
+            ],
+            [
+              5,
+              12
+            ]
+          ]
+        }
+      },
+      "paint": {
+        "text-color": {
+          "stops": [
+            [
+              2,
+              "#fff"
+            ],
+            [
+              3,
+              "#fff"
+            ],
+            [
+              5,
+              "#fff"
+            ],
+            [
+              6,
+              "#fff"
+            ]
+          ]
+        },
+        "text-halo-color": "#111",
+        "text-halo-width": 1
+      }
+    },
+    {
+      "id": "place_continent",
+      "type": "symbol",
+      "source": "carto",
+      "source-layer": "place",
+      "minzoom": 0,
+      "maxzoom": 2,
+      "filter": [
+        "all",
+        [
+          "==",
+          "class",
+          "continent"
+        ]
+      ],
+      "layout": {
+        "text-field": "{name_en}",
+        "text-font": [
+          "Montserrat Medium",
+          "Open Sans Bold",
+          "Noto Sans Regular",
+          "HanWangHeiLight Regular",
+          "NanumBarunGothic Regular"
+        ],
+        "text-transform": "uppercase",
+        "text-size": 14,
+        "text-letter-spacing": 0.1,
+        "text-max-width": 9,
+        "text-justify": "center",
+        "text-keep-upright": false
+      },
+      "paint": {
+        "text-color": "#555",
+        "text-halo-color": "#111",
+        "text-halo-width": 1
+      }
+    }
+  ],
+  "id": "voyager",
+  "owner": "Carto"
+}
