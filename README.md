@@ -107,5 +107,9 @@ Please contact cobap@covidborderaccountability.org.
 
 For any issues with the recorded policies, feel free to submit a github issue or give us a heads up [here](https://docs.google.com/forms/d/1OGd-56pqT0iRPGv6iJdTnIWWI5vkbF2faAnTz5sDNxI).
  
+# Contributors 
+Mary A. Shiraef, Mark A. Weiss, Cora Hirst, Bryn Walker, Thuy Nguyen, Camilla Kline, Aadya Bhaskaran, Elizabeth Beling, Layth Mattar, Matthew Amme, Maggie Shum, Johanna Sweere, Susanna Brantley, Luis Schenoni, Colin Lewis-Beck, Yashwini Selvaraj, Cayleigh Jackson, Nikolas Lazar, Rachel Musetti, Sarah Naseer, Noah Taylor, Amalia Gradie, William Yu, Suzanne Martin, Hannah Rossi, Lucas Musetti, Aman Bedi, Ian Wang, Katie Pleiss, Prue Nkansah
+
+
 # LICENSE 
 GPL-3.0
