@@ -56,7 +56,7 @@ This policy interpretation process can, in practice, become complicated. Our goa
 * Guernsey's state-owned airline, Aurigny, suspended all flights, which effectively removed all commercial air access to Guernsey (except emergency service to Southampton). We did not record this as air border closure because Guernsey's government never explicitly banned arrivals.
 * Vatican City was closed to all foreigners, but workers who live in Rome are allowed to travel into the Vatican City for work purposes. We record this as a "complete closure," with a "workers exception".
 * Niuean, Cook Islander, and Tokelauan citizens travel on New Zealand passports as New Zealand citizens. This means when we record a "complete closure" for New Zealand, we might not capture a specific country exception for these nations. We only record the country names listed in the text.
-* For additional complicated cases and the decisions we made, see our RA FAQ list.
+* For additional complicated cases and the decisions we made, see our [RA FAQ list in the supplementary doc](https://github.com/COBAPteam/COBAP/blob/main/documentation/COBAP_Supplementary_Doc.pdf).
 
 # FILELIST
 File | Description
