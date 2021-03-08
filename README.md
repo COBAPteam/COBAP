@@ -100,7 +100,7 @@ citizen_excep_list|comma separated list| which persons are exempted from the com
 country_excep|binary| whether specific country(ies) are exempted from the complete closure (1) or not (0)
 country_excep_list|comma separated list| which country(ies) are exempted from the complete closure
 work_excep| binary |whether the complete closure exempts workers (1) or not (0)
-policy_type|comma separated list| indication of source types included 1: internal_govt_source, 2: airline_source, 3: insurance_source, 4: govt_social_med_source, 5: ext_govt_source, 6: internal_media_source, 7: ext_media_source, 8: other source
+source_type|comma separated list| indication of source types included 1: internal_govt_source, 2: airline_source, 3: insurance_source, 4: govt_social_med_source, 5: ext_govt_source, 6: internal_media_source, 7: ext_media_source, 8: other source
 internal_govt_source| UTF-8 String | Web link to source of policy from a Government website of the host country
 airline_source| UTF-8 String | Web link to source of policy from the airline industry or IATA
 insurance_source| UTF-8 String | Web link to source of policy from the international insurance industry
