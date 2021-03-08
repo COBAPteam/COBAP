@@ -1,6 +1,6 @@
 # COVID Border Accountability Project (COBAP)
 
-Last update: 03-03-2021 1,306 Policies, 242 Territories
+Last update: 03-03-2021 1,307 Policies, 242 Territories
 
 This is the data repository for the [COBAP project](https://www.covidborderaccountability.org/). 
 
@@ -100,8 +100,16 @@ citizen_excep_list|comma separated list| which persons are exempted from the com
 country_excep|binary| whether specific country(ies) are exempted from the complete closure (1) or not (0)
 country_excep_list|comma separated list| which country(ies) are exempted from the complete closure
 work_excep| binary |whether the complete closure exempts workers (1) or not (0)
-source(0-4)| UTF-8 String | Web link to source of policy, one per column
-
+policy_type|comma separated list| indication of source types included 1: internal_govt_source, 2: airline_source, 3: insurance_source, 4: govt_social_med_source, 5: ext_govt_source, 6: internal_media_source, 7: ext_media_source, 8: other source
+internal_govt_source| UTF-8 String | Web link to source of policy from a Government website of the host country
+airline_source| UTF-8 String | Web link to source of policy from the airline industry or IATA
+insurance_source| UTF-8 String | Web link to source of policy from the international insurance industry
+govt_social_med_source| UTF-8 String | Web link to source of policy from a Government verified social media post 
+ext_govt_source| UTF-8 String | Web link to source of policy from a Government website of an external country 
+internal_media_source| UTF-8 String | Web link to source of policy from a major news outlet of host country
+ext_media_source| UTF-8 String | Web link to source of policy from a major news outlet of external country 
+other_source| UTF-8 String | Web link to source of policy that doesn't fit into other source categories above
+end_source| UTF-8 String | Web link to source of policy indicating policy has ended
 # Contact
 Please contact cobap@covidborderaccountability.org.
 
