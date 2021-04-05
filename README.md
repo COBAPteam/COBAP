@@ -59,7 +59,7 @@ This policy interpretation process can, in practice, become complicated. Our goa
 * For additional complicated cases and the decisions we made, see our [RA FAQ list in the supplementary doc](https://github.com/COBAPteam/COBAP/blob/main/documentation/COBAP_Supplementary_Doc.pdf).
 
 The following Codes are used in country lists:
-COVIDCASES: Policy indicates "Countries with active covid cases/transmission"
+* COVIDCASES: Policy indicates "Countries with active covid cases/transmission"
 
 # FILELIST
 File | Description
