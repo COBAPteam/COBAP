@@ -1,6 +1,6 @@
 # COVID Border Accountability Project (COBAP)
 
-Last update: 03-28-2021 1,337 Policies, 242 Territories
+Last update: 04-04-2021 1,338 Policies, 242 Territories
 
 This is the data repository for the [COBAP project](https://www.covidborderaccountability.org/). 
 
@@ -57,6 +57,9 @@ This policy interpretation process can, in practice, become complicated. Our goa
 * Vatican City was closed to all foreigners, but workers who live in Rome are allowed to travel into the Vatican City for work purposes. We record this as a "complete closure," with a "workers exception".
 * Niuean, Cook Islander, and Tokelauan citizens travel on New Zealand passports as New Zealand citizens. This means when we record a "complete closure" for New Zealand, we might not capture a specific country exception for these nations. We only record the country names listed in the text.
 * For additional complicated cases and the decisions we made, see our [RA FAQ list in the supplementary doc](https://github.com/COBAPteam/COBAP/blob/main/documentation/COBAP_Supplementary_Doc.pdf).
+
+The following Codes are used in country lists:
+COVIDCASES: Policy indicates "Countries with active covid cases/transmission"
 
 # FILELIST
 File | Description
