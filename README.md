@@ -1,6 +1,6 @@
 # COVID Border Accountability Project (COBAP)
 
-Last update: 04-04-2021 1,338 Policies, 242 Territories
+Last update: 04-11-2021 1,396 Policies, 244 Territories
 
 This is the data repository for the [COBAP project](https://www.covidborderaccountability.org/). 
 
