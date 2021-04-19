@@ -1,6 +1,6 @@
 # COVID Border Accountability Project (COBAP)
 
-Last update: 04-11-2021 1,396 Policies, 244 Territories
+Last update: 04-18-2021 1,395 Policies, 244 Territories
 
 This is the data repository for the [COBAP project](https://www.covidborderaccountability.org/). 
 
@@ -112,7 +112,7 @@ ext_govt_source| UTF-8 String | Web link to source of policy from a Government w
 internal_media_source| UTF-8 String | Web link to source of policy from a major news outlet of host country
 ext_media_source| UTF-8 String | Web link to source of policy from a major news outlet of external country 
 other_source| UTF-8 String | Web link to source of policy that doesn't fit into other source categories above
-end_source| UTF-8 String | Web link to source of policy indicating policy has ended
+end_source| UTF-8 String | Web link to source of policy indicating policy has ended if not present in original source
 # Contact
 Please contact nikolas_lazar@brown.edu.
 
