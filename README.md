@@ -64,9 +64,10 @@ The following Codes are used in country lists:
 # FILELIST
 File | Description
 ------------ | -------------
+[data/output/policy_list.csv](https://github.com/COBAPteam/COBAP/blob/main/data/policy_list.csv)|The processed output to decode the survey responses into the policy types described below. View this file for the final, sanitized results.
 [data/raw_survey_output/main_survey_raw.csv](https://github.com/COBAPteam/COBAP/blob/main/data/raw_survey_output/main_survey_raw.csv)|The output from the Qualtrics survey completed by RAs to record policy implementation, modified to remove duplicate/updated policies, and ISO country codes.
 [data/raw_survey_output/end_dates_survey_raw.csv](https://github.com/COBAPteam/COBAP/blob/main/data/raw_survey_output/end_dates_survey_raw.csv)|The output from the Qualtrics survey to record the end dates of policies, with sources, as well as any policy which was implemented in conjunction with the end of another policy in the dataset.
-[data/output/policy_list.csv](https://github.com/COBAPteam/COBAP/blob/main/data/policy_list.csv)|The processed output to decode the survey responses into the policy types described below. 
+
 
 # Data Fields in Policy List
 
