@@ -1,6 +1,6 @@
 # COVID Border Accountability Project (COBAP)
 
-Last update: 05-16-2021 1,329 Policies, 244 Territories
+Last update: 05-25-2021 1,308 Policies, 244 Territories
 
 This is the data repository for the [COBAP project](https://www.covidborderaccountability.org/). 
 
@@ -103,6 +103,7 @@ citizen_excep_list|comma separated list| which persons are exempted from the com
 country_excep|binary| whether specific country(ies) are exempted from the complete closure (1) or not (0)
 country_excep_list|comma separated list| which country(ies) are exempted from the complete closure
 work_excep| binary |whether the complete closure exempts workers (1) or not (0)
+source_quality | string | Very sure: internal government source, sure: airline or insurance source, less sure: any other source type
 source_type|comma separated list| indication of source types included 1: internal_govt_source, 2: airline_source, 3: insurance_source, 4: govt_social_med_source, 5: ext_govt_source, 6: internal_media_source, 7: ext_media_source, 8: other source
 internal_govt_source| UTF-8 String | Web link to source of policy from a Government website of the host country
 airline_source| UTF-8 String | Web link to source of policy from the airline industry or IATA
@@ -113,6 +114,8 @@ internal_media_source| UTF-8 String | Web link to source of policy from a major 
 ext_media_source| UTF-8 String | Web link to source of policy from a major news outlet of external country 
 other_source| UTF-8 String | Web link to source of policy that doesn't fit into other source categories above
 end_source| UTF-8 String | Web link to source of policy indicating policy has ended if not present in original source
+comment | UTF-8 String | Comments related to coding decisions
+old_id | alphanumeric | ID for policy before ID change
 # Contact
 Please contact nikolas_lazar@brown.edu.
 
