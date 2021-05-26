@@ -3,11 +3,12 @@ import os
 import pycountry
 import codecs
 import pandas
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 
 #Enable prints and write non-valid survey responses
 DEBUG = False
 WEBSITE_FILES = True
+TIME_SERIES = True
 
 #Policy Counts
 WORK_EXCEP = 0
@@ -29,7 +30,7 @@ CITIZENSHIP_BAN_AND_HISTORY_BAN = 0
 #REFUGEE_BAN
 #BORDER_CLOSURE
 
-def decode_policy(complete,visa,citizen,history,refugee,citException,workerException,countryException,air,land,sea):
+def decode_policy(complete,visa,citizen,history,refugee,citException,workerException,countryException,air,land,sea,unclear):
     global WORK_EXCEP 
     global SPECIFIC_COUNTRY
     global CITIZEN_EXCEP 
@@ -57,7 +58,12 @@ def decode_policy(complete,visa,citizen,history,refugee,citException,workerExcep
         CITIZENSHIP_BAN_AND_HISTORY_BAN = CITIZENSHIP_BAN_AND_HISTORY_BAN + 1
     if (air or land or sea):
         BORDER_CLOSURE = BORDER_CLOSURE + 1
-    if (complete and workerException):
+    if (unclear):
+        if(DEBUG):
+            return "UNCLEAR"
+        else:
+            return "NONE"
+    elif (complete and workerException):
         return "WORK_EXCEP"
     elif (complete and countryException):
         return "SPECIFIC_COUNTRY"
@@ -113,6 +119,10 @@ outputfile = codecs.open("policy_list.csv", 'w', 'utf-8')
 #create list to gather policies for website files
 policyList = []
 
+policyId = {}
+
+acapsSource = {}
+
 #open input files and error out if not found
 #main survey of policy data
 try:
@@ -147,7 +157,11 @@ except OSError:
     os.system("pause")
     sys.exit()
 
-outputfile.write("ID|COUNTRY_NAME|ISO3|ISO2|POLICY_TYPE|POLICY_SUBTYPE|START_DATE|END_DATE|AIR|AIR_TYPE|TARGETS_AIR|LAND|LAND_TYPE|TARGETS_LAND|SEA|SEA_TYPE|TARGETS_SEA|CITIZEN|CITIZEN_LIST|HISTORY_BAN|HISTORY_BAN_LIST|REFUGEE|REFUGEE_LIST|VISA_BAN|VISA_BAN_TYPE|VISA_BAN_LIST|CITIZEN_EXCEP|CITIZEN_EXCEP_LIST|COUNTRY_EXCEP|COUNTRY_EXCEP_LIST|WORK_EXCEP|SOURCE0|SOURCE1|SOURCE2|SOURCE3|SOURCE4\n")
+for indexAcaps,acaps in acapsLinks.iterrows():  
+    acapsSource[acaps[0]] = acaps[15] 
+
+outputfile.write("ID|COUNTRY_NAME|ISO3|ISO2|POLICY_TYPE|POLICY_SUBTYPE|START_DATE|END_DATE|AIR|AIR_TYPE|TARGETS_AIR|LAND|LAND_TYPE|TARGETS_LAND|SEA|SEA_TYPE|TARGETS_SEA|CITIZEN|CITIZEN_LIST|HISTORY_BAN|HISTORY_BAN_LIST|REFUGEE|REFUGEE_LIST|VISA_BAN|VISA_BAN_TYPE|VISA_BAN_LIST|CITIZEN_EXCEP|CITIZEN_EXCEP_LIST|COUNTRY_EXCEP|COUNTRY_EXCEP_LIST|WORK_EXCEP|SOURCE_QUALITY|SOURCE_TYPE|INTERNAL_GOVT_SOURCE|AIRLINE_SOURCE|INSURANCE_SOURCE|GOVT_SOCIAL_MED_SOURCE|EXT_GOVT_SOURCE|INTERNAL_MEDIA_SOURCE|EXT_MEDIA_SOURCE|OTHER_SOURCE|END_SOURCE|COMMENTS|OLD_ID\n")
+
 
 for index,row in mainSurvey.iterrows():
     if(DEBUG):
@@ -211,18 +225,18 @@ for index,row in mainSurvey.iterrows():
                 source = source = source + row['Q20_16_TEXT'] +  "|"; 
 
             #grab source from acaps if no better source was found
+
             if (source == ""): #and row[13].split()[0] == "Unable"):
-                for indexAcaps,acaps in acapsLinks.iterrows():  
-                    if (acaps[0] == row['Q1_5_TEXT']):
-                        source =  acaps[15] 
+                if (row['Q1_5_TEXT'] in acapsSource.keys()):
+                    source = acapsSource[row['Q1_5_TEXT']]
 
             print("NOSTARTDATE, %s"%(row['Q1_5_TEXT']))
-            outputfile.write(row['Q1_5_TEXT']+"|"+countryName+"|"+row['ISO3']+"|"+iso2+"|NOSTARTDATE|NONE|NONE|NONE|0|NA|NA|0|NA|NA|0|NA|NA|0|NA|0|NA|0|NA|0|NA|NA|0|NA|0|NA|0|"+source+"\n")
+            outputfile.write(row['Q1_5_TEXT']+"|"+countryName+"|"+row['ISO3']+"|"+iso2+"|NOSTARTDATE|NONE|NONE|NONE|0|NA|NA|0|NA|NA|0|NA|NA|0|NA|0|NA|0|NA|0|NA|NA|0|NA|0|NA|0|NA|"+source+"\n")
     
-    elif(row['Q5'] == "I did a full contextual search and found that there was no national-level policy enacted (paste wayback link here to justify this choice, and select a start date of Jan 1, 2020 and today's date as the end date)"):
+    elif(row['Q5'] == "I did a full contextual search"):
         source = row['Q5_3_TEXT']
         endDate = row['Q4'].split()[1].strip('()').rjust(2,'0') + "_" + row['Q22_1_TEXT'].rjust(2,'0') + "_20"
-        outputfile.write(row['Q1_5_TEXT']+"|"+countryName+"|"+row['ISO3']+"|"+iso2+"|NOPOLICYIMPLEMENTED|NONE|NONE|"+endDate+"|0|NA|NA|0|NA|NA|0|NA|NA|0|NA|0|NA|0|NA|0|NA|NA|0|NA|0|NA|0|"+source+"\n")
+        outputfile.write(row['Q1_5_TEXT']+"|"+countryName+"|"+row['ISO3']+"|"+iso2+"|NOPOLICYIMPLEMENTED|NONE|NONE|"+endDate+"|0|NA|NA|0|NA|NA|0|NA|NA|0|NA|0|NA|0|NA|0|NA|NA|0|NA|0|NA|0|NA|"+source+"\n")
     
     elif(row['Q5'].split()[0]=='Partial' and row['Q3'].split()[0] != 'No' and row['Q21'].split()[0] != 'No'):
         if ((row['Q32'] == '2020') or (row['Q32'] == '')):
@@ -237,48 +251,50 @@ for index,row in mainSurvey.iterrows():
                 endDate = row['Q4'].split()[1].strip('()').rjust(2,'0') + "_" + row['Q22_1_TEXT'].rjust(2,'0') + "_21"
         else:
             endDate = "NONE"
-        
+        endsource = ""
         for indexEndDates,rowEndDates in endDatesSurvey.iterrows():  
             if (rowEndDates['Q1_2_TEXT'] == row['Q1_5_TEXT']):
                 if(rowEndDates['Q5']=='2020' or rowEndDates['Q5']==''):
                     endDate = month_to_num(rowEndDates['Q3']).rjust(2,'0') + '_' + rowEndDates['Q4_1_TEXT'].rjust(2,'0')+'_20'
                 else:
                     endDate = month_to_num(rowEndDates['Q3']).rjust(2,'0') + '_' + rowEndDates['Q4_1_TEXT'].rjust(2,'0')+'_21'
-        
-        source=""
-        if (row['Q28_1_TEXT']!=""):
-            source = source = source + row['Q28_1_TEXT'] +  "|"; 
-        if (row['Q27_1_TEXT'] != ""):
-            source = source = source + row['Q27_1_TEXT'] +  "|"; 
-        if (row['Q27_2_TEXT'] != ""):
-            source = source = source + row['Q27_2_TEXT'] +  "|"; 
-        if (row['Q27_3_TEXT'] != ""):
-            source = source = source + row['Q27_3_TEXT'] +  "|"; 
-        if (row['Q27_4_TEXT'] != ""):
-            source = source = source + row['Q27_4_TEXT'] +  "|"; 
-        if (row['Q20_1_TEXT'] != ""):
-            source = source = source + row['Q20_1_TEXT'] +  "|"; 
-        if (row['Q20_2_TEXT'] != ""):
-            source = source = source + row['Q20_2_TEXT'] +  "|"; 
-        if (row['Q20_3_TEXT'] != ""):
-            source = source = source + row['Q20_3_TEXT'] +  "|"; 
-        if (row['Q20_4_TEXT'] != ""):
-            source = source = source + row['Q20_4_TEXT'] +  "|";
-        if (row['Q20_5_TEXT'] != ""):
-            source = source = source + row['Q20_5_TEXT'] +  "|"; 
-        if (row['Q20_6_TEXT'] != ""):
-            source = source = source + row['Q20_6_TEXT'] +  "|"; 
-        if (row['Q20_14_TEXT'] != ""):
-            source = source = source + row['Q20_14_TEXT'] +  "|";
-        if (row['Q20_16_TEXT'] != ""):
-            source = source = source + row['Q20_16_TEXT'] +  "|"; 
-
+                endsource = rowEndDates['Q2_2_TEXT']
+        #INTERNAL_GOVT_SOURCE|AIRLINE_SOURCE|INSURANCE_SOURCE|GOVT_SOCIAL_MED_SOURCE|EXT_GOVT_SOURCE|INTERNAL_MEDIA_SOURCE|EXT_MEDIA_SOURCE|OTHER_SOURCE|NON_ENGLISH_SOURCE
+        govt_source= row['Q27_3_TEXT'] if (row['Q27_3_TEXT'] != "") else row['Q20_3_TEXT']
+        airline_source= row['Q27_1_TEXT'] if (row['Q27_1_TEXT'] != "") else row['Q20_1_TEXT']
+        insurance_source= row['Q27_2_TEXT'] if (row['Q27_2_TEXT'] != "") else row['Q20_2_TEXT']
+        social_media_source= row['Q27_4_TEXT'] if (row['Q27_4_TEXT'] != "") else row['Q20_4_TEXT']
+        ext_govt_source=row['Q20_5_TEXT']
+        int_media_source =row['Q20_6_TEXT']
+        ext_media_source= row['Q20_14_TEXT']
+        other_source =row['Q20_16_TEXT'] if (row['Q20_16_TEXT'] != "") else row['Q20_15_TEXT']
+        if (other_source != ""):
+            other_source = other_source +","+row['Q33_2_TEXT']
+        else:
+            other_source = row['Q33_2_TEXT']
+        non_eng_source=row['Q28_1_TEXT']
+        sourcetype = "1" if (govt_source != "") else ""
+        sourcetype = sourcetype + ",2" if (airline_source != "" and sourcetype != "") else sourcetype + "2" if (airline_source != "") else sourcetype
+        sourcetype = sourcetype + ",3" if (insurance_source != "" and sourcetype != "") else sourcetype + "3" if (insurance_source != "") else sourcetype
+        sourcetype = sourcetype + ",4" if (social_media_source != "" and sourcetype != "") else sourcetype + "4" if (social_media_source != "") else sourcetype
+        sourcetype = sourcetype + ",5" if (ext_govt_source != "" and sourcetype != "") else sourcetype + "5" if (ext_govt_source != "") else sourcetype
+        sourcetype = sourcetype + ",6" if (int_media_source != "" and sourcetype != "") else sourcetype + "6" if (int_media_source != "") else sourcetype
+        sourcetype = sourcetype + ",7" if (ext_media_source != "" and sourcetype != "") else sourcetype + "7" if (ext_media_source != "") else sourcetype
+        sourcetype = sourcetype + ",8" if (other_source != "" and sourcetype != "") else sourcetype + "8" if (other_source != "") else sourcetype
+        if (govt_source != ""):
+            sourceQuality = "Very Sure"
+        elif (airline_source!="" or insurance_source !=""):
+            sourceQuality = "Sure"
+        else:
+            sourceQuality = "Less Sure"
         #grab source from acaps if no better source was found
-        if (source == ""): #and row[13].split()[0] == "Unable"):
-            for indexAcaps,acaps in acapsLinks.iterrows():  
-                if (acaps[0] == row['Q1_5_TEXT']):
-                    source =  acaps[15] 
-        
+        source = govt_source+"|"+airline_source+"|"+insurance_source+"|"+social_media_source+"|"+ext_govt_source+"|"+int_media_source+"|"+ext_media_source+"|"+ other_source+"|"+non_eng_source
+        if (source == "||||||||"): #and row[13].split()[0] == "Unable"):
+            sourcetype = "8"
+            if (row['Q1_5_TEXT'] in acapsSource.keys()):
+                other_source = acapsSource[row['Q1_5_TEXT']]
+        source = govt_source+"|"+airline_source+"|"+insurance_source+"|"+social_media_source+"|"+ext_govt_source+"|"+int_media_source+"|"+ext_media_source+"|"+ other_source+"|"+non_eng_source
+
         sea = 1 if "Sea" in row['Q10'] else 0
         air = 1 if "Air" in row['Q10'] else 0
         land = 1 if "Land" in row['Q10'] else 0
@@ -297,6 +313,9 @@ for index,row in mainSurvey.iterrows():
 
         refugee = 1 if "refugee" in row['Q7'] else 0
         refugeeList = row['Q7_18_TEXT'] if (row['Q7_18_TEXT'] != "") else "NA"
+
+        unclear = 1 if "unclear" in row['Q7'] else 0
+        unclearList = row['Q7_18_TEXT'] if (row['Q7_18_TEXT'] != "") else "NA"
         
         visa = 1 if "Yes" in row['Q17'] else 0 
         visaType = "All" if "all" in row['Q17'] else "specific" if "specific" in row['Q17'] else "NA"
@@ -315,9 +334,20 @@ for index,row in mainSurvey.iterrows():
             if (rowCountryLists[0] == row['Q1_5_TEXT']):
                 historyList = rowCountryLists[1] if (rowCountryLists[1] != "") else "NA"
                 visaList = rowCountryLists[2] if (rowCountryLists[2] != "") else "NA"
-        if (decode_policy(0,visa,citizen,history,refugee,citException,workerException,countryException,air,land,sea) != 'NONE' or DEBUG):
-            policyList.append({'name' :countryName, 'id': row['Q1_5_TEXT'], 'ISO3': row['ISO3'], 'type': decode_policy(0,visa,citizen,history,refugee,citException,workerException,countryException,air,land,sea), 'policy_start' : startDate, 'policy_end': endDate, 'source':source})
-            outputfile.write(row['Q1_5_TEXT']+"|"+countryName+"|"+row['ISO3']+"|"+iso2+"|PARTIAL|"+decode_policy(0,visa,citizen,history,refugee,citException,workerException,countryException,air,land,sea)+"|"+startDate+"|"+endDate+"|"+str(air)+"|"+str(airType)+"|"+targetsAir+"|"+str(land)+"|"+str(landType)+"|"+targetsLand+"|"+str(sea)+"|"+str(seaType)+"|"+targetsSea+"|"+str(citizen)+"|"+citizenshipList+"|"+str(history)+"|"+historyList+"|"+str(refugee)+"|"+refugeeList+"|"+str(visa)+"|"+visaType+"|"+visaList+"|"+str(citException)+"|"+citExceptionList+"|"+str(countryException)+"|"+countryExceptionList+"|"+str(workerException)+"|"+source+"\n")
+        if (source == "||||||||"):
+            print row['Q1_5_TEXT']
+        if (decode_policy(0,visa,citizen,history,refugee,citException,workerException,countryException,air,land,sea,unclear) != 'NONE' or DEBUG):
+            if (source != "||||||||"):
+                if (row['ISO3'] in policyId.keys()):
+                    policyId[row['ISO3']] = policyId[row['ISO3']] + 1
+                    newId = policyId[row['ISO3']]
+
+                else:
+                    policyId[row['ISO3']] = 1;
+                    newId = 1;
+                policyList.append({'name' :countryName, 'id': row['Q1_5_TEXT'], 'ISO3': row['ISO3'], 'pc': 'PARTIAL', 'type': decode_policy(0,visa,citizen,history,refugee,citException,workerException,countryException,air,land,sea,0), 'policy_start' : startDate, 'policy_end': endDate, 'source':source})
+
+                outputfile.write(iso2+"%02d" % (newId,)+"|"+countryName+"|"+row['ISO3']+"|"+iso2+"|PARTIAL|"+decode_policy(0,visa,citizen,history,refugee,citException,workerException,countryException,air,land,sea,unclear)+"|"+startDate+"|"+endDate+"|"+str(air)+"|"+str(airType)+"|"+targetsAir+"|"+str(land)+"|"+str(landType)+"|"+targetsLand+"|"+str(sea)+"|"+str(seaType)+"|"+targetsSea+"|"+str(citizen)+"|"+citizenshipList+"|"+str(history)+"|"+historyList+"|"+str(refugee)+"|"+refugeeList+"|"+str(visa)+"|"+visaType+"|"+visaList+"|"+str(citException)+"|"+citExceptionList+"|"+str(countryException)+"|"+countryExceptionList+"|"+str(workerException)+"|"+sourceQuality+"|"+sourcetype+"|"+govt_source+"|"+airline_source+"|"+insurance_source+"|"+social_media_source+"|"+ext_govt_source+"|"+int_media_source+"|"+ext_media_source+"|"+ other_source+"|"+endsource+"|"+row['Q33_1_TEXT']+"|"+row['Q1_5_TEXT']+"\n")
 
     elif(row['Q5'].split()[0]=='Complete' and row['Q3'].split()[0] != 'No' and row['Q21'].split()[0] != 'No'):
         if ((row['Q32'] == '2020') or (row['Q32'] == '')):
@@ -332,50 +362,57 @@ for index,row in mainSurvey.iterrows():
                 endDate = row['Q4'].split()[1].strip('()').rjust(2,'0') + "_" + row['Q22_1_TEXT'].rjust(2,'0') + "_21"
         else:
             endDate = "NONE"
+
+        endsource = ""
         for indexEndDates,rowEndDates in endDatesSurvey.iterrows():  
             if (rowEndDates['Q1_2_TEXT'] == row['Q1_5_TEXT']):
                 if(rowEndDates['Q5']=='2020' or rowEndDates['Q5']==''):
                     endDate = month_to_num(rowEndDates['Q3']).rjust(2,'0') + '_' + rowEndDates['Q4_1_TEXT'].rjust(2,'0')+'_20'
                 else:
                     endDate = month_to_num(rowEndDates['Q3']).rjust(2,'0') + '_' + rowEndDates['Q4_1_TEXT'].rjust(2,'0')+'_21'
-        
-        source=""
-        if (row['Q28_1_TEXT']!=""):
-            source = source = source + row['Q28_1_TEXT'] +  "|"; 
-        if (row['Q27_1_TEXT'] != ""):
-            source = source = source + row['Q27_1_TEXT'] +  "|"; 
-        if (row['Q27_2_TEXT'] != ""):
-            source = source = source + row['Q27_2_TEXT'] +  "|"; 
-        if (row['Q27_3_TEXT'] != ""):
-            source = source = source + row['Q27_3_TEXT'] +  "|"; 
-        if (row['Q27_4_TEXT'] != ""):
-            source = source = source + row['Q27_4_TEXT'] +  "|"; 
-        if (row['Q20_1_TEXT'] != ""):
-            source = source = source + row['Q20_1_TEXT'] +  "|"; 
-        if (row['Q20_2_TEXT'] != ""):
-            source = source = source + row['Q20_2_TEXT'] +  "|"; 
-        if (row['Q20_3_TEXT'] != ""):
-            source = source = source + row['Q20_3_TEXT'] +  "|"; 
-        if (row['Q20_4_TEXT'] != ""):
-            source = source = source + row['Q20_4_TEXT'] +  "|";
-        if (row['Q20_5_TEXT'] != ""):
-            source = source = source + row['Q20_5_TEXT'] +  "|"; 
-        if (row['Q20_6_TEXT'] != ""):
-            source = source = source + row['Q20_6_TEXT'] +  "|"; 
-        if (row['Q20_14_TEXT'] != ""):
-            source = source = source + row['Q20_14_TEXT'] +  "|";
-        if (row['Q20_16_TEXT'] != ""):
-            source = source = source + row['Q20_16_TEXT'] +  "|"; 
+                endsource = rowEndDates['Q2_2_TEXT']
 
+        govt_source= row['Q27_3_TEXT'] if (row['Q27_3_TEXT'] != "") else row['Q20_3_TEXT']
+        airline_source= row['Q27_1_TEXT'] if (row['Q27_1_TEXT'] != "") else row['Q20_1_TEXT']
+        insurance_source= row['Q27_2_TEXT'] if (row['Q27_2_TEXT'] != "") else row['Q20_2_TEXT']
+        social_media_source= row['Q27_4_TEXT'] if (row['Q27_4_TEXT'] != "") else row['Q20_4_TEXT']
+        ext_govt_source=row['Q20_5_TEXT']
+        int_media_source =row['Q20_6_TEXT']
+        ext_media_source= row['Q20_14_TEXT']
+        other_source =row['Q20_16_TEXT'] if (row['Q20_16_TEXT'] != "") else row['Q20_15_TEXT']
+        if (other_source != ""):
+            other_source = other_source +","+row['Q33_2_TEXT']
+        else:
+            other_source = row['Q33_2_TEXT']
+        non_eng_source=row['Q28_1_TEXT']
+        source = govt_source+"|"+airline_source+"|"+insurance_source+"|"+social_media_source+"|"+ext_govt_source+"|"+int_media_source+"|"+ext_media_source+"|"+ other_source+"|"+non_eng_source
+        sourcetype = "1" if (govt_source != "") else ""
+        sourcetype = sourcetype + ",2" if (airline_source != "" and sourcetype != "") else sourcetype + "2" if (airline_source != "") else sourcetype
+        sourcetype = sourcetype + ",3" if (insurance_source != "" and sourcetype != "") else sourcetype + "3" if (insurance_source != "") else sourcetype
+        sourcetype = sourcetype + ",4" if (social_media_source != "" and sourcetype != "") else sourcetype + "4" if (social_media_source != "") else sourcetype
+        sourcetype = sourcetype + ",5" if (ext_govt_source != "" and sourcetype != "") else sourcetype + "5" if (ext_govt_source != "") else sourcetype
+        sourcetype = sourcetype + ",6" if (int_media_source != "" and sourcetype != "") else sourcetype + "6" if (int_media_source != "") else sourcetype
+        sourcetype = sourcetype + ",7" if (ext_media_source != "" and sourcetype != "") else sourcetype + "7" if (ext_media_source != "") else sourcetype
+        sourcetype = sourcetype + ",8" if (other_source != "" and sourcetype != "") else sourcetype + "8" if (other_source != "") else sourcetype
+        if (govt_source != ""):
+            sourceQuality = "Very Sure"
+        elif (airline_source!="" or insurance_source !=""):
+            sourceQuality = "Sure"
+        else:
+            sourceQuality = "Less Sure"
         #grab source from acaps if no better source was found
-        if (source == ""): #and row[13].split()[0] == "Unable"):
-            for indexAcaps,acaps in acapsLinks.iterrows():  
-                if (acaps[0] == row['Q1_5_TEXT']):
-                    source =  acaps[15] 
-        
+        if (source == "||||||||"): #and row[13].split()[0] == "Unable"):
+            sourcetype = "8"
+            if (row['Q1_5_TEXT'] in acapsSource.keys()):
+                other_source = acapsSource[row['Q1_5_TEXT']]
+
+        source = govt_source+"|"+airline_source+"|"+insurance_source+"|"+social_media_source+"|"+ext_govt_source+"|"+int_media_source+"|"+ext_media_source+"|"+ other_source+"|"+non_eng_source
+
         citException = 1 if  "Yes" in row['Q6'] else 0 
         countryException = 1 if  "Yes" in row['Q9'] else 0
         workerException = 1 if "Yes" in row['Q8'] else 0
+
+        unclear = 0 #1 if ("Unclear" in row['Q8'] or "Unclear" in row['Q9']) else 0
 
         citExceptionList = row['Q6_1_TEXT'] if "Yes" in row['Q6'] else "NA" 
         countryExceptionList = row['Q9_1_TEXT'] if "Yes" in row['Q9'] else "NA"
@@ -399,14 +436,22 @@ for index,row in mainSurvey.iterrows():
         historyList = "NA"
         refugee = 0
         refugeeList = "NA"
-
+        if (source == "||||||||"):
+            print row['Q1_5_TEXT']
         for indexCountryLists,rowCountryLists in targetsFixed.iterrows():  
             if (rowCountryLists[0] == row['Q1_5_TEXT']):
                 if (rowCountryLists[3] != "Unclear" and rowCountryLists[3] != "" and rowCountryLists[3] != "No" and rowCountryLists[3] != "NA"):
                     countryExceptionList = rowCountryLists[3]
-        if (decode_policy(1,visa,citizen,history,refugee,citException,workerException,countryException,air,land,sea) != 'NONE' or DEBUG):
-            policyList.append({'name' :countryName, 'id': row['Q1_5_TEXT'], 'ISO3': row['ISO3'], 'type': decode_policy(1,visa,citizen,history,refugee,citException,workerException,countryException,air,land,sea), 'policy_start' : startDate, 'policy_end': endDate, 'source':source})
-            outputfile.write(row['Q1_5_TEXT']+"|"+countryName+"|"+row['ISO3']+"|"+iso2+"|COMPLETE|"+decode_policy(1,visa,citizen,history,refugee,citException,workerException,countryException,air,land,sea)+"|"+startDate+"|"+endDate+"|"+str(air)+"|"+airType+"|"+targetsAir+"|"+str(land)+"|"+landType+"|"+targetsLand+"|"+str(sea)+"|"+seaType+"|"+targetsSea+"|"+str(citizen)+"|"+citizenshipList+"|"+str(history)+"|"+historyList+"|"+str(refugee)+"|"+refugeeList+"|"+str(visa)+"|"+visaType+"|"+visaList+"|"+str(citException)+"|"+citExceptionList+"|"+str(countryException)+"|"+countryExceptionList+"|"+str(workerException)+"|"+source+"\n")
+        if (decode_policy(1,visa,citizen,history,refugee,citException,workerException,countryException,air,land,sea,unclear) != 'NONE' or DEBUG):
+            if (source != "||||||||"):
+                if (row['ISO3'] in policyId.keys()):
+                    policyId[row['ISO3']] = policyId[row['ISO3']] + 1
+                    newId = policyId[row['ISO3']]
+                else:
+                    policyId[row['ISO3']] = 1;
+                    newId = 1;
+                policyList.append({'name' :countryName, 'id': row['Q1_5_TEXT'], 'ISO3': row['ISO3'], 'pc': 'COMPLETE', 'type': decode_policy(1,visa,citizen,history,refugee,citException,workerException,countryException,air,land,sea,0), 'policy_start' : startDate, 'policy_end': endDate, 'source':source})
+                outputfile.write(iso2+"%02d" % (newId,)+"|"+countryName+"|"+row['ISO3']+"|"+iso2+"|COMPLETE|"+decode_policy(1,visa,citizen,history,refugee,citException,workerException,countryException,air,land,sea,unclear)+"|"+startDate+"|"+endDate+"|"+str(air)+"|"+airType+"|"+targetsAir+"|"+str(land)+"|"+landType+"|"+targetsLand+"|"+str(sea)+"|"+seaType+"|"+targetsSea+"|"+str(citizen)+"|"+citizenshipList+"|"+str(history)+"|"+historyList+"|"+str(refugee)+"|"+refugeeList+"|"+str(visa)+"|"+visaType+"|"+visaList+"|"+str(citException)+"|"+citExceptionList+"|"+str(countryException)+"|"+countryExceptionList+"|"+str(workerException)+"|"+sourceQuality+"|"+sourcetype+"|"+govt_source+"|"+airline_source+"|"+insurance_source+"|"+social_media_source+"|"+ext_govt_source+"|"+int_media_source+"|"+ext_media_source+"|"+ other_source+"|"+endsource+"|"+row['Q33_1_TEXT']+"|"+row['Q1_5_TEXT']+"\n")
 
 print "\nPOLICY_SUMMARY:\n"
 print "WORK_EXCEP " + str(WORK_EXCEP/2)
@@ -465,6 +510,8 @@ def carto_policy_language(policy):
     if(policy == "NONE"):
         return 'NONE'
 
+test_countries = ('ABW','AFG')
+
 countries = ('ABW','AFG','AGO','AIA','ALA','ALB','AND','ARE','ARG','ARM','ASM','ATA','ATF','ATG','AUS','AUT','AZE','BDI','BEL','BEN','BES','BFA','BGD','BGR','BHR',
     'BHS','BIH','BLM','BLR','BLZ','BMU','BOL','BRA','BRB','BRN','BTN','BVT','BWA','CAF','CAN','CCK','CHE','CHL','CHN','CIV','CMR','COD','COG','COK','COL','COM','CPV',
     'CRI','CUB','CUW','CXR','CYM','CYP','CZE','DEU','DJI','DMA','DNK','DOM','DZA','ECU','EGY','ERI','SAH','ESP','EST','ETH','FIN','FJI','FLK','FRA','FRO','FSM','GAB',
@@ -474,9 +521,117 @@ countries = ('ABW','AFG','AGO','AIA','ALA','ALB','AND','ARE','ARG','ARM','ASM','
     'NCL','NER','NFK','NGA','NIC','NIU','NLD','NOR','NPL','NRU','NZL','OMN','PAK','PAN','PCN','PER','PHL','PLW','PNG','POL','PRI','PRK','PRT','PRY','KOS','PYF','QAT',
     'REU','ROU','RUS','RWA','SAU','SDN','SEN','SGP','SGS','SHN','SJM','SLB','SLE','SLV','SMR','SOL','SOM','SPM','SRB','SSD','STP','SUR','SVK','SVN','SWE','SWZ','SXM','SYC',
     'SYR','TCA','TCD','TGO','THA','TJK','TKL','TKM','TLS','TON','TTO','TUN','TUR','TUV','TWN','TZA','UGA','UKR','UMI','URY','USA','UZB','VAT','VCT','VEN','VGB','VIR',
-    'VNM','VUT','WLF','WSM','YEM','ZAF','ZMB','ZWE','PSX')
+    'VNM','VUT','WLF','WSM','YEM','ZAF','ZMB','ZWE','PSX','EUR')
+
+weeks = ('1_26_20','2_2_20','2_9_20','2_16_20','2_23_20','3_1_20','3_8_20','3_15_20','3_22_20','3_29_20','4_5_20','4_12_20','4_19_20','4_26_20','5_3_20','5_10_20','5_17_20','5_24_20','5_31_20','6_7_20','6_14_20','6_21_20','6_28_20','7_5_20','7_12_20','7_19_20','7_26_20','8_2_20','8_9_20','8_16_20','8_23_20','8_30_20','9_6_20','9_13_20','9_20_20','9_27_20','10_4_20','10_11_20','10_18_20','10_25_20','11_1_20','11_8_20','11_15_20','11_22_20','11_29_20','12_6_20','12_13_20','12_20_20','12_27_20')
 
 policies = ["Workers Exception","Specific Country(ies) Exception","Citizen Exception","Essentials-only Exception","Visa ban(s)","Citizenship ban(s)","Travel history ban(s)","Border Closure(s)","NONE"]
+
+
+if(TIME_SERIES):
+    outputfile = codecs.open("policy_timeseries.csv", 'w',"utf-8")
+
+    outputfile.write("iso3|countryname|date|complete|partial|completenew|partialnew|work_excepnew|specific_countrynew|citizen_excepnew|essential_onlynew|visa_bannew|citizenship_bannew|history_bannew|border_closurenew\n")
+    for country in countries:
+        if(country=="EUR"):
+            iso3 = "EUR"
+            name = "European Union"
+        elif(country=="SAH"):
+            iso3 = "ESH"
+            name = "Sahrawi Arab Democratic Republic"
+        elif(country=="KOS"):
+            iso3 = "XKX"
+            name = "Kosovo"
+        elif(country=="PSX"):
+            iso3 = "PSE"
+            name = "Palestine"
+        elif(country=="SOL"):
+            iso3 = "SOL"
+            name = "Somaliland"
+        else:
+            iso3 = country
+            name = pycountry.countries.get(alpha_3=country).name
+        date_iter = 0
+        for dates in weeks:
+            complete = 0
+            partial = 0
+            completenew = 0
+            partialnew = 0
+            work_excepnew = 0
+            specific_countrynew = 0
+            citizen_excepnew = 0 
+            essential_onlynew = 0
+            visa_bannew = 0
+            citizenship_bannew = 0
+            history_bannew = 0
+            border_closurenew = 0
+            for policy in policyList:
+                if("00" in policy['policy_start'] or "and" in policy['policy_start']):
+                    continue
+                if (policy['ISO3'] == country):
+                    #start month less, end month greater
+                    if ((int(policy['policy_start'].split('_')[0]) < int(weeks[date_iter].split('_')[0])) and (int(policy['policy_start'].split('_')[2]) == 20)) and \
+                     ((policy['policy_end'] == "NONE") or (int(policy['policy_end'].split('_')[0]) > int(weeks[date_iter].split('_')[0]))):
+                        if (policy['pc'] == 'PARTIAL'):
+                            partial = partial + 1
+                        elif (policy['pc'] == 'COMPLETE'):
+                            complete = complete + 1
+                    #start month same, end month greater
+                    elif ((int(policy['policy_start'].split('_')[0]) == int(weeks[date_iter].split('_')[0])) and (int(policy['policy_start'].split('_')[2]) == 20)) and \
+                     ((policy['policy_end'] == "NONE") or (int(policy['policy_end'].split('_')[0]) > int(weeks[date_iter].split('_')[0]))):
+                        if ((int(policy['policy_start'].split('_')[1]) <= int(weeks[date_iter].split('_')[1]) + 6)):
+                            if (policy['pc'] == 'PARTIAL'):
+                                partial = partial + 1
+                            elif (policy['pc'] == 'COMPLETE'):
+                                complete = complete + 1
+                    #start month less, end month same
+                    elif ((int(policy['policy_start'].split('_')[0]) < int(weeks[date_iter].split('_')[0])) and (int(policy['policy_start'].split('_')[2]) == 20)) and \
+                     ((int(policy['policy_end'].split('_')[0]) == int(weeks[date_iter].split('_')[0])) and (int(policy['policy_end'].split('_')[2]) == 20)):
+                        if ((int(policy['policy_end'].split('_')[1]) >= int(weeks[date_iter].split('_')[1]))):
+                            if (policy['pc'] == 'PARTIAL'):
+                                partial = partial + 1
+                            elif (policy['pc'] == 'COMPLETE'):
+                                complete = complete + 1
+                    #start month smae, end month same
+                    elif ((int(policy['policy_start'].split('_')[0]) == int(weeks[date_iter].split('_')[0])) and (int(policy['policy_start'].split('_')[2]) == 20)) and \
+                     ((int(policy['policy_end'].split('_')[0]) == int(weeks[date_iter].split('_')[0])) and (int(policy['policy_end'].split('_')[2]) == 20)):
+                        if ((int(policy['policy_end'].split('_')[1]) >= int(weeks[date_iter].split('_')[1]))):
+                            if ((int(policy['policy_start'].split('_')[1]) <= int(weeks[date_iter].split('_')[1]) + 6)):
+                                if (policy['pc'] == 'PARTIAL'):
+                                    partial = partial + 1
+                                elif (policy['pc'] == 'COMPLETE'):
+                                    complete = complete + 1
+            date_iter = date_iter + 1
+            date_iter_date = datetime.strptime(dates, "%m_%d_%y")
+            for delta in range (0,7):
+                for policy in policyList:
+                    if (policy['ISO3'] == country):
+                        #start month less, end month greater
+                        if (int(policy['policy_start'].split('_')[1]) != 0):
+                            if((date_iter_date + timedelta(days=delta)) == datetime.strptime(policy['policy_start'], "%m_%d_%y")):
+                                if (policy['pc'] == 'PARTIAL'):
+                                    partialnew = partialnew + 1
+                                elif (policy['pc'] == 'COMPLETE'):
+                                    completenew = completenew + 1
+                                if(policy['type'] == "WORK_EXCEP"):
+                                    work_excepnew = work_excepnew + 1;
+                                if(policy['type'] == "SPECIFIC_COUNTRY"):
+                                    specific_countrynew = specific_countrynew + 1;
+                                if(policy['type'] == "CITIZEN_EXCEP"):
+                                    citizen_excepnew = citizen_excepnew + 1; 
+                                if(policy['type'] == "ESSENTIAL_ONLY"):
+                                    essential_onlynew = essential_onlynew + 1;
+                                if(policy['type'] == "VISA_BAN"):
+                                    visa_bannew = visa_bannew + 1;
+                                if(policy['type'] == "CITIZENSHIP_BAN"):
+                                    citizenship_bannew = citizenship_bannew + 1;
+                                if(policy['type'] == "HISTORY_BAN"):
+                                    history_bannew = history_bannew + 1;
+                                if(policy['type'] == "BORDER_CLOSURE"):
+                                    border_closurenew = border_closurenew + 1;
+
+            outputfile.write(iso3+'|'+name+'|'+dates+'|'+str(complete)+'|'+str(partial)+'|'+str(completenew)+'|'+str(partialnew)+'|'+str(work_excepnew)+'|'+str(specific_countrynew)+'|')
+            outputfile.write(str(citizen_excepnew)+'|'+str(essential_onlynew)+'|'+str(visa_bannew)+'|'+str(citizenship_bannew)+'|'+str(history_bannew)+'|'+str(border_closurenew)+'\n')
 
 
 #File for website sidebar
@@ -497,10 +652,16 @@ if(WEBSITE_FILES):
             iso3 = "PSX"
         else:
             iso3 = policy['ISO3']
-        if (policy['policy_end']=="NONE"):
-            outputfile.write(iso3+'|'+policy['name']+'|'+web_policy_language(policy['type']) + '|'+policy['policy_start'].split('_')[0]+'|'+policy['policy_start'].split('_')[1]+'|'+'24|31'+'|' + policy['source'] +'\n')
-        else:
-            outputfile.write(iso3+'|'+policy['name']+'|'+web_policy_language(policy['type']) + '|'+policy['policy_start'].split('_')[0]+'|'+policy['policy_start'].split('_')[1]+'|'+policy['policy_end'].split('_')[0]+'|'+policy['policy_end'].split('_')[1]+'|' + policy['source'] +'\n')
+        if("00" not in policy['policy_start'] and "and" not in policy['policy_start']):
+            start_day = int(policy['policy_start'].split('_')[1])
+            start_month =  int(policy['policy_start'].split('_')[0]) if (int(policy['policy_start'].split('_')[2]) == 20) else  int(policy['policy_start'].split('_')[0]) + 12
+        if(policy['policy_end']!="NONE" and "00" not in policy['policy_end']):
+            end_day = int(policy['policy_end'].split('_')[1])
+            end_month =  int(policy['policy_end'].split('_')[0]) if (int(policy['policy_end'].split('_')[2]) == 20) else  int(policy['policy_end'].split('_')[0]) + 12
+        if ("00" not in policy['policy_start'] and policy['policy_end']=="NONE"):
+            outputfile.write(iso3+'|'+policy['name']+'|'+web_policy_language(policy['type']) + '|'+str(start_month)+'|'+str(start_day)+'|'+'24|31'+'|' + policy['source'] +'\n')
+        elif("00" not in policy['policy_start'] and "00" not in policy['policy_end']):
+            outputfile.write(iso3+'|'+policy['name']+'|'+web_policy_language(policy['type']) + '|'+str(start_month)+'|'+str(start_day)+'|'+str(end_month)+'|'+str(end_day)+'|' + policy['source'] +'\n')
 
     outputfile.close()
 
@@ -578,6 +739,8 @@ if(WEBSITE_FILES):
         elif(country == "SAH"):
             outputfile.write('Sahrawi Arab Democratic Republic|')
             iso3 = "ESH"
+        elif(country == "EUR"):
+            continue
         else:
             outputfile.write(pycountry.countries.get(alpha_3=country).name+'|')
             iso3 = country
@@ -590,12 +753,12 @@ if(WEBSITE_FILES):
             else:
                 if(int(countrypolicyList[iso3][policy]['start_m']) > 12):
                     #print countrypolicyList[iso3][policy]['start_m']
-                    print iso3
+                    #print iso3
                     startday = date(2021, int(countrypolicyList[iso3][policy]['start_m'])-12, int(countrypolicyList[iso3][policy]['start_d'])).timetuple().tm_yday + 365
                 else:
                     startday = date(2020, int(countrypolicyList[iso3][policy]['start_m']), int(countrypolicyList[iso3][policy]['start_d'])).timetuple().tm_yday - 1
                 if(int(countrypolicyList[iso3][policy]['end_m']) > 12):
-                    print iso3
+                    #print iso3
                     endday = date(2021, int(countrypolicyList[iso3][policy]['end_m'])-12, int(countrypolicyList[iso3][policy]['end_d'])).timetuple().tm_yday + 365
                 else:
                     endday = date(2020, int(countrypolicyList[iso3][policy]['end_m']), int(countrypolicyList[iso3][policy]['end_d'])).timetuple().tm_yday - 1
