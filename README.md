@@ -105,7 +105,7 @@ country_excep|binary| whether specific country(ies) are exempted from the comple
 country_excep_list|comma separated list| which country(ies) are exempted from the complete closure
 work_excep| binary |whether the complete closure exempts workers (1) or not (0)
 source_quality | string | Very sure: internal government source, sure: airline or insurance source, less sure: any other source type
-source_type|comma separated list| indication of source types included 1: internal_govt_source, 2: airline_source, 3: insurance_source, 4: govt_social_med_source, 5: ext_govt_source, 6: internal_media_source, 7: ext_media_source, 8: other source
+source_type|comma separated list| indication of source types included 1: internal_govt_source, 2: airline_source, 3: insurance_source, 4: govt_social_med_source, 5: ext_govt_source, 6: internal_media_source, 7: ext_media_source, 8: other source, 9: A combination of other partial closures leading to a complete closure, policies contributing listed in Comments and internal_govt_source
 internal_govt_source| UTF-8 String | Web link to source of policy from a Government website of the host country
 airline_source| UTF-8 String | Web link to source of policy from the airline industry or IATA
 insurance_source| UTF-8 String | Web link to source of policy from the international insurance industry
