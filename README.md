@@ -1,6 +1,6 @@
 # COVID Border Accountability Project (COBAP)
 
-Last update: 04-18-2021 1,395 Policies, 244 Territories
+Last update: 06-01-2021 1,306 Policies, 246 Territories
 
 This is the data repository for the [COBAP project](https://www.covidborderaccountability.org/). 
 
@@ -64,9 +64,10 @@ The following Codes are used in country lists:
 # FILELIST
 File | Description
 ------------ | -------------
+[data/output/policy_list.csv](https://github.com/COBAPteam/COBAP/blob/main/data/policy_list.csv)|The processed output to decode the survey responses into the policy types described below. View this file for the final, sanitized results.
 [data/raw_survey_output/main_survey_raw.csv](https://github.com/COBAPteam/COBAP/blob/main/data/raw_survey_output/main_survey_raw.csv)|The output from the Qualtrics survey completed by RAs to record policy implementation, modified to remove duplicate/updated policies, and ISO country codes.
 [data/raw_survey_output/end_dates_survey_raw.csv](https://github.com/COBAPteam/COBAP/blob/main/data/raw_survey_output/end_dates_survey_raw.csv)|The output from the Qualtrics survey to record the end dates of policies, with sources, as well as any policy which was implemented in conjunction with the end of another policy in the dataset.
-[data/output/policy_list.csv](https://github.com/COBAPteam/COBAP/blob/main/data/policy_list.csv)|The processed output to decode the survey responses into the policy types described below. 
+
 
 # Data Fields in Policy List
 
@@ -103,7 +104,8 @@ citizen_excep_list|comma separated list| which persons are exempted from the com
 country_excep|binary| whether specific country(ies) are exempted from the complete closure (1) or not (0)
 country_excep_list|comma separated list| which country(ies) are exempted from the complete closure
 work_excep| binary |whether the complete closure exempts workers (1) or not (0)
-source_type|comma separated list| indication of source types included 1: internal_govt_source, 2: airline_source, 3: insurance_source, 4: govt_social_med_source, 5: ext_govt_source, 6: internal_media_source, 7: ext_media_source, 8: other source
+source_quality | string | Very sure: internal government source, sure: airline or insurance source, less sure: any other source type
+source_type|comma separated list| indication of source types included 1: internal_govt_source, 2: airline_source, 3: insurance_source, 4: govt_social_med_source, 5: ext_govt_source, 6: internal_media_source, 7: ext_media_source, 8: other source, 9: A combination of other partial closures leading to a complete closure, policies contributing listed in Comments and internal_govt_source
 internal_govt_source| UTF-8 String | Web link to source of policy from a Government website of the host country
 airline_source| UTF-8 String | Web link to source of policy from the airline industry or IATA
 insurance_source| UTF-8 String | Web link to source of policy from the international insurance industry
@@ -113,6 +115,8 @@ internal_media_source| UTF-8 String | Web link to source of policy from a major 
 ext_media_source| UTF-8 String | Web link to source of policy from a major news outlet of external country 
 other_source| UTF-8 String | Web link to source of policy that doesn't fit into other source categories above
 end_source| UTF-8 String | Web link to source of policy indicating policy has ended if not present in original source
+comment | UTF-8 String | Comments related to coding decisions
+old_id | alphanumeric | ID for policy before ID change
 # Contact
 Please contact nikolas_lazar@brown.edu.
 
