@@ -19,7 +19,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/1.10.0/mapbox-gl.min.js"></script>
     <script src="https://libs.cartocdn.com/airship-components/v1.0.3/airship.js"></script>
     <script async src='https://cdn.plot.ly/plotly-latest.min.js'></script>
-    <script src="casedata1129.js"></script>
+    <script src="casedata.js"></script>
     <script src="info.js"></script>
     <link rel="stylesheet" type="text/css" href="mapall.css">
     <link rel="icon" href="favicon.png">
@@ -62,17 +62,31 @@
   </aside>
   <div id="minilegend"><a style="color:white;text-decoration:none" href="javascript:showlegend()">Show Legend ^</a></div>
   <div id="loader">
-    <div id="loadertext">
-    <img src="logoim.png" height=125>
-    <h1> Welcome to the COVID Border Accountability Project</h1>
-      <p>This map tool displays information on border policies around the world in response to the COVID-19 pandemic. Clicking on a country will provide more info on policies, including sources.</p>
-    <p><div id="spinner" class="CDB-LoaderIcon CDB-LoaderIcon--big">
-      <svg class="CDB-LoaderIcon-spinner" viewBox="0 0 50 50">
-        <circle class="CDB-LoaderIcon-path" cx="25" cy="25" r="20" fill="none"></circle>
-      </svg>
-    </div></p>
-  </div>
+      <div id="loadertext">
+          <img src="logoim.png" height=125>
+          <h1> Welcome to the COVID Border Accountability Project</h1>
+          <p>
+              This map tool displays hand-coded information on border closures around the world introduced in response to the COVID-19 pandemic. Clicking on a country will provide more info on policies, including sources.
+          </p>
+          Only 2020 data has been verified by our team. For the most up-to-date travel rules, we recommend checking with the government website of the host country. For research, we recommend further verifying the 2021 data prior to publication.
+
+          <p>
+              <div id="spinner" class="CDB-LoaderIcon CDB-LoaderIcon--big">
+                  <svg class="CDB-LoaderIcon-spinner" viewBox="0 0 50 50">
+                      <circle class="CDB-LoaderIcon-path" cx="25" cy="25" r="20" fill="none"></circle>
+                  </svg>
+              </div>
+          </p>
+      </div>
   </div> 
+  <form autocomplete="off">
+      <div class="autocomplete" style="width:300px;">
+          <input id="myInput" type="text" name="myCountry" placeholder="Search by Country Name">
+      </div>
+  </form>
+
 </body>
+
+
 <script src="mapout.js"></script>
 </html>

@@ -29,7 +29,7 @@ if (!carto.isBrowserSupported()) {
         //Prevent panning past bounds
         maxBounds: new mapboxgl.LngLatBounds(
             new mapboxgl.LngLat(-220, -70),
-            new mapboxgl.LngLat(180, 80)),
+            new mapboxgl.LngLat(200, 80)),
         minZoom: 2,
         maxZoom: 7,
         zoom: 2
@@ -50,22 +50,23 @@ if (!carto.isBrowserSupported()) {
 
     popup = new mapboxgl.Popup({
         closeButton: false,
-        closeOnClick: false
+        closeOnClick: false,
+        anchor: "bottom"
     });
 
     var layerLoaded = 0;
     var displayInfo = 0;
     var animate = 0;
     //const source = new carto.source.GeoJSON(cntrydata)
-    days = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-    months = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
-    monthformat = { '0': '01', '1': '02', '2': '03', '3': '04', '4': '05', '5': '06', '6': '07', '7': '08', '8': '09', '9': '10', '10': '11' }
-    monthdisplay = { '0': 'Jan ', '1': 'Feb ', '2': 'Mar ', '3': 'Apr ', '4': 'May ', '5': 'Jun ', '6': 'Jul ', '7': 'Aug ', '8': 'Sep ', '9': 'Oct ', '10': 'Nov ', '11': 'Dec ' }
+    days = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31,31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    months = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,12,13,14,15,16,17,18,19,20]
+    monthformat = { '0': '01', '1': '02', '2': '03', '3': '04', '4': '05', '5': '06', '6': '07', '7': '08', '8': '09', '9': '10', '10': '11', '11': '12', '12': '13', '13': '14', '14': '15', '15': '16', '16': '17', '17': '18', '18': '19', '19': '20'   }
+    monthdisplay = { '0': 'Jan ', '1': 'Feb ', '2': 'Mar ', '3': 'Apr ', '4': 'May ', '5': 'Jun ', '6': 'Jul ', '7': 'Aug ', '8': 'Sep ', '9': 'Oct ', '10': 'Nov ', '11': 'Dec ', '12': 'Jan ', '13': 'Feb ', '14': 'Mar ', '15': 'Apr ', '16': 'May ', '17': 'Jun ', '18': 'Jul ', '19': 'Aug ' }
     var pipFormats = {}
     var pipDisplay = {}
     var pipValues = []
-    var currentMonth = 10;
-    var currentday = 29;
+    var currentMonth = 19;
+    var currentday = 31;
     var displaydate = "";
     var formatdate = "";
     var limitWidth = document.body.offsetWidth <= 900;
@@ -83,7 +84,7 @@ if (!carto.isBrowserSupported()) {
         if (month > currentMonth) {
             break;
         }
-        if (month > 0 & ((limitWidth & month % 2) | !limitWidth))
+        if (month > 0 & ((limitWidth & ((month % 3) ==1)) | !limitWidth))
             pipValues.push(iter);
         for (var day = 1; day <= days[month]; day++) {
             if ((month == currentMonth) & (day > currentday)) {
@@ -92,17 +93,29 @@ if (!carto.isBrowserSupported()) {
             if ((month == 0) & day < 22) {
                 continue;
             }
-            formatdate = monthformat[month] + String("0" + day).slice(-2);
-            pipFormats[iter] = formatdate;
-            displaydate = monthdisplay[month] + String("0" + day).slice(-2);
-            pipDisplay[iter] = displaydate;
-            iter++;
+
+            if (month < 12){
+                formatdate = monthformat[month] + String("0" + day).slice(-2);
+                pipFormats[iter] = formatdate;
+                displaydate = monthdisplay[month] + String(day).slice(-2) + " '20";
+                pipDisplay[iter] = displaydate;
+                iter++;
+            
+            }
+            else{
+                formatdate = monthformat[month] + String("0" + day).slice(-2);
+                pipFormats[iter] = formatdate;
+                displaydate = monthdisplay[month] + String(day).slice(-2) + " '21";
+                pipDisplay[iter] = displaydate;
+                iter++;
+            }           
         }
     }
     iter = iter - 1
     if (iter - pipValues[pipValues.length - 1] > 10) {
         pipValues.push(iter);
     }
+
     slider = noUiSlider.create($(".slider")[0], {
         start: iter,
         step: 1,
@@ -131,8 +144,13 @@ if (!carto.isBrowserSupported()) {
             if ((month == 1) & day < 22) {
                 continue;
             }
-            datesforchart.push("2020-" + String(month) + "-" + String(day));
-        }
+            if(month>12){
+             datesforchart.push("2021-" + String(month-12) + "-" + String(day));
+            }
+            else{
+             datesforchart.push("2020-" + String(month) + "-" + String(day));
+            }     
+   }
     }
 
     //Add custom pip for 'WHO declares pandemic'
@@ -144,19 +162,19 @@ if (!carto.isBrowserSupported()) {
 
     tooltipcategories = {
         "Workers Exception": 'A complete closure with exceptions for specific work permit status holders',
-        "Specific Country(ies) Exception": 'A complete closure with exceptions for essentials and for nationals from a specific country or listed set of countries (up to 25)',
+        "Specific Country(ies) Exception": 'A complete closure with exceptions for essentials and for nationals from a specific country or listed set of countries (up to 10)',
         "Citizen Exception": 'A complete closure with exceptions for essentials and for citizens (including citizens, permanent residents, and/or the family members of citizens and permanent residents)',
         "Essentials-only Exception": 'A complete closure with exceptions for essentials but not for citizens',
         "Visa ban(s)": 'A partial closure which bans the application for new visas, whether all visa seekers or impacting those from specified countries',
         "Citizenship ban(s)": 'A partial closure which bans foreign nationals from one country or group of countries, e.g. "entry to the country is denied to foreign nationals from Austria, Belgium, and France"',
         "Travel history ban(s)": 'A partial closure which bans travelers who, regardless of nationality, have recently travelled  through or from a specified country or group of countries, e.g. for "All travelers who have been to or travelled through China, Hong Kong, Iran, Italy, and Japan are advised to not enter the country, and may be denied entry"',
         "Border Closure(s)": 'A partial closure which impacts those entering through a specified land, sea or air border; OR all land borders closed OR all air borders closed OR all sea borders closed (but not all three)',
-        "NONE": 'No policy recorded at this date'
+        "NONE": 'No policy recorded on this date'
     };
 
     colormap = { "Workers Exception": '#a8dbd9', "Specific Country(ies) Exception": '#85c4c9', "Citizen Exception": '#4f90a6', "Essentials-only Exception": '#2a5674', "Visa ban(s)": '#672044', "Citizenship ban(s)": '#ad466c', "Travel history ban(s)": '#e38191', "Border Closure(s)": '#ffc6c4', "NONE": '#888' };
     const colors = ['#a8dbd9', '#85c4c9', '#4f90a6', '#2a5674', '#672044', '#ad466c', '#e38191', '#ffc6c4', '#888'];
-    const source = new carto.source.Dataset('cobap1129');
+    const source = new carto.source.Dataset('carto_output_1');
     //Get world borders for background interactivity layer
     const source3 = new carto.source.Dataset('world_borders_hd');
     layer = [];
@@ -300,12 +318,13 @@ if (!carto.isBrowserSupported()) {
             @ddate: $5_30_20d
             @country: $Country
             @iso3: $ISO3
-            width: sqrt(@date/600)
+            width: sqrt(@date/1600)
             @widthforlegend : globalEqIntervals (@date,7);
             @name: $Country
             color: opacity(#333, .5)
             strokeWidth : 1
             `
+
     for (var month = 1; month <= currentMonth + 1; month++) {
         for (var day = 1; day <= days[month - 1]; day++) {
             if ((month == currentMonth + 1) & (day > currentday)) {
@@ -314,12 +333,13 @@ if (!carto.isBrowserSupported()) {
             if ((month == 1) & day < 22) {
                 continue;
             }
-            date = String(month) + "_" + String(day) + "_20";
+            date = String(month%13+Math.floor(month/13)) + "_" + String(day) + "_" + String(20+Math.floor(month/13));
             stringViz2a = stringViz2a + `
                     @cnt${date} : $${date}
                     `
         }
     }
+
     for (var month = 1; month <= currentMonth + 1; month++) {
         for (var day = 1; day <= days[month - 1]; day++) {
             if ((month == currentMonth + 1) & (day > currentday)) {
@@ -328,7 +348,7 @@ if (!carto.isBrowserSupported()) {
             if ((month == 1) & day < 22) {
                 continue;
             }
-            date = String(month) + "_" + String(day) + "_20d";
+            date = String(month%13+Math.floor(month/13)) + "_" + String(day) + "_" + String(20+Math.floor(month/13))+ "d";
             stringViz2a = stringViz2a + `
                     @cnt${date} : $${date}
                     `
@@ -349,12 +369,12 @@ if (!carto.isBrowserSupported()) {
     let stringViz3a = `
             @date: $5_30_20d
             @cdate: $5_30_20
-            width: sqrt(@date/600)
+            width: sqrt(@date/1600)
             @widthforlegend : globalEqIntervals (@date,7);
             @name: $Country
             strokeWidth : 1
             color: opacity(#fff, .5)
-            @down: ${window.devicePixelRatio}*sqrt(@cdate/600)/2 - sqrt(@date/600)/2 - 2
+            @down: ${window.devicePixelRatio}*sqrt(@cdate/1600)/2 - sqrt(@date/1600)/2 - 2
             transform: translate(0,-@down)
             `
     for (var month = 1; month <= currentMonth + 1; month++) {
@@ -365,13 +385,14 @@ if (!carto.isBrowserSupported()) {
             if ((month == 1) & day < 22) {
                 continue;
             }
-            date = String(month) + "_" + String(day) + "_20d";
+            date = String(month%13+Math.floor(month/13)) + "_" + String(day) + "_" + String(20+Math.floor(month/13))+ "d";
             stringViz3a = stringViz3a + `
                     @cnt${date} : $${date}
                     `
         }
-    }
-    for (var month = 1; month <= currentMonth + 1; month++) {
+    } 
+
+   for (var month = 1; month <= currentMonth + 1; month++) {
         for (var day = 1; day <= days[month - 1]; day++) {
             if ((month == currentMonth + 1) & (day > currentday)) {
                 break;
@@ -379,7 +400,7 @@ if (!carto.isBrowserSupported()) {
             if ((month == 1) & day < 22) {
                 continue;
             }
-            date = String(month) + "_" + String(day) + "_20";
+            date = String(month%13+Math.floor(month/13)) + "_" + String(day) + "_" + String(20+Math.floor(month/13));
             stringViz3a = stringViz3a + `
                     @cnt${date} : $${date}
                     `
@@ -399,7 +420,7 @@ if (!carto.isBrowserSupported()) {
             cases = numberWithCommas(vars.date.value)
             deaths = numberWithCommas(vars.ddate.value)
             popup.setHTML(`
-          <div class="popupinfo">
+          <div class="popupinfo" id="popupinfo">
           <h2 >
           ${vars.name.value}
           </h2>
@@ -410,6 +431,11 @@ if (!carto.isBrowserSupported()) {
             popup.setLngLat([event.coordinates.lng, event.coordinates.lat]);
             if (!popup.isOpen()) {
                 popup.addTo(map);
+
+            }
+            if (document.getElementById("popupinfo").getBoundingClientRect().right > (window.innerWidth - document.getElementById("info").getBoundingClientRect().width)) {
+                document.getElementById("popupinfo").style.transform = "translateX(-240px)";
+
             }
         } else {
             popup.remove();
@@ -419,7 +445,7 @@ if (!carto.isBrowserSupported()) {
     function generateLegend() {
         // Request data for legend from the layer viz
         let legendList = `<div class="tooltip"><h4>Complete Closures <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path style="fill:white" d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"/></svg></h4></label>
-            <span class="tooltiptext">A new policy in which all newcomers are banned from all ports of entry - AIR, LAND, and SEA - with limited exceptions, including citizens, nationals from a specified country or set of up to 25 countries, and/or essential reasons, e.g. health emergencies, extreme humanitarian/diplomatic reasons, dignitaries, cargo flights, commercial transport, essential deliveries, permanent residents, existing visa holders, and family members of citizens</span></div>`
+            <span class="tooltiptext">A new policy in which all newcomers are banned from all ports of entry - AIR, LAND, and SEA - with limited exceptions, including citizens, nationals from a specified country or set of up to 10 countries, and/or essential reasons, e.g. health emergencies, extreme humanitarian/diplomatic reasons, dignitaries, cargo flights, commercial transport, essential deliveries, permanent residents, existing visa holders, and family members of citizens</span></div>`
         for (var i = 0; i <= 7; i++) {
             if (i == 4) {
                 legendList += `<div class="tooltip"><h4>Partial Closures <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path style="fill:white" d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"/></svg></h4></label>
@@ -524,6 +550,111 @@ if (!carto.isBrowserSupported()) {
         };
     }
 
+    var countries = ["Afghanistan", "&Aring;land Islands", "Albania", "Algeria", "American Samoa", "Andorra", "Angola", "Anguilla", "Antarctica", "Antigua and Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia, Plurinational State of", "Bonaire, Sint Eustatius and Saba", "Bosnia and Herzegovina", "Botswana", "Brazil", "British Indian Ocean Territory", "Brunei Darussalam", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Cayman Islands", "Central African Republic", "Chad", "Chile", "China", "Christmas Island", "Cocos (Keeling) Islands", "Colombia", "Comoros", "Congo", "Congo, The Democratic Republic of the", "Cook Islands", "Costa Rica", "C&ocirc;te d'Ivoire", "Croatia", "Cuba", "Cura&ccedil;ao", "Cyprus", "Czechia", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Falkland Islands (Malvinas)", "Faroe Islands", "Fiji", "Finland", "France", "French Guiana", "French Polynesia", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guadeloupe", "Guam", "Guatemala", "Guernsey", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Holy See (Vatican City State)", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran, Islamic Republic of", "Iraq", "Ireland", "Isle of Man", "Israel", "Italy", "Jamaica", "Japan", "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea, Democratic People's Republic of", "Korea, Republic of", "Kuwait", "Kyrgyzstan", "Lao People's Democratic Republic", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macao", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Martinique", "Mauritania", "Mauritius", "Mayotte", "Mexico", "Micronesia, Federated States of", "Moldova, Republic of", "Monaco", "Mongolia", "Montenegro", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Niue", "Norfolk Island", "North Macedonia", "Northern Mariana Islands", "Norway", "Oman", "Pakistan", "Palau", "Palestine, State of", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Pitcairn", "Poland", "Portugal", "Puerto Rico", "Qatar", "Republic of Kosovo", "R&eacute;union", "Romania", "Russian Federation", "Rwanda", "Sahrawi Arab Democratic Republic", "Saint Barth&eacute;lemy", "Saint Helena, Ascension and Tristan da Cunha", "Saint Kitts and Nevis", "Saint Lucia", "Saint Martin (French part)", "Saint Pierre and Miquelon", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Sint Maarten (Dutch part)", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "Somaliland", "South Africa", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Svalbard and Jan Mayen", "Sweden", "Switzerland", "Syrian Arab Republic", "Taiwan, Province of China", "Tajikistan", "Tanzania, United Republic of", "Thailand", "Timor-Leste", "Togo", "Tokelau", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks and Caicos Islands", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Venezuela, Bolivarian Republic of", "Viet Nam", "Virgin Islands, British", "Virgin Islands, U.S.", "Wallis and Futuna", "Yemen", "Zambia", "Zimbabwe"];
+    var iso3s = ["AFG", "ALA", "ALB", "DZA", "ASM", "AND", "AGO", "AIA", "ATA", "ATG", "ARG", "ARM", "ABW", "AUS", "AUT", "AZE", "BHS", "BHR", "BGD", "BRB", "BLR", "BEL", "BLZ", "BEN", "BMU", "BTN", "BOL", "BES", "BIH", "BWA", "BRA", "IOT", "BRN", "BGR", "BFA", "BDI", "CPV", "KHM", "CMR", "CAN", "CYM", "CAF", "TCD", "CHL", "CHN", "CXR", "CCK", "COL", "COM", "COG", "COD", "COK", "CRI", "CIV", "HRV", "CUB", "CUW", "CYP", "CZE", "DNK", "DJI", "DMA", "DOM", "ECU", "EGY", "SLV", "GNQ", "ERI", "EST", "SWZ", "ETH", "FLK", "FRO", "FJI", "FIN", "FRA", "GUF", "PYF", "GAB", "GMB", "GEO", "DEU", "GHA", "GIB", "GRC", "GRL", "GRD", "GLP", "GUM", "GTM", "GGY", "GIN", "GNB", "GUY", "HTI", "VAT", "HND", "HKG", "HUN", "ISL", "IND", "IDN", "IRN", "IRQ", "IRL", "IMN", "ISR", "ITA", "JAM", "JPN", "JEY", "JOR", "KAZ", "KEN", "KIR", "PRK", "KOR", "KWT", "KGZ", "LAO", "LVA", "LBN", "LSO", "LBR", "LBY", "LIE", "LTU", "LUX", "MAC", "MDG", "MWI", "MYS", "MDV", "MLI", "MLT", "MHL", "MTQ", "MRT", "MUS", "MYT", "MEX", "FSM", "MDA", "MCO", "MNG", "MNE", "MSR", "MAR", "MOZ", "MMR", "NAM", "NRU", "NPL", "NLD", "NCL", "NZL", "NIC", "NER", "NGA", "NIU", "NFK", "MKD", "MNP", "NOR", "OMN", "PAK", "PLW", "PSX", "PAN", "PNG", "PRY", "PER", "PHL", "PCN", "POL", "PRT", "PRI", "QAT", "KOS", "REU", "ROU", "RUS", "RWA", "SAH", "BLM", "SHN", "KNA", "LCA", "MAF", "SPM", "VCT", "WSM", "SMR", "STP", "SAU", "SEN", "SRB", "SYC", "SLE", "SGP", "SXM", "SVK", "SVN", "SLB", "SOM", "SOL", "ZAF", "SSD", "ESP", "LKA", "SDN", "SUR", "SJM", "SWE", "CHE", "SYR", "TWN", "TJK", "TZA", "THA", "TLS", "TGO", "TKL", "TON", "TTO", "TUN", "TUR", "TKM", "TCA", "TUV", "UGA", "UKR", "ARE", "GBR", "USA", "URY", "UZB", "VUT", "VEN", "VNM", "VGB", "VIR", "WLF", "YEM", "ZMB", "ZWE"];
+    function autocomplete(inp, arr, arr2) {
+        /*the autocomplete function takes two arguments,
+        the text field element and an array of possible autocompleted values:*/
+        var currentFocus;
+        /*execute a function when someone writes in the text field:*/
+        inp.addEventListener("input", function (e) {
+            var a, b, i, val = this.value;
+            /*close any already open lists of autocompleted values*/
+            closeAllLists();
+            if (!val) { return false; }
+            currentFocus = -1;
+            /*create a DIV element that will contain the items (values):*/
+            a = document.createElement("DIV");
+            a.setAttribute("id", this.id + "autocomplete-list");
+            a.setAttribute("class", "autocomplete-items");
+            /*append the DIV element as a child of the autocomplete container:*/
+            this.parentNode.appendChild(a);
+            /*for each item in the array...*/
+            for (i = 0; i < arr.length; i++) {
+                /*check if the item starts with the same letters as the text field value:*/
+                if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                    /*create a DIV element for each matching element:*/
+                    b = document.createElement("DIV");
+                    /*make the matching letters bold:*/
+                    b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                    b.innerHTML += arr[i].substr(val.length);
+                    /*insert a input field that will hold the current array item's value:*/
+                    b.innerHTML += "<input type='hidden' name='country' value='" + arr[i] + "'>";
+                    b.innerHTML += "<input type='hidden' name='iso3' value='" + arr2[i] + "'>";
+                    /*execute a function when someone clicks on the item value (DIV element):*/
+                    b.addEventListener("click", function (e) {
+                        /*insert the value for the autocomplete text field:*/
+                        inp.value = this.getElementsByTagName("input")[0].value;
+                        /*close the list of autocompleted values,
+                        (or any other open lists of autocompleted values:*/
+                        closeAllLists();
+                        iso3 = this.getElementsByTagName("input")[1].value;
+                        country = inp.value;
+                        date = parseInt(slider.get())
+                        displayInfo = 1;
+                        drawinfo(iso3, country, date)
+                    });
+                    a.appendChild(b);
+                }
+            }
+        });
+        /*execute a function presses a key on the keyboard:*/
+        inp.addEventListener("keydown", function (e) {
+            var x = document.getElementById(this.id + "autocomplete-list");
+            if (x) x = x.getElementsByTagName("div");
+            if (e.keyCode == 40) {
+                /*If the arrow DOWN key is pressed,
+                increase the currentFocus variable:*/
+                currentFocus++;
+                /*and and make the current item more visible:*/
+                addActive(x);
+            } else if (e.keyCode == 38) { //up
+                /*If the arrow UP key is pressed,
+                decrease the currentFocus variable:*/
+                currentFocus--;
+                /*and and make the current item more visible:*/
+                addActive(x);
+            } else if (e.keyCode == 13) {
+                /*If the ENTER key is pressed, prevent the form from being submitted,*/
+                e.preventDefault();
+                if (currentFocus > -1) {
+                    /*and simulate a click on the "active" item:*/
+                    if (x) x[currentFocus].click();
+                }
+            }
+        });
+        function addActive(x) {
+            /*a function to classify an item as "active":*/
+            if (!x) return false;
+            /*start by removing the "active" class on all items:*/
+            removeActive(x);
+            if (currentFocus >= x.length) currentFocus = 0;
+            if (currentFocus < 0) currentFocus = (x.length - 1);
+            /*add class "autocomplete-active":*/
+            x[currentFocus].classList.add("autocomplete-active");
+        }
+        function removeActive(x) {
+            /*a function to remove the "active" class from all autocomplete items:*/
+            for (var i = 0; i < x.length; i++) {
+                x[i].classList.remove("autocomplete-active");
+            }
+        }
+        function closeAllLists(elmnt) {
+            /*close all autocomplete lists in the document,
+            except the one passed as an argument:*/
+            var x = document.getElementsByClassName("autocomplete-items");
+            for (var i = 0; i < x.length; i++) {
+                if (elmnt != x[i] && elmnt != inp) {
+                    x[i].parentNode.removeChild(x[i]);
+                }
+            }
+        }
+        /*execute a function when someone clicks in the document:*/
+        document.addEventListener("click", function (e) {
+            closeAllLists(e.target);
+        });
+    }
+    autocomplete(document.getElementById("myInput"), countries, iso3s);
     slider.on('update', debounce(onSlide, 20));
 
     function onSlide(values, handle) {
@@ -533,28 +664,28 @@ if (!carto.isBrowserSupported()) {
         viz[2].variables['selected_d'] = parseInt(values[0]) + 21;
         viz[3].variables['selected_d'] = parseInt(values[0]) + 21;
         if (pipFormats[parseInt(values[0])].charAt(0) == '0' & pipFormats[parseInt(values[0])].charAt(2) == '0' & !iOS()) {
-            viz2a.variables['date'] = viz2a.variables['cnt' + pipFormats[parseInt(values[0])].charAt(1) + "_" + pipFormats[parseInt(values[0])].charAt(3) + "_20"]
-            viz2a.variables['ddate'] = viz2a.variables['cnt' + pipFormats[parseInt(values[0])].charAt(1) + "_" + pipFormats[parseInt(values[0])].charAt(3) + "_20d"]
-            viz3a.variables['date'] = viz3a.variables['cnt' + pipFormats[parseInt(values[0])].charAt(1) + "_" + pipFormats[parseInt(values[0])].charAt(3) + "_20d"]
-            viz3a.variables['cdate'] = viz3a.variables['cnt' + pipFormats[parseInt(values[0])].charAt(1) + "_" + pipFormats[parseInt(values[0])].charAt(3) + "_20"]
+            viz2a.variables['date'] = viz2a.variables['cnt' + pipFormats[parseInt(values[0])].charAt(1) + "_" + pipFormats[parseInt(values[0])].charAt(3) + "_" +"20"]
+            viz2a.variables['ddate'] = viz2a.variables['cnt' + pipFormats[parseInt(values[0])].charAt(1) + "_" + pipFormats[parseInt(values[0])].charAt(3) + "_" +"20d"]
+            viz3a.variables['date'] = viz3a.variables['cnt' + pipFormats[parseInt(values[0])].charAt(1) + "_" + pipFormats[parseInt(values[0])].charAt(3) + "_" +"20d"]
+            viz3a.variables['cdate'] = viz3a.variables['cnt' + pipFormats[parseInt(values[0])].charAt(1) + "_" + pipFormats[parseInt(values[0])].charAt(3) + "_" +"20"]
         }
         else if (pipFormats[parseInt(values[0])].charAt(0) == '0' & pipFormats[parseInt(values[0])].charAt(2) != '0' & !iOS()){
-            viz2a.variables['date'] = viz2a.variables['cnt'  + pipFormats[parseInt(values[0])].charAt(1) + "_" + pipFormats[parseInt(values[0])].charAt(2) + pipFormats[parseInt(values[0])].charAt(3) + "_20"]
-            viz2a.variables['ddate'] = viz2a.variables['cnt' + pipFormats[parseInt(values[0])].charAt(1) + "_" + pipFormats[parseInt(values[0])].charAt(2) + pipFormats[parseInt(values[0])].charAt(3) + "_20d"]
-            viz3a.variables['date'] = viz3a.variables['cnt'  + pipFormats[parseInt(values[0])].charAt(1) + "_" + pipFormats[parseInt(values[0])].charAt(2) + pipFormats[parseInt(values[0])].charAt(3) + "_20d"]
-            viz3a.variables['cdate'] = viz3a.variables['cnt' + pipFormats[parseInt(values[0])].charAt(1) + "_" + pipFormats[parseInt(values[0])].charAt(2) + pipFormats[parseInt(values[0])].charAt(3) + "_20"]
+            viz2a.variables['date'] = viz2a.variables['cnt'  + pipFormats[parseInt(values[0])].charAt(1) + "_" + pipFormats[parseInt(values[0])].charAt(2) + pipFormats[parseInt(values[0])].charAt(3) + "_" +"20"]
+            viz2a.variables['ddate'] = viz2a.variables['cnt' + pipFormats[parseInt(values[0])].charAt(1) + "_" + pipFormats[parseInt(values[0])].charAt(2) + pipFormats[parseInt(values[0])].charAt(3) + "_" +"20d"]
+            viz3a.variables['date'] = viz3a.variables['cnt'  + pipFormats[parseInt(values[0])].charAt(1) + "_" + pipFormats[parseInt(values[0])].charAt(2) + pipFormats[parseInt(values[0])].charAt(3) + "_" +"20d"]
+            viz3a.variables['cdate'] = viz3a.variables['cnt' + pipFormats[parseInt(values[0])].charAt(1) + "_" + pipFormats[parseInt(values[0])].charAt(2) + pipFormats[parseInt(values[0])].charAt(3) + "_" +"20"]
         }        
         else if (pipFormats[parseInt(values[0])].charAt(0) != '0' & pipFormats[parseInt(values[0])].charAt(2) == '0' & !iOS()){
-            viz2a.variables['date'] = viz2a.variables['cnt'  + pipFormats[parseInt(values[0])].charAt(0) + pipFormats[parseInt(values[0])].charAt(1) + "_" + pipFormats[parseInt(values[0])].charAt(3) + "_20"]
-            viz2a.variables['ddate'] = viz2a.variables['cnt' + pipFormats[parseInt(values[0])].charAt(0) + pipFormats[parseInt(values[0])].charAt(1) + "_" + pipFormats[parseInt(values[0])].charAt(3) + "_20d"]
-            viz3a.variables['date'] = viz3a.variables['cnt'  + pipFormats[parseInt(values[0])].charAt(0) + pipFormats[parseInt(values[0])].charAt(1) + "_" + pipFormats[parseInt(values[0])].charAt(3) + "_20d"]
-            viz3a.variables['cdate'] = viz3a.variables['cnt' + pipFormats[parseInt(values[0])].charAt(0) + pipFormats[parseInt(values[0])].charAt(1) + "_" + pipFormats[parseInt(values[0])].charAt(3) + "_20"]
+            viz2a.variables['date'] = viz2a.variables['cnt'  + String(pipFormats[parseInt(values[0])].substr(0,2)%13+Math.floor(pipFormats[parseInt(values[0])].substr(0,2)/13)) + "_" + pipFormats[parseInt(values[0])].charAt(3) + "_" +String(20+Math.floor(pipFormats[parseInt(values[0])].substr(0,2)/13))]
+            viz2a.variables['ddate'] = viz2a.variables['cnt' + String(pipFormats[parseInt(values[0])].substr(0,2)%13+Math.floor(pipFormats[parseInt(values[0])].substr(0,2)/13)) + "_" + pipFormats[parseInt(values[0])].charAt(3) + "_" +String(20+Math.floor(pipFormats[parseInt(values[0])].substr(0,2)/13)) + "d"]
+            viz3a.variables['date'] = viz3a.variables['cnt'  + String(pipFormats[parseInt(values[0])].substr(0,2)%13+Math.floor(pipFormats[parseInt(values[0])].substr(0,2)/13)) + "_" + pipFormats[parseInt(values[0])].charAt(3) + "_" +String(20+Math.floor(pipFormats[parseInt(values[0])].substr(0,2)/13)) + "d"]
+            viz3a.variables['cdate'] = viz3a.variables['cnt' + String(pipFormats[parseInt(values[0])].substr(0,2)%13+Math.floor(pipFormats[parseInt(values[0])].substr(0,2)/13)) + "_" + pipFormats[parseInt(values[0])].charAt(3) + "_" +String(20+Math.floor(pipFormats[parseInt(values[0])].substr(0,2)/13))]
         }
         else if (!iOS()){
-            viz2a.variables['date'] = viz2a.variables['cnt'  + pipFormats[parseInt(values[0])].charAt(0) + pipFormats[parseInt(values[0])].charAt(1) + "_" + pipFormats[parseInt(values[0])].charAt(2) + pipFormats[parseInt(values[0])].charAt(3) + "_20"]
-            viz2a.variables['ddate'] = viz2a.variables['cnt' + pipFormats[parseInt(values[0])].charAt(0) + pipFormats[parseInt(values[0])].charAt(1) + "_" + pipFormats[parseInt(values[0])].charAt(2) + pipFormats[parseInt(values[0])].charAt(3) + "_20d"]
-            viz3a.variables['date'] = viz3a.variables['cnt'  + pipFormats[parseInt(values[0])].charAt(0) + pipFormats[parseInt(values[0])].charAt(1) + "_" + pipFormats[parseInt(values[0])].charAt(2) + pipFormats[parseInt(values[0])].charAt(3) + "_20d"]
-            viz3a.variables['cdate'] = viz3a.variables['cnt' + pipFormats[parseInt(values[0])].charAt(0) + pipFormats[parseInt(values[0])].charAt(1) + "_" + pipFormats[parseInt(values[0])].charAt(2) + pipFormats[parseInt(values[0])].charAt(3) + "_20"]
+            viz2a.variables['date'] = viz2a.variables['cnt'  + String(pipFormats[parseInt(values[0])].substr(0,2)%13+Math.floor(pipFormats[parseInt(values[0])].substr(0,2)/13)) + "_" + pipFormats[parseInt(values[0])].substr(2,2) + "_" +String(20+Math.floor(pipFormats[parseInt(values[0])].substr(0,2)/13))]
+            viz2a.variables['ddate'] = viz2a.variables['cnt' + String(pipFormats[parseInt(values[0])].substr(0,2)%13+Math.floor(pipFormats[parseInt(values[0])].substr(0,2)/13)) + "_" + pipFormats[parseInt(values[0])].substr(2,2) + "_" +String(20+Math.floor(pipFormats[parseInt(values[0])].substr(0,2)/13)) + "d"]
+            viz3a.variables['date'] = viz3a.variables['cnt'  + String(pipFormats[parseInt(values[0])].substr(0,2)%13+Math.floor(pipFormats[parseInt(values[0])].substr(0,2)/13)) + "_" + pipFormats[parseInt(values[0])].substr(2,2) + "_" +String(20+Math.floor(pipFormats[parseInt(values[0])].substr(0,2)/13)) + "d"]
+            viz3a.variables['cdate'] = viz3a.variables['cnt' + String(pipFormats[parseInt(values[0])].substr(0,2)%13+Math.floor(pipFormats[parseInt(values[0])].substr(0,2)/13)) + "_" + pipFormats[parseInt(values[0])].substr(2,2) + "_" +String(20+Math.floor(pipFormats[parseInt(values[0])].substr(0,2)/13))]
         }
         //drawHistogram()
         if ((layerLoaded == 1) & (displayInfo == 1))
@@ -635,11 +766,11 @@ if (!carto.isBrowserSupported()) {
 
 
     function drawinfo(iso3, country, date) {
-
+        //console.warn(iso3)
         csvtestarray = readinfo(csvtest, '|');
         currentcountry = []
         showdate = pipFormats[date]
-
+        document.getElementById("myInput").value = "";
         for (var i = 0; i < csvtestarray.length; i++) {
             if (csvtestarray[i][0] == iso3) {
                 currentcountry.push(csvtestarray[i])
@@ -712,20 +843,29 @@ if (!carto.isBrowserSupported()) {
             ${country}<hr>
           </h1>
           
-          <div id='policytable'>
-          <h2 class="CDB-infowindow-subtitle">Country-Specific Resources:</h2>`
-          if(authorityfound)
+          <div id='policytable'>`
+        if (authorityfound)
           infohtml += `Entity responsible for border closures:
           <p><a href='`+ site1link + `'target="_blank" rel="noopener noreferrer">` + site1 +`</a></p>`
         if (eu.includes(iso3))
             infohtml += `<p><a href='` + eusite1link + `'target="_blank" rel="noopener noreferrer">` + eusite1 + `</a></p>`
-        if (dashboardfound)
-              infohtml += `<p><a href='` + dashboard + `'target="_blank" rel="noopener noreferrer">Covid-19 Dashboard</a></p>`
+        if (dashboardfound) {
+            infohtml += `Country-level Resources:`
+            infohtml += `<p><a href='` + dashboard + `'target="_blank" rel="noopener noreferrer">Country-level COVID-19 Website</a></p>`
+        }
         if (eu.includes(iso3))
-            infohtml += `<p><a href='` + eudashboard + `'target="_blank" rel="noopener noreferrer">European Union Covid-19 Dashboard</a></p>`
+            infohtml += `<p><a href='` + eudashboard + `'target="_blank" rel="noopener noreferrer">European Union Covid-19 Website</a></p>`
 
-        infohtml += `
-          <h2 class="CDB-infowindow-subtitle">Policies active on `+ monthdisplay[parseInt(showdate.slice(0, 2)) - 1] + ` ` + showdate.slice(2) + `:</h2>`
+        if(parseInt(showdate.slice(0, 2)) > 12){
+infohtml += `
+          <h2 class="CDB-infowindow-subtitle">Policies active on `+ monthdisplay[parseInt(showdate.slice(0, 2)) - 1] + ` ` + showdate.slice(2) + `, 2021:</h2>`
+        }
+        else{
+infohtml += `
+          <h2 class="CDB-infowindow-subtitle">Policies active on `+ monthdisplay[parseInt(showdate.slice(0, 2)) - 1] + ` ` + showdate.slice(2) + `, 2020:</h2>`
+}
+
+        
         if (currentpoliciesc.length > 0) {
             infohtml += `
             <h3 style="color:white">Complete Closures</h3>
@@ -737,13 +877,18 @@ if (!carto.isBrowserSupported()) {
             <th>Source</th>
             </tr>`
             for (var i = 0; i < currentpoliciesc.length; i++) {
-                infohtml += `<tr><th>
-            ${currentpoliciesc[i][2]} </th><th> 
-            ${currentpoliciesc[i][3]} / ${currentpoliciesc[i][4]} </th><th> `
-                if (currentpoliciesc[i][5] == '12' & currentpoliciesc[i][6] == '31')
+            if(currentpoliciesc[i][3] > 12){
+                infohtml += `<tr><th>${currentpoliciesc[i][2]} </th><th> ${currentpoliciesc[i][3]-12} / ${currentpoliciesc[i][4]} / 21 </th><th> `
+            }            
+            else{
+               infohtml += `<tr><th>${currentpoliciesc[i][2]} </th><th> ${currentpoliciesc[i][3]} / ${currentpoliciesc[i][4]} /20</th><th> `
+             }
+             if (currentpoliciesc[i][5] == '24' & currentpoliciesc[i][6] == '31')
                     infohtml += `None </th><th> `
+                else if(currentpoliciesc[i][5] > 12)
+                    infohtml += `${currentpoliciesc[i][5]-12}/${currentpoliciesc[i][6]}/21</th><th> `
                 else
-                    infohtml += `${currentpoliciesc[i][5]} / ${currentpoliciesc[i][6]} </th><th> `
+                    infohtml += `${currentpoliciesc[i][5]}/${currentpoliciesc[i][6]}/20</th><th> `
                 if (currentpoliciesc[i][7].includes('web.archive.org')) {
                     url = currentpoliciesc[i][7].split('web.archive.org')[1].split('/')
                     url.shift()
@@ -760,7 +905,7 @@ if (!carto.isBrowserSupported()) {
             }
         }
         else
-            infohtml += '<h3 style="color:white">Complete Closures</h3>&nbsp;&nbsp;&nbsp;No Complete Closures at this date'
+            infohtml += '<h3 style="color:white">Complete Closures</h3>&nbsp;&nbsp;&nbsp;No Complete Closures on this date'
 
 
         infohtml += `</table></div>`;
@@ -775,13 +920,19 @@ if (!carto.isBrowserSupported()) {
             <th>Source</th>
             </tr>`
             for (var i = 0; i < currentpoliciesp.length; i++) {
-                infohtml += `<tr><th>
-            ${currentpoliciesp[i][2]} </th><th> 
-            ${currentpoliciesp[i][3]} / ${currentpoliciesp[i][4]} </th><th> `
-                if (currentpoliciesp[i][5] == '12' & currentpoliciesp[i][6] == '31')
-                    infohtml += `None</th><th> `
+            if(currentpoliciesp[i][3] > 12){
+                infohtml += `<tr><th>${currentpoliciesp[i][2]} </th><th> ${currentpoliciesp[i][3]-12}/${currentpoliciesp[i][4]}/ 21 </th><th> `
+            }            
+            else{
+               infohtml += `<tr><th>${currentpoliciesp[i][2]} </th><th> ${currentpoliciesp[i][3]}/${currentpoliciesp[i][4]}/20</th><th> `
+             }
+             if (currentpoliciesp[i][5] == '24' & currentpoliciesp[i][6] == '31')
+                    infohtml += `None </th><th> `
+                else if(currentpoliciesp[i][5] > 12)
+                    infohtml += `${currentpoliciesp[i][5]-12}/${currentpoliciesp[i][6]}/21 </th><th> `
                 else
-                    infohtml += `${currentpoliciesp[i][5]} / ${currentpoliciesp[i][6]} </th><th> `
+                    infohtml += `${currentpoliciesp[i][5]}/${currentpoliciesp[i][6]}/20</th><th> `
+                
                 if (currentpoliciesp[i][7].includes('web.archive.org')) {
                     url = currentpoliciesp[i][7].split('web.archive.org')[1].split('/')
                     url.shift()
@@ -798,10 +949,10 @@ if (!carto.isBrowserSupported()) {
             }
         }
         else
-            infohtml += '<h3 style="color:white">Partial Closures</h3>&nbsp;&nbsp;&nbsp;No Partial Closures at this date'
+            infohtml += '<h3 style="color:white">Partial Closures</h3>&nbsp;&nbsp;&nbsp;No Partial Closures on this date'
 
-        infohtml += `</table><h3 class="CDB-infowindow-subtitle" style="color:white">Covid-19 Stats:</h3>
-<div id='countrychart'></div><div id='countrychart2'></div><div id='attr' style="font-size:10px">Source: <a href='https://github.com/CSSEGISandData/COVID-19'>JHU CSSE COVID-19 Data</a></div><div id='heatmap'></div>
+        infohtml += `</table><h3 class="CDB-infowindow-subtitle" style="color:white"><br>Covid-19 Stats:</h3>
+<div id='countrychart'></div><div id='countrychart2'></div><div id='attr' style="font-size:10px">Source: <a href='https://github.com/CSSEGISandData/COVID-19'>JHU CSSE COVID-19 Data</a></div><div><h3 class="CDB-infowindow-subtitle" style="color:white"><br>Policy Calendar:</h3></div><div id='heatmap'></div>
 `
         document.getElementById('info').innerHTML = infohtml;
         if (document.getElementById('info').style.display == "none" | document.getElementById('info').style.display == "") {
@@ -826,9 +977,15 @@ if (!carto.isBrowserSupported()) {
                     if ((month == 1) & day < 22) {
                         continue;
                     }
+                    if( month >12){
+                    casesforchart.push(casefromjson[String(month-12) + "_" + String(day) + "_21"]);
+                    deathsforchart.push(casefromjson[String(month-12) + "_" + String(day) + "_21d"]);
+                    }
+                    else{
                     casesforchart.push(casefromjson[String(month) + "_" + String(day) + "_20"]);
                     deathsforchart.push(casefromjson[String(month) + "_" + String(day) + "_20d"]);
-                }
+                    }                
+            }
             }
 
 
@@ -864,7 +1021,7 @@ if (!carto.isBrowserSupported()) {
                 margin: {
                     l: 20,
                     r: 20,
-                    b: 40,
+                    b: 60,
                     t: 20,
                     pad: 4
                 },
@@ -872,6 +1029,7 @@ if (!carto.isBrowserSupported()) {
                 xaxis:
                 {
                     autorange: true,
+                    hoverformat: "%b %d \'%y",
                     gridcolor: '#ffffff10',
                     tickfont: {
                         family: '"Poppins",Old Standard TT, serif',
@@ -880,9 +1038,9 @@ if (!carto.isBrowserSupported()) {
                     },
                     tickcolor: '#ffffff80',
                     tickmode: "auto",
-                    nticks: 8,
+                    nticks: 12,
                     fixedrange: true,
-                    tickformat: '%b'
+                    tickformat: '%b \'%y'
                 },
                 yaxis:
                 {
@@ -914,7 +1072,7 @@ if (!carto.isBrowserSupported()) {
         }
 
         var now = new Date();
-        var start = new Date(now.getFullYear(), 0, 0);
+        var start = new Date(2020, 0, 0);
         var dayone = start.getDay();
         var diff = (now - start) + ((start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000);
         var oneDay = 1000 * 60 * 60 * 24;
@@ -936,7 +1094,7 @@ if (!carto.isBrowserSupported()) {
 
         categoriespriority = { "Workers Exception": 0, "Specific Country(ies) Exception": 1, "Citizen Exception": 2, "Essentials-only Exception": 3, "Visa ban": 4, "Citizenship ban": 5, "Travel history ban": 6, "Border Closure": 7, "NONE": 8 };
 
-        for (var month = 1; month <= currentMonth + 1; month++) {
+        for (var month = 1; month <= currentMonth +1; month++) {
             for (var day = 1; day <= days[month - 1]; day++) {
                 if ((month == currentMonth + 1) & (day > currentday)) {
                     break;
@@ -990,7 +1148,7 @@ if (!carto.isBrowserSupported()) {
             }],
             layout = {
                 width: 400,
-                height: 880,
+                height: 1580,
                 paper_bgcolor: '#222',
                 plot_bgcolor: '#222',
                 annotations: [],
@@ -1013,11 +1171,11 @@ if (!carto.isBrowserSupported()) {
                 yaxis: {
                     ticks: '',
                     ticksuffix: ' ',
-                    //    width: 700,
-                    //  height: 700,
+                    //    width: 900,
+                    //  height: 900,
                     tickmode: "array",
-                    ticktext: ["Jan ", "Feb ", "Mar ", "Apr ", "May ", "Jun ", "Jul ", "Aug ", "Sep ", "Oct ","Nov "],
-                    tickvals: [0, 4, 8, 13, 17, 22, 26, 30, 35,39,43],
+                    ticktext: ["Jan 2020", "Feb ", "Mar ", "Apr ", "May ", "Jun ", "Jul ", "Aug ", "Sep ", "Oct ", "Nov ", "Dec ", "Jan 2021", "Feb ", "Mar ", "Apr ", "May ", "Jun ", "Jul "],
+                    tickvals: [0, 4, 8, 13, 17, 22, 26, 30, 35,39,43,48,52,57,61,65,69,74,78],
                     autorange: 'reversed',
                     autosize: true,
                     showline: false,

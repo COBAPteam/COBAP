@@ -120,11 +120,11 @@
   ],
   "ARM": [
     {
-      "3": "Ministry of Foreign Affairs of Armenia",
-      "4": "https://www.mfa.am/en/residency/",
+      "3": "Government of Armenia",
+      "4": "https://www.gov.am/en/covid-travel-restrictions/",
       "5": "",
       "6": "",
-      "7": "https://www.coronatracker.com/ar/country/armenia/",
+      "7": "https://ncdc.am/coronavirus/confirmed-cases-by-days/",
       "8": "1"
 
 
@@ -240,7 +240,7 @@
   ],
   "BEL": [
     {
-      "3": "Kingdom of Belgium",
+      "3": "FPS Foreign Affairs",
       "4": "https://diplomatie.belgium.be/en/policy/policy_areas/striving_for_global_solidarity/asylum_and_migration",
       "5": "",
       "6": "",
@@ -599,7 +599,7 @@
   "COD": [
     {
       "3": "Ministry of Foreign Affairs",
-      "4": "https://www.minaffet.gouv.cd",
+      "4": "https://www.facebook.com/RDC.Minaffet/",
       "5": "",
       "6": "",
       "7": "https://www.stopcoronavirusrdc.info/",
@@ -779,10 +779,10 @@
   "GNQ": [
     {
       "3": "Ministry of Foreign Affairs, International Cooperation, and Francophone Affairs",
-      "4": "https://www.guineaecuatorialpress.com/buscador.php?cat=21&lang=en",
+      "4": "https://minexteriores.gob.gq/",
       "5": "",
       "6": "",
-      "7": "https://www.guineaecuatorialpress.com/buscador.php?cat=10005",
+      "7": "https://www.guineaecuatorialpress.com/categorias/COVID-19",
       "8": "1"
 
 
@@ -1380,8 +1380,8 @@
       "4": "https://www.mfa.gov.ki/immigration/",
       "5": "",
       "6": "",
-      "7": "",
-      "8": "0"
+      "7": "https://covid19.gov.ki/",
+      "8": "1"
 
 
     }
@@ -2169,7 +2169,7 @@
   "RWA": [
     {
       "3": "Ministry of Foreign Affairs and International Cooperation",
-      "4": "https://www.minaffet.gov.rw/index.php?id=2",
+      "4": "https://www.minaffet.gov.rw/",
       "5": "Rwanda Directorate General of Immigration and Emigration",
       "6": "https://www.migration.gov.rw/home/",
       "7": "https://www.rbc.gov.rw/index.php?id=707",
@@ -2313,7 +2313,7 @@
   "SEN": [
     {
       "3": "Ministry of Foreign Affairs",
-      "4": "http://www.diplomatie.gouv.sn",
+      "4": "https://www.sec.gouv.sn/services-aux-usagers/les-missions-diplomatiques-et-consulaires-du-s%C3%A9n%C3%A9gal",
       "5": "",
       "6": "",
       "7": "http://www.sante.gouv.sn",
@@ -2701,6 +2701,18 @@
       "5": "",
       "6": "",
       "7": "http://www.health.gov.tt/sitepages/default.aspx?id=293",
+      "8": "1"
+
+
+    }
+  ],
+  "TUR": [
+    {
+      "3": "Ministry of Foreign Affairs",
+      "4": "http://www.mfa.gov.tr/default.en.mfa",
+      "5": "",
+      "6": "",
+      "7": "https://covid19.saglik.gov.tr/",
       "8": "1"
 
 

@@ -20,15 +20,6 @@ CITIZENSHIP_BAN = 0
 HISTORY_BAN = 0
 BORDER_CLOSURE = 0
 CITIZENSHIP_BAN_AND_HISTORY_BAN = 0
-#ESSENTIAL_ONLY
-#CITIZEN_EXCEP
-#SPECIFIC_COUNTRY
-#WORK_EXCEP 
-#VISA_BAN
-#CITIZENSHIP_BAN
-#HISTORY_BAN
-#REFUGEE_BAN
-#BORDER_CLOSURE
 
 def decode_policy(complete,visa,citizen,history,refugee,citException,workerException,countryException,air,land,sea,unclear):
     global WORK_EXCEP 
@@ -109,8 +100,10 @@ def month_to_num(month):
         return "11"
     elif (month == 'Dec'):
         return "12"
-    else:
+    elif (month != "Click to write Choice 13"):
         print "INVALID_DATE: " + month
+        return "00"
+    else:
         return "00"
 
 #create output file for writing
@@ -122,13 +115,14 @@ policyList = []
 policyId = {}
 
 acapsSource = {}
-
+updatedIdMapping = {}
+updatedIdMappingSave = {}
 #open input files and error out if not found
 #main survey of policy data
 try:
     mainSurvey = pandas.read_csv('main_survey_raw.csv',keep_default_na=False, encoding='utf-8', dtype=str, quotechar='"', delimiter=',',header=0)
 except OSError:
-    print "Could not open/read file:", 'masterdata1017.csv'
+    print "Could not open/read file:", 'main_survey_raw.csv'
     os.system("pause")
     sys.exit()
 
@@ -136,15 +130,7 @@ except OSError:
 try:
     endDatesSurvey = pandas.read_csv('end_dates_survey_raw.csv',keep_default_na=False,encoding='utf-8', dtype=str, quotechar='"', delimiter=',',header=0)
 except OSError:
-    print "Could not open/read file:", 'end_dates.csv'
-    os.system("pause")
-    sys.exit()
-
-#list of policies with targeted country lists normalized
-try:
-    targetsFixed = pandas.read_csv('countrylistsclean.csv',keep_default_na=False, encoding='utf-8',dtype=str, quotechar='"', delimiter=',',header=1)
-except OSError:
-    print "Could not open/read file:", 'countylistsclean.csv'
+    print "Could not open/read file:", 'end_dates_survey_raw.csv'
     os.system("pause")
     sys.exit()
 
@@ -159,6 +145,34 @@ except OSError:
 
 for indexAcaps,acaps in acapsLinks.iterrows():  
     acapsSource[acaps[0]] = acaps[15] 
+
+#public facing Ids
+try:
+    updatedIds = pandas.read_csv('idmapping.csv',keep_default_na=False, encoding='latin-1', dtype=str, quotechar='"', delimiter=',',header=1)
+except OSError:
+    print "Could not open/read file:", 'idmapping.csv'
+    os.system("pause")
+    sys.exit()
+
+#read existing ID mappings from last run, and populate ID generator with highest existing ID per country
+for indexID,updatedID in updatedIds.iterrows():  
+    updatedIdMapping[updatedID[0]] = int(updatedID[1][2:])
+    updatedIdMappingSave[updatedID[0]] = updatedID[1]
+    if (updatedID[1][:2] == "XS"):
+        iso3 = "SOL"
+    elif (updatedID[1][:2] == "EU"):
+        iso3 = "EUR"
+    elif (updatedID[1][:2] == "XK"):
+        iso3 = "XKX"
+    elif (updatedID[1][:2] == "EH"):
+        iso3 = "ESH"
+    else:
+        iso3 = pycountry.countries.get(alpha_2=updatedID[1][:2]).alpha_3
+    if(iso3 in policyId.keys()):
+        if (policyId[iso3] < int(updatedID[1][2:])):
+            policyId[iso3] = int(updatedID[1][2:])
+    else:
+        policyId[iso3] = int(updatedID[1][2:])
 
 outputfile.write("ID|COUNTRY_NAME|ISO3|ISO2|POLICY_TYPE|POLICY_SUBTYPE|START_DATE|END_DATE|AIR|AIR_TYPE|TARGETS_AIR|LAND|LAND_TYPE|TARGETS_LAND|SEA|SEA_TYPE|TARGETS_SEA|CITIZEN|CITIZEN_LIST|HISTORY_BAN|HISTORY_BAN_LIST|REFUGEE|REFUGEE_LIST|VISA_BAN|VISA_BAN_TYPE|VISA_BAN_LIST|CITIZEN_EXCEP|CITIZEN_EXCEP_LIST|COUNTRY_EXCEP|COUNTRY_EXCEP_LIST|WORK_EXCEP|SOURCE_QUALITY|SOURCE_TYPE|INTERNAL_GOVT_SOURCE|AIRLINE_SOURCE|INSURANCE_SOURCE|GOVT_SOCIAL_MED_SOURCE|EXT_GOVT_SOURCE|INTERNAL_MEDIA_SOURCE|EXT_MEDIA_SOURCE|OTHER_SOURCE|END_SOURCE|COMMENTS|OLD_ID\n")
 
@@ -251,6 +265,7 @@ for index,row in mainSurvey.iterrows():
                 endDate = row['Q4'].split()[1].strip('()').rjust(2,'0') + "_" + row['Q22_1_TEXT'].rjust(2,'0') + "_21"
         else:
             endDate = "NONE"
+
         endsource = ""
         for indexEndDates,rowEndDates in endDatesSurvey.iterrows():  
             if (rowEndDates['Q1_2_TEXT'] == row['Q1_5_TEXT']):
@@ -259,6 +274,10 @@ for index,row in mainSurvey.iterrows():
                 else:
                     endDate = month_to_num(rowEndDates['Q3']).rjust(2,'0') + '_' + rowEndDates['Q4_1_TEXT'].rjust(2,'0')+'_21'
                 endsource = rowEndDates['Q2_2_TEXT']
+                if (rowEndDates['Q2_2_TEXT'] == ""):
+                    endsource = rowEndDates['Q4_2_TEXT']
+        if ((endDate == "00_00_20") or (endDate == "00_00_21")):
+            endDate = "NONE"
         #INTERNAL_GOVT_SOURCE|AIRLINE_SOURCE|INSURANCE_SOURCE|GOVT_SOCIAL_MED_SOURCE|EXT_GOVT_SOURCE|INTERNAL_MEDIA_SOURCE|EXT_MEDIA_SOURCE|OTHER_SOURCE|NON_ENGLISH_SOURCE
         govt_source= row['Q27_3_TEXT'] if (row['Q27_3_TEXT'] != "") else row['Q20_3_TEXT']
         airline_source= row['Q27_1_TEXT'] if (row['Q27_1_TEXT'] != "") else row['Q20_1_TEXT']
@@ -330,24 +349,28 @@ for index,row in mainSurvey.iterrows():
         countryException = 0
         workerException = 0
 
-        for indexCountryLists,rowCountryLists in targetsFixed.iterrows():  
-            if (rowCountryLists[0] == row['Q1_5_TEXT']):
-                historyList = rowCountryLists[1] if (rowCountryLists[1] != "") else "NA"
-                visaList = rowCountryLists[2] if (rowCountryLists[2] != "") else "NA"
-        if (source == "||||||||"):
-            print row['Q1_5_TEXT']
         if (decode_policy(0,visa,citizen,history,refugee,citException,workerException,countryException,air,land,sea,unclear) != 'NONE' or DEBUG):
             if (source != "||||||||"):
-                if (row['ISO3'] in policyId.keys()):
+                if (row['Q1_5_TEXT'] in updatedIdMapping.keys()):
+                    newId = updatedIdMapping[row['Q1_5_TEXT']]
+                elif (row['ISO3'] in policyId.keys()):
                     policyId[row['ISO3']] = policyId[row['ISO3']] + 1
                     newId = policyId[row['ISO3']]
+                    updatedIdMappingSave[row['Q1_5_TEXT']] = iso2+"%02d" % (newId,)
 
                 else:
-                    policyId[row['ISO3']] = 1;
-                    newId = 1;
-                policyList.append({'name' :countryName, 'id': row['Q1_5_TEXT'], 'ISO3': row['ISO3'], 'pc': 'PARTIAL', 'type': decode_policy(0,visa,citizen,history,refugee,citException,workerException,countryException,air,land,sea,0), 'policy_start' : startDate, 'policy_end': endDate, 'source':source})
+                    policyId[row['ISO3']] = 1
+                    newId = 1
+                    updatedIdMappingSave[row['Q1_5_TEXT']] = iso2+"%02d" % (newId,)
 
-                outputfile.write(iso2+"%02d" % (newId,)+"|"+countryName+"|"+row['ISO3']+"|"+iso2+"|PARTIAL|"+decode_policy(0,visa,citizen,history,refugee,citException,workerException,countryException,air,land,sea,unclear)+"|"+startDate+"|"+endDate+"|"+str(air)+"|"+str(airType)+"|"+targetsAir+"|"+str(land)+"|"+str(landType)+"|"+targetsLand+"|"+str(sea)+"|"+str(seaType)+"|"+targetsSea+"|"+str(citizen)+"|"+citizenshipList+"|"+str(history)+"|"+historyList+"|"+str(refugee)+"|"+refugeeList+"|"+str(visa)+"|"+visaType+"|"+visaList+"|"+str(citException)+"|"+citExceptionList+"|"+str(countryException)+"|"+countryExceptionList+"|"+str(workerException)+"|"+sourceQuality+"|"+sourcetype+"|"+govt_source+"|"+airline_source+"|"+insurance_source+"|"+social_media_source+"|"+ext_govt_source+"|"+int_media_source+"|"+ext_media_source+"|"+ other_source+"|"+endsource+"|"+row['Q33_1_TEXT']+"|"+row['Q1_5_TEXT']+"\n")
+                if ((air==1) and (land==1) and (sea==1) and (airType=="All") and (seaType =="All") and landType == "All"):
+                    print ("Converting policy " + row['Q1_5_TEXT'] + " to complete closure!\n")
+                    policyList.append({'name' :countryName, 'id': row['Q1_5_TEXT'], 'ISO3': row['ISO3'], 'pc': 'COMPLETE', 'type': decode_policy(1,visa,citizen,history,refugee,citException,workerException,countryException,air,land,sea,0), 'policy_start' : startDate, 'policy_end': endDate, 'source':source})
+                    outputfile.write(iso2+"%02d" % (newId,)+"|"+countryName+"|"+row['ISO3']+"|"+iso2+"|COMPLETE|"+decode_policy(1,0,0,0,0,1,0,0,0,0,0,0)+"|"+startDate+"|"+endDate+"|"+str(0)+"|"+"NA"+"|"+"NA"+"|"+str(0)+"|"+"NA"+"|"+"NA"+"|"+str(0)+"|"+"NA"+"|"+"NA"+"|"+str(0)+"|"+"NA"+"|"+str(0)+"|"+"NA"+"|"+str(0)+"|"+"NA"+"|"+str(0)+"|"+"NA"+"|"+"NA"+"|"+str(1)+"|"+"citizens"+"|"+str(0)+"|"+"NA"+"|"+str(0)+"|"+sourceQuality+"|"+sourcetype+"|"+govt_source+"|"+airline_source+"|"+insurance_source+"|"+social_media_source+"|"+ext_govt_source+"|"+int_media_source+"|"+ext_media_source+"|"+ other_source+"|"+endsource+"|"+row['Q33_1_TEXT']+"|"+row['Q1_5_TEXT']+"\n")
+  
+                else:
+                    policyList.append({'name' :countryName, 'id': row['Q1_5_TEXT'], 'ISO3': row['ISO3'], 'pc': 'PARTIAL', 'type': decode_policy(0,visa,citizen,history,refugee,citException,workerException,countryException,air,land,sea,0), 'policy_start' : startDate, 'policy_end': endDate, 'source':source})
+                    outputfile.write(iso2+"%02d" % (int(newId),)+"|"+countryName+"|"+row['ISO3']+"|"+iso2+"|PARTIAL|"+decode_policy(0,visa,citizen,history,refugee,citException,workerException,countryException,air,land,sea,unclear)+"|"+startDate+"|"+endDate+"|"+str(air)+"|"+str(airType)+"|"+targetsAir+"|"+str(land)+"|"+str(landType)+"|"+targetsLand+"|"+str(sea)+"|"+str(seaType)+"|"+targetsSea+"|"+str(citizen)+"|"+citizenshipList+"|"+str(history)+"|"+historyList+"|"+str(refugee)+"|"+refugeeList+"|"+str(visa)+"|"+visaType+"|"+visaList+"|"+str(citException)+"|"+citExceptionList+"|"+str(countryException)+"|"+countryExceptionList+"|"+str(workerException)+"|"+sourceQuality+"|"+sourcetype+"|"+govt_source+"|"+airline_source+"|"+insurance_source+"|"+social_media_source+"|"+ext_govt_source+"|"+int_media_source+"|"+ext_media_source+"|"+ other_source+"|"+endsource+"|"+row['Q33_1_TEXT']+"|"+row['Q1_5_TEXT']+"\n")
 
     elif(row['Q5'].split()[0]=='Complete' and row['Q3'].split()[0] != 'No' and row['Q21'].split()[0] != 'No'):
         if ((row['Q32'] == '2020') or (row['Q32'] == '')):
@@ -371,7 +394,10 @@ for index,row in mainSurvey.iterrows():
                 else:
                     endDate = month_to_num(rowEndDates['Q3']).rjust(2,'0') + '_' + rowEndDates['Q4_1_TEXT'].rjust(2,'0')+'_21'
                 endsource = rowEndDates['Q2_2_TEXT']
-
+                if (rowEndDates['Q2_2_TEXT'] == ""):
+                    endsource = rowEndDates['Q4_2_TEXT']
+        if ((endDate == "00_00_20") or (endDate == "00_00_21")):
+            endDate = "NONE"
         govt_source= row['Q27_3_TEXT'] if (row['Q27_3_TEXT'] != "") else row['Q20_3_TEXT']
         airline_source= row['Q27_1_TEXT'] if (row['Q27_1_TEXT'] != "") else row['Q20_1_TEXT']
         insurance_source= row['Q27_2_TEXT'] if (row['Q27_2_TEXT'] != "") else row['Q20_2_TEXT']
@@ -436,22 +462,20 @@ for index,row in mainSurvey.iterrows():
         historyList = "NA"
         refugee = 0
         refugeeList = "NA"
-        if (source == "||||||||"):
-            print row['Q1_5_TEXT']
-        for indexCountryLists,rowCountryLists in targetsFixed.iterrows():  
-            if (rowCountryLists[0] == row['Q1_5_TEXT']):
-                if (rowCountryLists[3] != "Unclear" and rowCountryLists[3] != "" and rowCountryLists[3] != "No" and rowCountryLists[3] != "NA"):
-                    countryExceptionList = rowCountryLists[3]
         if (decode_policy(1,visa,citizen,history,refugee,citException,workerException,countryException,air,land,sea,unclear) != 'NONE' or DEBUG):
             if (source != "||||||||"):
-                if (row['ISO3'] in policyId.keys()):
+                if (row['Q1_5_TEXT'] in updatedIdMapping.keys()):
+                    newId = updatedIdMapping[row['Q1_5_TEXT']]
+                elif (row['ISO3'] in policyId.keys()):
                     policyId[row['ISO3']] = policyId[row['ISO3']] + 1
                     newId = policyId[row['ISO3']]
+                    updatedIdMappingSave[row['Q1_5_TEXT']] = iso2+"%02d" % (newId,)
                 else:
-                    policyId[row['ISO3']] = 1;
-                    newId = 1;
+                    policyId[row['ISO3']] = 1
+                    newId = 1
+                    updatedIdMappingSave[row['Q1_5_TEXT']] = iso2+"%02d" % (newId,)
                 policyList.append({'name' :countryName, 'id': row['Q1_5_TEXT'], 'ISO3': row['ISO3'], 'pc': 'COMPLETE', 'type': decode_policy(1,visa,citizen,history,refugee,citException,workerException,countryException,air,land,sea,0), 'policy_start' : startDate, 'policy_end': endDate, 'source':source})
-                outputfile.write(iso2+"%02d" % (newId,)+"|"+countryName+"|"+row['ISO3']+"|"+iso2+"|COMPLETE|"+decode_policy(1,visa,citizen,history,refugee,citException,workerException,countryException,air,land,sea,unclear)+"|"+startDate+"|"+endDate+"|"+str(air)+"|"+airType+"|"+targetsAir+"|"+str(land)+"|"+landType+"|"+targetsLand+"|"+str(sea)+"|"+seaType+"|"+targetsSea+"|"+str(citizen)+"|"+citizenshipList+"|"+str(history)+"|"+historyList+"|"+str(refugee)+"|"+refugeeList+"|"+str(visa)+"|"+visaType+"|"+visaList+"|"+str(citException)+"|"+citExceptionList+"|"+str(countryException)+"|"+countryExceptionList+"|"+str(workerException)+"|"+sourceQuality+"|"+sourcetype+"|"+govt_source+"|"+airline_source+"|"+insurance_source+"|"+social_media_source+"|"+ext_govt_source+"|"+int_media_source+"|"+ext_media_source+"|"+ other_source+"|"+endsource+"|"+row['Q33_1_TEXT']+"|"+row['Q1_5_TEXT']+"\n")
+                outputfile.write(iso2+"%02d" % (int(newId),)+"|"+countryName+"|"+row['ISO3']+"|"+iso2+"|COMPLETE|"+decode_policy(1,visa,citizen,history,refugee,citException,workerException,countryException,air,land,sea,unclear)+"|"+startDate+"|"+endDate+"|"+str(air)+"|"+airType+"|"+targetsAir+"|"+str(land)+"|"+landType+"|"+targetsLand+"|"+str(sea)+"|"+seaType+"|"+targetsSea+"|"+str(citizen)+"|"+citizenshipList+"|"+str(history)+"|"+historyList+"|"+str(refugee)+"|"+refugeeList+"|"+str(visa)+"|"+visaType+"|"+visaList+"|"+str(citException)+"|"+citExceptionList+"|"+str(countryException)+"|"+countryExceptionList+"|"+str(workerException)+"|"+sourceQuality+"|"+sourcetype+"|"+govt_source+"|"+airline_source+"|"+insurance_source+"|"+social_media_source+"|"+ext_govt_source+"|"+int_media_source+"|"+ext_media_source+"|"+ other_source+"|"+endsource+"|"+row['Q33_1_TEXT']+"|"+row['Q1_5_TEXT']+"\n")
 
 print "\nPOLICY_SUMMARY:\n"
 print "WORK_EXCEP " + str(WORK_EXCEP/2)
@@ -465,6 +489,13 @@ print "BORDER_CLOSURE " + str(BORDER_CLOSURE/2)
 print "CITIZENSHIP_BAN_AND_HISTORY_BAN " + str(CITIZENSHIP_BAN_AND_HISTORY_BAN/2)
 
 outputfile.close()
+
+outputfileIds = codecs.open("idmapping_test.csv", 'w', 'utf-8')
+
+for old,new in updatedIdMappingSave.items():
+    outputfileIds.write(str(old) + "," + str(new) +"\n")
+
+outputfileIds.close()
 
 def web_policy_language(policy):
     if(policy == "WORK_EXCEP"):
@@ -608,6 +639,10 @@ if(TIME_SERIES):
                     if (policy['ISO3'] == country):
                         #start month less, end month greater
                         if (int(policy['policy_start'].split('_')[1]) != 0):
+                            try:
+                                (date_iter_date + timedelta(days=delta)) == datetime.strptime(policy['policy_start'], "%m_%d_%y")
+                            except:
+                                print "INVALID DATE: ID:" + policy['id'] + " COUNTRY:" + policy['name']
                             if((date_iter_date + timedelta(days=delta)) == datetime.strptime(policy['policy_start'], "%m_%d_%y")):
                                 if (policy['pc'] == 'PARTIAL'):
                                     partialnew = partialnew + 1
@@ -752,13 +787,11 @@ if(WEBSITE_FILES):
                 outputfile.write('|731|731|')
             else:
                 if(int(countrypolicyList[iso3][policy]['start_m']) > 12):
-                    #print countrypolicyList[iso3][policy]['start_m']
-                    #print iso3
+
                     startday = date(2021, int(countrypolicyList[iso3][policy]['start_m'])-12, int(countrypolicyList[iso3][policy]['start_d'])).timetuple().tm_yday + 365
                 else:
                     startday = date(2020, int(countrypolicyList[iso3][policy]['start_m']), int(countrypolicyList[iso3][policy]['start_d'])).timetuple().tm_yday - 1
                 if(int(countrypolicyList[iso3][policy]['end_m']) > 12):
-                    #print iso3
                     endday = date(2021, int(countrypolicyList[iso3][policy]['end_m'])-12, int(countrypolicyList[iso3][policy]['end_d'])).timetuple().tm_yday + 365
                 else:
                     endday = date(2020, int(countrypolicyList[iso3][policy]['end_m']), int(countrypolicyList[iso3][policy]['end_d'])).timetuple().tm_yday - 1

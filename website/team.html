@@ -20,6 +20,16 @@ $(function(){
   $("#modal").load("modal.html"); 
 });
 </script>
+<style>
+    .foundteamgrid {
+        display: grid;
+        justify-items: center;
+        grid-template-columns: auto auto auto;
+        grid-template-rows: auto auto auto;
+        column-gap: 10px;
+        row-gap: 15px;
+    }
+</style>
 <body>
 <div id="modal" class="modal"></div>
 <div class="topbar" id="topbar"></div>
@@ -33,49 +43,73 @@ $(function(){
         <h1 class="w3-xxxlarge w3-text-purple"><b>THE TEAM</b></h1>
         <hr style="width:50px;border:5px solid #402c62; background-color:#402c62" class="w3-round">
         <h2>PRINCIPAL INVESTIGATOR</h2>
-        <li>Mary Shiraef</li>
+        <img src="team/shiraef.jpg" class="w3-circle" style="height: 106px; width: 106px;"> <a href="https://politicalscience.nd.edu/people/students/mary-a-shiraef/" target="_blank" rel="noopener noreferrer">Mary A. Shiraef</a>
         <h2>COMMUNICATIONS DIRECTOR</h2>
         <li>Yeshwini Selvaraj</li>
         <h2>SOCIAL MEDIA DIRECTOR</h2>
         <li>Cora Hirst</li>
         <h2>FOUNDING TEAM MEMBERS</h2>
-        <li>Mark Weiss</li>
-        <li>Elizabeth Beling</li>
-        <li>Aadya Bhaskaran</li>
+
+        <div class="foundteamgrid">
+            <div class="item item-1"><img src="team/beling.jpg" class="w3-circle" style="height: 106px; width: 106px;">  <a href="https://www.linkedin.com/in/elizabeth-beling-804819146/" target="_blank" rel="noopener noreferrer">Elizabeth Beling</a> <img src="lilogo.png" style="height: 12pt;"><br />Elizabeth Beling is a senior at Emory University majoring in Sociology with a minor in Sustainability. She covered island nations as well as a portion of southeast Asia.</div>
+            <div class="item item-2"><img src="team/bhaskaran.jpg" class="w3-circle" style="height: 106px; width: 106px;">  <a href="https://www.linkedin.com/in/aadya-bhaskaran/" target="_blank" rel="noopener noreferrer">Aadya Bhaskaran</a> <img src="lilogo.png" style="height: 12pt;"> <br />Aadya Bhaskaran is a senior at Emory University covering countries in Europe and Middle East as well as Island Territories. She is studying Economics with a Health focus and is interested in data analysis positions to influence health policy.</div>
+            <div class="item item-2"><img src="team/gradie.jpg" class="w3-circle" style="height: 106px; width: 106px;">  Amalia Gradie <br />Amalia is a Human Health major from Emory University with an interest in health equity.</div>
+            <div class="item item-2"><img src="team/kline.jpg" class="w3-circle" style="height: 106px; width: 106px;">  <a href="https://www.linkedin.com/in/camilla-kline-944022152/" target="_blank" rel="noopener noreferrer">Camilla Kline</a> <img src="lilogo.png" style="height: 12pt;"> <br />Camilla Kline is a senior at Emory University who covered policies for 30 different countries with a focus on Island nations and territories. She also has expertise in environmental research and policy and hopes to work in those or related fields before pursuing a law degree.</div>
+            <div class="item item-2">
+                <img src="team/lazar.jpg" class="w3-circle" style="height: 106px; width: 106px;"> <a href="https://www.linkedin.com/in/nikolaslazar/" target="_blank" rel="noopener noreferrer">Nikolas Lazar</a> <img src="lilogo.png" style="height: 12pt;"> <br /> Nikolas Lazar is a senior at Brown University who covers Northern Africa and South America, with a particular interest in disputed territories.
+            </div>
+            <div class="item item-2">  <img src="team/mattar.jpg" class="w3-circle" style="height: 106px; width: 106px;">  <a href="https://www.linkedin.com/in/layth-mattar-54aaa21ab/" target="_blank" rel="noopener noreferrer">Layth Mattar</a> <img src="lilogo.png" style="height: 12pt;"> <br />Layth Mattar is a senior at Emory University majoring in Biology and Arabic. He is hoping to pursue a career in medicine. </div>
+            <div class="item item-2">  <img src="team/musetti.jpg" class="w3-circle" style="height: 106px; width: 106px;">  <a href="https://www.linkedin.com/in/raem/" target="_blank" rel="noopener noreferrer">Rachel Musetti</a> <img src="lilogo.png" style="height: 12pt;"> <br />Rachel Musetti is a senior at Emory University who covered Shengen countries and also produced, with Amalia Gradie, our EU policies report. She is seeking environmental employment opportunities focused in waste reduction, water policy, or general sustainability that will allow her to make meaningful change at the local or state levels.</div>
+            <div class="item item-2">  <img src="team/naseer.jpg" class="w3-circle" style="height: 106px; width: 106px;">  <a href="https://www.linkedin.com/in/sarah-naseer/" target="_blank" rel="noopener noreferrer">Sarah Naseer</a> <img src="lilogo.png" style="height: 12pt;"> <br />Sarah Naseer is a senior at Emory University covering various countries in Europe, Africa, and Latin America. Sarah is studying Quantitative Sciences/Sociology and Arabic, and she is seeking opportunities to work in policy research after graduating in Spring 2021.</div>
+            <div class="item item-2">  <img src="team/taylor.jpg" class="w3-circle" style="height: 106px; width: 106px;">  <a href="http://linkedin.com/in/noahrusktaylor" target="_blank" rel="noopener noreferrer">Noah Taylor</a> <img src="lilogo.png" style="height: 12pt;"><br />Noah Taylor is a junior at Emory University majoring in Human Health and Philosophy, Politics, and Law. His interests center on the relationship between policy and health, particularly vis-à-vis pandemic response and emerging threat preparedness.</div>
+        </div>
+        <br />
         <li>Cora Hirst</li>
-        <li>Camilla Kline</li>
-        <li>Nikolas Lazar</li>
-        <li>Rachel Musetti</li>
         <li>Thuy Nguyen</li>
         <li>Yeshwini Selvaraj</li>
-        <li>Noah Taylor</li>
         <li>Bryn Walker</li>
+        <li>Mark Weiss</li>
         <h2>Faculty Advisors</h2>
         <li>Colin Lewis-Beck</li>
         <li>Luis Schenoni</li>
         <h2>PORTFOLIO MANAGERS</h2>
-        <li>Cayleigh Jackson</li>
-        <li>Nikolas Lazar</li>
-        <li>Prue Nkansah</li>
+        <li>Lukas Feddern (<a href="reports/COBAP+EU+Manual.pdf">EU Coding Guidelines</a>)</li>
+        <li>Amalia Gradie</li>
+        <li>Rachel Musetti</li>
+        <li>Cayleigh Jackson (<a href="greaterchinareport.html" target="_blank" rel="noopener noreferrer">Greater China</a>)</li>
         <li>Katie Pleiss</li>
         <li>Noah Taylor</li>
-        <li>Bryn Walker<a href="usareport.html" target="_blank" rel="noopener noreferrer">(U.S.)</a></li>
-        <li>Mark Weiss</li>
-        <h2>RESEARCH ASSISTANTS</h2>
+        <li>Bryn Walker (<a href="usareport.html" target="_blank" rel="noopener noreferrer">U.S.</a>)</li>
+        <h2>CURRENT RESEARCH ASSISTANTS</h2>
         <li>Elizabeth Beling</li>
+        <li>Nathan Danek</li>
+        <li>Jonathan Falcone</li>
+        <li>Lukas Feddern</li>
         <li>Amalia Gradie</li>
+        <li>Sonila Hasaj</li>
         <li>Cayleigh Jackson</li>
+        <li>Nora Murphy</li>
+        <li>Sarah Naseer</li>
+        <li>Maria Del Rosario Villalaz</li>
+        <li>Elizabeth Stifel</li>
+        <li>Erin Straight</li>
+        <li>Dongying Tao</li>
+        <li>Erin Tutaj</li>
+        <li>Mark Weiss</li>
+        <h2>PAST RESEARCH ASSISTANTS</h2>
+        <li>Aadya Bhaskaran</li>
+        <li>Camilla Kline</li>
         <li>Nikolas Lazar</li>
         <li>Suzanne Martin</li>
         <li>Layth Mattar</li>
+        <li>Mary Mitsdarffer</li>
         <li>Rachel Musetti</li>
-        <li>Sarah Naseer</li>
+        <li>Thuy Nguyen</li>
         <li>Noah Taylor</li>
-        <li>Mark Weiss</li>
+        <li>Bryn Walker</li>
         <li>William Yu</li>
-        <h2>CHIEF SNACK OFFICER</h2>
+        <h2>CHIEF SNACK OFFICER (CSO)</h2>
         <li>Pepper</li>
-
     </div> 
 
 </div>
