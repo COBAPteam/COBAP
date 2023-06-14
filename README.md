@@ -118,7 +118,7 @@ end_source| UTF-8 String | Web link to source of policy indicating policy has en
 comment | UTF-8 String | Comments related to coding decisions
 old_id | alphanumeric | ID for policy before ID change
 # Contact
-Please contact nikolas_lazar@brown.edu.
+Please contact [Mary Shiraef](https://politicalscience.nd.edu/people/students/mary-a-shiraef/).
 
 For any issues with the recorded policies, feel free to submit a github issue or give us a heads up [here](https://docs.google.com/forms/d/1OGd-56pqT0iRPGv6iJdTnIWWI5vkbF2faAnTz5sDNxI).
  
